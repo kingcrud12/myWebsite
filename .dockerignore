@@ -1,0 +1,10 @@
+# Fichiers à ignorer dans Docker
+.git
+.gitignore
+.DS_Store
+node_modules
+*.log
+server/vendor/
+server/composer.lock
+server/config.php
+

@@ -1,9 +1,9 @@
 services:
   - type: web
     name: portfolio-yann-dipita
-    env: php
-    buildCommand: cd server && composer install
-    startCommand: php -S 0.0.0.0:$PORT router.php
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: SMTP_USERNAME
         sync: false
