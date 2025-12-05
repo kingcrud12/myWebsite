@@ -18,6 +18,26 @@ if (strpos($requestPath, 'server/send-email.php') !== false ||
     exit;
 }
 
+// Servir robots.txt
+if ($requestPath === 'robots.txt') {
+    $file = __DIR__ . '/client/robots.txt';
+    if (file_exists($file)) {
+        header('Content-Type: text/plain; charset=utf-8');
+        readfile($file);
+        exit;
+    }
+}
+
+// Servir sitemap.xml
+if ($requestPath === 'sitemap.xml') {
+    $file = __DIR__ . '/client/sitemap.xml';
+    if (file_exists($file)) {
+        header('Content-Type: application/xml; charset=utf-8');
+        readfile($file);
+        exit;
+    }
+}
+
 // Si c'est la racine ou index.html, servir index.html
 if ($requestPath === '' || $requestPath === 'index.html' || $requestPath === '/') {
     $file = __DIR__ . '/client/index.html';
