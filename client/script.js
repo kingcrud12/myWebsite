@@ -117,49 +117,26 @@ contactForm.addEventListener('submit', async (e) => {
     formMessage.className = 'form-message';
     
     try {
-        // Using EmailJS for sending emails
-        // Note: You'll need to set up EmailJS account and replace with your service ID
-        // For now, we'll use a mailto fallback and show success message
+        // Envoyer les données au script PHP
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('subject', formData.subject);
+        formDataToSend.append('message', formData.message);
         
-        // Create mailto link as fallback
-        const mailtoLink = `mailto:dipitay@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-        
-        // For production, you would use EmailJS or a backend service
-        // This is a client-side solution that opens email client
-        // You can integrate EmailJS by:
-        // 1. Sign up at https://www.emailjs.com/
-        // 2. Add your service ID, template ID, and public key
-        // 3. Uncomment and configure the EmailJS code below
-        
-        /*
-        // EmailJS integration (uncomment and configure)
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-            from_name: formData.name,
-            from_email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-            to_email: 'dipitay@gmail.com'
-        }, 'YOUR_PUBLIC_KEY')
-        .then(() => {
-            showSuccess();
-            contactForm.reset();
-        })
-        .catch((error) => {
-            showError('Une erreur est survenue. Veuillez réessayer.');
-            console.error('EmailJS error:', error);
+        const response = await fetch('/server/send-email.php', {
+            method: 'POST',
+            body: formDataToSend
         });
-        */
         
-        // Simulate API call (replace with actual EmailJS or backend call)
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const result = await response.json();
         
-        // For now, we'll show success and provide mailto option
-        // In production, replace this with actual email sending
-        showSuccess('Message envoyé avec succès! Je vous répondrai bientôt.');
-        contactForm.reset();
-        
-        // Optionally open mailto as backup
-        // window.location.href = mailtoLink;
+        if (result.success) {
+            showSuccess(result.message || 'Message envoyé avec succès! Je vous répondrai bientôt.');
+            contactForm.reset();
+        } else {
+            showError(result.message || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+        }
         
     } catch (error) {
         showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');

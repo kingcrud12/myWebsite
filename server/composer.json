@@ -1,0 +1,13 @@
+{
+    "name": "yann-dipita/portfolio-website",
+    "description": "Site portfolio de Yann Dipita",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
+

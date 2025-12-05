@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: portfolio-yann-dipita
+    env: php
+    buildCommand: cd server && composer install
+    startCommand: php -S 0.0.0.0:$PORT router.php
+    envVars:
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+

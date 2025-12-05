@@ -1,0 +1,23 @@
+<?php
+/**
+ * Configuration SMTP pour Gmail
+ * 
+ * INSTRUCTIONS:
+ * 1. Copiez ce fichier et renommez-le en "config.php"
+ * 2. Remplacez les valeurs ci-dessous par vos identifiants réels
+ * 3. Ne commitez JAMAIS config.php dans un dépôt public!
+ */
+
+// Votre adresse Gmail complète
+define('SMTP_USERNAME', 'votre-email@gmail.com');
+
+// Votre mot de passe d'application Gmail
+// Pour obtenir un mot de passe d'application:
+// 1. Allez sur https://myaccount.google.com/
+// 2. Sécurité > Validation en 2 étapes (doit être activée)
+// 3. Mots de passe des applications > Sélectionnez "Autre" > Nommez-le (ex: "Site Web")
+// 4. Copiez le mot de passe généré et collez-le ci-dessous
+define('SMTP_PASSWORD', 'votre-mot-de-passe-application-ici');
+
+?>
+
