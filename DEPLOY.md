@@ -60,14 +60,27 @@
 
 ### Étape 3 : Configurer le service
 
-Render détectera automatiquement le fichier `render.yaml` et utilisera ces paramètres :
+**Si Render détecte automatiquement PHP** (grâce à `render.yaml` ou aux fichiers PHP) :
+- Les paramètres seront pré-remplis
+- Vérifiez simplement que tout est correct
 
-- **Name** : `portfolio-yann-dipita` (ou le nom que vous préférez)
-- **Environment** : `PHP` (détecté automatiquement)
-- **Build Command** : `cd server && composer install` (depuis render.yaml)
-- **Start Command** : `php -S 0.0.0.0:$PORT router.php` (depuis render.yaml)
+**Si Render pense que c'est Node.js** (détection automatique incorrecte) :
 
-**Vous pouvez laisser les valeurs par défaut** ou les modifier si nécessaire.
+1. **Changez manuellement l'environnement** :
+   - Dans "Environment", sélectionnez **"PHP"** au lieu de "Node"
+   - Si vous ne voyez pas PHP, choisissez "Docker" ou "Other"
+
+2. **Configurez manuellement les commandes** :
+   - **Build Command** : `cd server && composer install`
+   - **Start Command** : `php -S 0.0.0.0:$PORT router.php`
+
+3. **Vérifiez les autres paramètres** :
+   - **Name** : `portfolio-yann-dipita` (ou le nom que vous préférez)
+   - **Region** : Choisissez la région la plus proche (ex: Frankfurt, Ireland)
+   - **Branch** : `main` (ou `master` selon votre dépôt)
+   - **Root Directory** : Laissez vide (racine du dépôt)
+
+**Note** : Même si `render.yaml` n'est pas détecté automatiquement, vous pouvez toujours configurer manuellement avec les valeurs ci-dessus.
 
 ### Étape 4 : Configurer les variables d'environnement
 
