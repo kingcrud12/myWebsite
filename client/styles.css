@@ -6,9 +6,9 @@
 }
 
 :root {
-    --primary-color: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary-color: #8b5cf6;
+    --primary-color: #0891b2;
+    --primary-dark: #0e7490;
+    --secondary-color: #06b6d4;
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --bg-primary: #ffffff;
@@ -67,30 +67,51 @@ body {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: logoMoveAndColor 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes logoMoveAndColor {
+    0% {
+        transform: translateY(0);
+        background: linear-gradient(135deg, #0891b2, #06b6d4);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    25% {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, #06b6d4, #10b981);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    50% {
+        transform: translateY(0);
+        background: linear-gradient(135deg, #10b981, #f59e0b);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    75% {
+        transform: translateY(5px);
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    100% {
+        transform: translateY(0);
+        background: linear-gradient(135deg, #0891b2, #06b6d4);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
 }
 
 .nav-menu {
-    position: fixed;
-    left: -100%;
-    top: 70px;
-    flex-direction: column;
-    background: white;
-    width: 100%;
-    text-align: center;
-    transition: 0.3s;
-    box-shadow: var(--shadow-lg);
-    padding: 2rem 0;
     display: flex;
     list-style: none;
     gap: 2rem;
-}
-
-.nav-menu.active {
-    left: 0;
 }
 
 .nav-link {
@@ -108,12 +129,12 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--primary-color);
+    background: #000000;
     transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: #000000;
 }
 
 .nav-link:hover::after {
@@ -121,7 +142,7 @@ body {
 }
 
 .hamburger {
-    display: flex;
+    display: none;
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
@@ -151,17 +172,17 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Image violette avec graduation de couleur */
+/* Image avec graduation de couleur */
 .hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: transparent;
     background-size: 200% 200%;
     /* Animation cycle (30s): 
-       0-10s (0-33%): Purple Wave
+       0-10s (0-33%): Teal Wave
        10-20s (33-66%): Dark Theme (Typewriter)
        20-30s (66-100%): Rabbit Scene
     */
@@ -170,7 +191,7 @@ body {
     transform-origin: center center;
 }
 
-/* Pattern de grille sur l'image violette */
+/* Pattern de grille sur l'image */
 .hero::after {
     content: '';
     position: absolute;
@@ -268,7 +289,7 @@ body {
 
 .btn-primary {
     background: white;
-    color: var(--primary-color);
+    color: #000000;
 }
 
 .btn-primary:hover {
@@ -284,7 +305,7 @@ body {
 
 .btn-secondary:hover {
     background: white;
-    color: var(--primary-color);
+    color: #000000;
 }
 
 .hero-visual {
@@ -603,7 +624,7 @@ section {
 
 @keyframes heroCycle {
 
-    /* 0% - 33%: Purple Wave (Visible) */
+    /* 0% - 33%: Teal Wave (Visible) */
     0% {
         background-position: 0% 50%;
         transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
@@ -626,7 +647,7 @@ section {
         opacity: 0;
     }
 
-    /* 36% - 95%: Dark Theme & Rabbit Scene (Hidden Purple BG) */
+    /* 36% - 95%: Dark Theme & Rabbit Scene (Hidden Teal BG) */
     95% {
         transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
         opacity: 0;
@@ -688,7 +709,7 @@ section {
 
 @keyframes rabbitSceneCycle {
 
-    /* 0-66%: Hidden (Purple BG then Dark Theme/Typewriter) */
+    /* 0-66%: Hidden (Teal BG then Dark Theme/Typewriter) */
     0%,
     60% {
         opacity: 0;
@@ -715,8 +736,8 @@ section {
         animation: rabbitVerticalLoop 8s linear infinite;
     }
 
-    .hero-bg {
-        animation: heroCycleMobileBG 30s linear infinite;
+    .hero-rabbit-scene {
+        animation: rabbitVerticalLoop 8s linear infinite;
     }
 }
 
@@ -854,7 +875,7 @@ section {
 }
 
 .skill-tag:hover {
-    background: var(--primary-color);
+    background: #000000;
     color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
@@ -888,7 +909,7 @@ section {
 
 .project-image {
     height: 200px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: #f3f4f6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1084,6 +1105,26 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow-lg);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
 
 
     .hero-content {

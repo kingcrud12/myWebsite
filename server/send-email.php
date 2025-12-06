@@ -12,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Charger PHPMailer
-require_once 'vendor/autoload.php';
+// Charger PHPMailer
+require_once __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Charger la configuration
-require_once 'config.php';
+require_once __DIR__ . '/config.php';
 
 // Récupérer les données du formulaire
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
@@ -43,7 +44,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 try {
     // Créer une instance de PHPMailer
     $mail = new PHPMailer(true);
-    
+
     // Configuration du serveur SMTP
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
@@ -53,16 +54,16 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
-    
+
     // Expéditeur et destinataire
     $mail->setFrom(SMTP_USERNAME, 'Site Web - Yann Dipita');
     $mail->addAddress('dipitay@gmail.com', 'Yann Dipita');
     $mail->addReplyTo($email, $name);
-    
+
     // Contenu de l'email
     $mail->isHTML(true);
     $mail->Subject = 'Nouveau message du site web: ' . $subject;
-    
+
     $mail->Body = "
     <html>
     <head>
@@ -103,7 +104,7 @@ try {
     </body>
     </html>
     ";
-    
+
     // Version texte pour les clients email qui ne supportent pas HTML
     $mail->AltBody = "
 Nouveau message depuis votre site web
@@ -115,16 +116,16 @@ Sujet: {$subject}
 Message:
 {$message}
     ";
-    
+
     // Envoyer l'email
     $mail->send();
-    
+
     // Réponse de succès
     echo json_encode([
         'success' => true,
         'message' => 'Message envoyé avec succès! Je vous répondrai bientôt.'
     ]);
-    
+
 } catch (Exception $e) {
     // En cas d'erreur
     http_response_code(500);
@@ -132,9 +133,8 @@ Message:
         'success' => false,
         'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.'
     ]);
-    
+
     // Log de l'erreur (optionnel, pour le débogage)
     error_log('Erreur PHPMailer: ' . $mail->ErrorInfo);
 }
 ?>
-
