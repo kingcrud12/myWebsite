@@ -94,25 +94,29 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo" aria-label="Yann Dipita">Collaborons</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Accueil</a></li>
-                <li><a href="#about" class="nav-link">À propos</a></li>
-                <li><a href="#projects" class="nav-link">Projets</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <!-- Page Container for 3D Flip -->
+    <div class="page-container">
+        <!-- Front Side: Navbar + Hero -->
+        <div class="page-front">
+            <!-- Navigation -->
+            <nav class="navbar" id="navbar">
+                <div class="nav-container">
+                    <div class="logo" aria-label="Yann Dipita">Collaborons</div>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" class="nav-link">Accueil</a></li>
+                        <li><a href="#about" class="nav-link">À propos</a></li>
+                        <li><a href="#projects" class="nav-link">Projets</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
 
-    <section id="home" class="hero">
+            <section id="home" class="hero">
         <div class="hero-bg"></div>
         <div class="hero-rabbit-scene">
             <div class="scene-container">
@@ -154,6 +158,37 @@
             <div class="mouse"></div>
         </div>
     </section>
+        </div>
+        <!-- Back Side: Matrix Scene -->
+        <div class="page-back">
+            <div class="matrix-scene">
+                <!-- Matrix Background -->
+                <div class="matrix-grid"></div>
+                
+                <!-- Geometric Shapes -->
+                <div class="geometric-shape shape-1"></div>
+                <div class="geometric-shape shape-2"></div>
+                <div class="geometric-shape shape-3"></div>
+                <div class="geometric-shape shape-4"></div>
+                
+                <!-- Web Sphere -->
+                <div class="web-sphere">
+                    <div class="sphere-inner"></div>
+                    <div class="sphere-glow"></div>
+                </div>
+                
+                <!-- Skills Text Floating -->
+                <div class="skill-text skill-1">Web Design</div>
+                <div class="skill-text skill-2">Web Development</div>
+                <div class="skill-text skill-3">Mobile Development</div>
+                <div class="skill-text skill-4">API & Backend</div>
+                <div class="skill-text skill-5">UI/UX Design</div>
+                <div class="skill-text skill-6">Test Automation</div>
+                <div class="skill-text skill-7">DevOps</div>
+                <div class="skill-text skill-8">Full Stack</div>
+            </div>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about">

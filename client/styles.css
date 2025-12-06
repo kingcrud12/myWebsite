@@ -30,6 +30,47 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    perspective: 2000px;
+}
+
+/* 3D Page Container */
+.page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    transform-style: preserve-3d;
+    animation: pageFlip 20s ease-in-out infinite;
+}
+
+.page-front,
+.page-back {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.page-front {
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+.page-back {
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+@keyframes pageFlip {
+    0%, 40% {
+        transform: rotateY(0deg);
+    }
+    50%, 90% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
 }
 
 .container {
@@ -49,6 +90,11 @@ body {
     box-shadow: var(--shadow-sm);
     z-index: 1000;
     transition: all 0.3s ease;
+}
+
+.page-front .navbar {
+    position: fixed;
+    z-index: 1001;
 }
 
 .navbar.scrolled {
@@ -1185,6 +1231,270 @@ section {
     .contact-form {
         padding: 1.5rem;
     }
+}
+
+/* Matrix Scene Styles */
+.matrix-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #000000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Matrix Grid Background */
+.matrix-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: matrixMove 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes matrixMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+/* Geometric Shapes */
+.geometric-shape {
+    position: absolute;
+    border: 2px solid rgba(0, 255, 0, 0.6);
+    animation: floatShape 8s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    transform: rotate(45deg);
+    animation-delay: 0s;
+    border-radius: 20% 80% 20% 80%;
+}
+
+.shape-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 15%;
+    transform: rotate(30deg);
+    animation-delay: 2s;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    transform: rotate(60deg);
+    animation-delay: 4s;
+    border-radius: 50%;
+}
+
+.shape-4 {
+    width: 70px;
+    height: 70px;
+    top: 40%;
+    right: 30%;
+    transform: rotate(90deg);
+    animation-delay: 6s;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+
+@keyframes floatShape {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.6;
+    }
+    25% {
+        transform: translate(30px, -30px) rotate(90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-20px, 20px) rotate(180deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translate(20px, 30px) rotate(270deg);
+        opacity: 1;
+    }
+}
+
+/* Web Sphere */
+.web-sphere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    animation: sphereRotate 10s linear infinite;
+}
+
+.sphere-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 0, 0.8), rgba(0, 150, 0, 0.6), rgba(0, 100, 0, 0.4));
+    box-shadow: 
+        inset -20px -20px 50px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(0, 255, 0, 0.4);
+    position: relative;
+}
+
+.sphere-inner::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 30%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    filter: blur(10px);
+}
+
+.sphere-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.3), transparent 70%);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes sphereRotate {
+    0% {
+        transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateY(360deg) rotateX(360deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* Skills Text Floating */
+.skill-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(0, 255, 0, 0.9);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    animation: emergeFromDepth 4s ease-out infinite;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.skill-1 {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0.5s;
+}
+
+.skill-2 {
+    top: 25%;
+    right: 10%;
+    animation-delay: 1s;
+}
+
+.skill-3 {
+    top: 45%;
+    left: 8%;
+    animation-delay: 1.5s;
+}
+
+.skill-4 {
+    top: 55%;
+    right: 12%;
+    animation-delay: 2s;
+}
+
+.skill-5 {
+    bottom: 30%;
+    left: 15%;
+    animation-delay: 2.5s;
+}
+
+.skill-6 {
+    bottom: 20%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+.skill-7 {
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 3.5s;
+}
+
+.skill-8 {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 4s;
+}
+
+@keyframes emergeFromDepth {
+    0% {
+        opacity: 0;
+        transform: translateZ(-1000px) scale(0.5);
+        filter: blur(20px);
+    }
+    20% {
+        opacity: 0.3;
+        transform: translateZ(-500px) scale(0.7);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateZ(0px) scale(1);
+        filter: blur(0px);
+    }
+    80% {
+        opacity: 0.8;
+        transform: translateZ(200px) scale(1.1);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateZ(500px) scale(1.2);
+        filter: blur(5px);
+    }
+}
+
+/* Adjust navbar and hero for 3D container */
+.page-front .navbar,
+.page-front .hero {
+    position: relative;
 }
 
 /* Animations */
