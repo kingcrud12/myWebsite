@@ -74,9 +74,23 @@ body {
 }
 
 .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: var(--shadow-lg);
+    padding: 2rem 0;
     display: flex;
     list-style: none;
     gap: 2rem;
+}
+
+.nav-menu.active {
+    left: 0;
 }
 
 .nav-link {
@@ -107,7 +121,7 @@ body {
 }
 
 .hamburger {
-    display: none;
+    display: flex;
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
@@ -801,12 +815,14 @@ section {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .about-text p {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
     line-height: 1.8;
+    text-align: center;
 }
 
 .skills {
@@ -817,12 +833,14 @@ section {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+    justify-content: center;
 }
 
 .skill-tag {
@@ -904,18 +922,21 @@ section {
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .project-description {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.7;
+    text-align: center;
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    justify-content: center;
 }
 
 .tag {
@@ -945,6 +966,7 @@ section {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .contact-item {
@@ -952,6 +974,7 @@ section {
     gap: 1rem;
     margin-bottom: 2rem;
     align-items: flex-start;
+    justify-content: center;
 }
 
 .contact-icon {
@@ -979,6 +1002,7 @@ section {
     color: var(--text-secondary);
     line-height: 1.7;
     margin-top: 2rem;
+    text-align: center;
 }
 
 .contact-form {
@@ -1060,26 +1084,7 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
 
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background: white;
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: var(--shadow-lg);
-        padding: 2rem 0;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
 
     .hero-content {
         grid-template-columns: 1fr;
