@@ -42,6 +42,25 @@ body {
     animation: pageFlip 20s ease-in-out infinite;
 }
 
+/* Disable 3D flip on mobile to prevent text/image inversion */
+@media (max-width: 768px) {
+    .page-container {
+        animation: none;
+        transform: none;
+    }
+    
+    .page-front,
+    .page-back {
+        position: relative;
+        transform: none;
+        backface-visibility: visible;
+    }
+    
+    .page-back {
+        display: none; /* Hide matrix scene on mobile */
+    }
+}
+
 .page-front,
 .page-back {
     position: absolute;
