@@ -10,7 +10,7 @@ navLinks.forEach(link => {
         e.preventDefault();
         const targetId = link.getAttribute('href');
         const targetSection = document.querySelector(targetId);
-        
+
         if (targetSection) {
             const offsetTop = targetSection.offsetTop - 70;
             window.scrollTo({
@@ -18,7 +18,7 @@ navLinks.forEach(link => {
                 behavior: 'smooth'
             });
         }
-        
+
         // Close mobile menu
         navMenu.classList.remove('active');
     });
@@ -36,7 +36,7 @@ window.addEventListener('scroll', () => {
 // Mobile menu toggle
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    
+
     // Animate hamburger
     const spans = hamburger.querySelectorAll('span');
     if (navMenu.classList.contains('active')) {
@@ -79,11 +79,11 @@ const observer = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     sections.forEach(section => {
         observer.observe(section);
     });
-    
+
     projectCards.forEach(card => {
         observer.observe(card);
     });
@@ -98,7 +98,7 @@ const btnLoader = btnSubmit.querySelector('.btn-loader');
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     // Get form data
     const formData = {
         name: document.getElementById('name').value,
@@ -106,16 +106,16 @@ contactForm.addEventListener('submit', async (e) => {
         subject: document.getElementById('subject').value,
         message: document.getElementById('message').value
     };
-    
+
     // Show loading state
     btnText.style.display = 'none';
     btnLoader.style.display = 'inline';
     btnSubmit.disabled = true;
-    
+
     // Hide previous messages
     formMessage.style.display = 'none';
     formMessage.className = 'form-message';
-    
+
     try {
         // Envoyer les données au script PHP
         const formDataToSend = new FormData();
@@ -123,21 +123,21 @@ contactForm.addEventListener('submit', async (e) => {
         formDataToSend.append('email', formData.email);
         formDataToSend.append('subject', formData.subject);
         formDataToSend.append('message', formData.message);
-        
+
         const response = await fetch('/server/send-email.php', {
             method: 'POST',
             body: formDataToSend
         });
-        
+
         const result = await response.json();
-        
+
         if (result.success) {
             showSuccess(result.message || 'Message envoyé avec succès! Je vous répondrai bientôt.');
             contactForm.reset();
         } else {
             showError(result.message || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
         }
-        
+
     } catch (error) {
         showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
         console.error('Form submission error:', error);
@@ -153,7 +153,7 @@ function showSuccess(message = 'Message envoyé avec succès!') {
     formMessage.textContent = message;
     formMessage.className = 'form-message success';
     formMessage.style.display = 'block';
-    
+
     // Scroll to message
     formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -162,7 +162,7 @@ function showError(message) {
     formMessage.textContent = message;
     formMessage.className = 'form-message error';
     formMessage.style.display = 'block';
-    
+
     // Scroll to message
     formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -200,3 +200,84 @@ revealElements.forEach(element => {
     revealObserver.observe(element);
 });
 
+
+// Typewriter Effect
+const heroBg = document.querySelector('.hero-bg');
+const heroDescription = document.querySelector('.hero-description');
+const originalText = "Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et automatisation.";
+
+// Clear text initially
+heroDescription.textContent = originalText;
+
+function typeWriter(text, element, speed = 50) {
+    element.textContent = '';
+    element.classList.add('typing-cursor');
+
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Typing finished
+            // Keep cursor for a while then remove if needed, or keep blinking
+        }
+    }
+    type();
+}
+
+// Synchronize with CSS animation
+if (heroBg && heroDescription) {
+    // Initial state
+    heroDescription.style.opacity = '1';
+
+    // Listen for animation iteration to sync
+    heroBg.addEventListener('animationiteration', () => {
+        runTypingCycle();
+    });
+
+    // Also start the cycle initially (sync with the first run of CSS animation)
+    // The CSS animation starts immediately. We need to match the timing.
+    // Cycle is 20s.
+    // 0-35% (0-7s): Visible
+    // 35-45% (7-9s): Fade Out
+    // 45% (9s): Start Typing
+
+    runTypingCycle();
+}
+
+function runTypingCycle() {
+    // Cycle is 30s
+    // 0-10s: Purple BG (Visible)
+    // 10-20s: Dark Theme (Typewriter)
+    // 20-30s: Rabbit Scene (Text should be hidden or visible? Let's hide it to focus on rabbit)
+
+    // Reset
+    heroDescription.style.transition = 'none';
+    heroDescription.style.opacity = '1';
+    heroDescription.textContent = originalText;
+    heroDescription.classList.remove('typing-cursor');
+
+    // Schedule Fade Out at 10s (33%) - Transition to Dark Theme
+    setTimeout(() => {
+        heroDescription.style.transition = 'opacity 1s ease';
+        heroDescription.style.opacity = '0';
+    }, 10000);
+
+    // Schedule Typing Start at 12s (40%) - On Dark Theme
+    setTimeout(() => {
+        heroDescription.style.transition = 'none';
+        heroDescription.style.opacity = '1';
+        typeWriter(originalText, heroDescription, 50);
+    }, 12000);
+
+    // Schedule Fade Out at 20s (66%) - Transition to Rabbit Scene
+    setTimeout(() => {
+        heroDescription.style.transition = 'opacity 1s ease';
+        heroDescription.style.opacity = '0';
+    }, 20000);
+
+    // Text remains hidden during Rabbit Scene (20-30s)
+    // Will reset at 30s (0s) by the next cycle call
+}

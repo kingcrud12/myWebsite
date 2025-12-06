@@ -137,9 +137,8 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Image violette qui se froisse et disparaît en boule */
-.hero::before {
-    content: '';
+/* Image violette avec graduation de couleur */
+.hero-bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -147,16 +146,14 @@ body {
     bottom: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     background-size: 200% 200%;
-    animation: 
-        gradientShift 10s ease infinite,
-        crinkleAndFade 20s ease-in-out infinite;
+    /* Animation cycle (30s): 
+       0-10s (0-33%): Purple Wave
+       10-20s (33-66%): Dark Theme (Typewriter)
+       20-30s (66-100%): Rabbit Scene
+    */
+    animation: heroCycle 30s ease-in-out infinite;
     z-index: 1;
-    transform-origin: 50% 50%;
-    transform-style: preserve-3d;
-    will-change: transform, opacity, clip-path, border-radius, filter;
-    box-shadow: 
-        inset 0 0 50px rgba(0, 0, 0, 0.3),
-        inset 0 0 100px rgba(0, 0, 0, 0.2);
+    transform-origin: center center;
 }
 
 /* Pattern de grille sur l'image violette */
@@ -169,7 +166,6 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
     opacity: 0.3;
-    animation: crinkleOverlay 6s ease-in-out infinite, fadeOut 15s ease-in-out infinite;
     z-index: 2;
     pointer-events: none;
 }
@@ -227,6 +223,13 @@ body {
     line-height: 1.8;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 1.6s both;
+    min-height: 3.6em;
+    /* Reserve space for 2 lines */
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: blinkCursor 0.75s step-end infinite;
 }
 
 .hero-buttons {
@@ -286,9 +289,12 @@ body {
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-20px);
     }
@@ -338,6 +344,11 @@ body {
     position: relative;
 }
 
+section {
+    padding: 160px 0;
+    position: relative;
+}
+
 .mouse::before {
     content: '';
     position: absolute;
@@ -356,6 +367,7 @@ body {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translateX(-50%) translateY(12px);
@@ -366,9 +378,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -379,103 +393,96 @@ body {
         transform: scale(1);
         filter: brightness(1) contrast(1) blur(0px);
         opacity: 1;
-        clip-path: polygon(
-            0% 0%, 100% 0%, 100% 100%, 0% 100%
-        );
-        box-shadow: 
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        box-shadow:
             inset 0 0 50px rgba(0, 0, 0, 0.3),
             inset 0 0 100px rgba(0, 0, 0, 0.2);
     }
+
     15% {
         transform: scale(1.05);
         filter: brightness(1.1) contrast(1.2) blur(0.5px);
         opacity: 1;
-        clip-path: polygon(
-            2% 1%, 15% 0%, 25% 3%, 35% 1%, 50% 2%, 65% 0%, 75% 3%, 85% 1%, 98% 2%,
-            99% 15%, 97% 25%, 99% 35%, 98% 50%, 99% 65%, 97% 75%, 99% 85%, 98% 99%,
-            85% 98%, 75% 97%, 65% 99%, 50% 98%, 35% 99%, 25% 97%, 15% 99%, 1% 98%
-        );
-        box-shadow: 
+        clip-path: polygon(3% 2%, 8% 1%, 12% 3%, 15% 0%, 85% 0%, 88% 3%, 92% 1%, 97% 2%,
+                98% 5%, 99% 12%, 98% 20%, 99% 35%, 98% 50%, 99% 65%, 98% 80%, 99% 88%, 98% 95%,
+                97% 98%, 92% 99%, 88% 97%, 85% 100%, 15% 100%, 12% 97%, 8% 99%, 3% 98%, 2% 95%, 1% 88%, 2% 80%, 1% 65%, 2% 50%, 1% 35%, 2% 20%, 1% 12%, 2% 5%);
+        box-shadow:
             inset 0 0 60px rgba(0, 0, 0, 0.4),
             inset 0 0 120px rgba(0, 0, 0, 0.3),
             0 10px 30px rgba(0, 0, 0, 0.2);
     }
+
     30% {
         transform: scale(0.95);
         filter: brightness(0.9) contrast(1.1) blur(1px);
         opacity: 0.95;
-        clip-path: polygon(
-            5% 3%, 20% 1%, 30% 5%, 40% 2%, 55% 4%, 70% 1%, 80% 5%, 90% 2%, 97% 4%,
-            96% 20%, 94% 30%, 96% 40%, 95% 55%, 96% 70%, 94% 80%, 96% 90%, 95% 97%,
-            90% 96%, 80% 94%, 70% 96%, 55% 95%, 40% 96%, 30% 94%, 20% 96%, 3% 95%
-        );
-        box-shadow: 
+        clip-path: polygon(6% 4%, 12% 2%, 18% 5%, 22% 1%, 78% 1%, 82% 5%, 88% 2%, 94% 4%,
+                95% 8%, 96% 15%, 95% 25%, 96% 40%, 95% 50%, 96% 60%, 95% 75%, 96% 85%, 95% 92%,
+                94% 96%, 88% 98%, 82% 95%, 78% 99%, 22% 99%, 18% 95%, 12% 98%, 6% 96%, 5% 92%, 4% 85%, 5% 75%, 4% 60%, 5% 50%, 4% 40%, 5% 25%, 4% 15%, 5% 8%);
+        box-shadow:
             inset 0 0 80px rgba(0, 0, 0, 0.5),
             inset 0 0 150px rgba(0, 0, 0, 0.4),
             0 15px 40px rgba(0, 0, 0, 0.3);
     }
+
     45% {
         transform: scale(0.85);
         filter: brightness(0.7) contrast(0.9) blur(2px);
         opacity: 0.85;
-        clip-path: polygon(
-            10% 8%, 25% 5%, 35% 10%, 45% 6%, 60% 9%, 75% 5%, 85% 10%, 92% 7%,
-            91% 25%, 89% 35%, 91% 45%, 90% 60%, 91% 75%, 89% 85%, 91% 92%,
-            85% 91%, 75% 89%, 60% 91%, 45% 90%, 35% 91%, 25% 89%, 8% 91%
-        );
-        box-shadow: 
+        clip-path: polygon(12% 8%, 20% 4%, 28% 10%, 32% 6%, 68% 6%, 72% 10%, 80% 4%, 88% 8%,
+                90% 12%, 91% 20%, 90% 30%, 91% 45%, 90% 50%, 91% 55%, 90% 70%, 91% 80%, 90% 88%,
+                88% 92%, 80% 96%, 72% 90%, 68% 94%, 32% 94%, 28% 90%, 20% 96%, 12% 92%, 10% 88%, 9% 80%, 10% 70%, 9% 55%, 10% 50%, 9% 45%, 10% 30%, 9% 20%, 10% 12%);
+        box-shadow:
             inset 0 0 100px rgba(0, 0, 0, 0.6),
             inset 0 0 200px rgba(0, 0, 0, 0.5),
             0 20px 50px rgba(0, 0, 0, 0.4);
     }
+
     60% {
         transform: scale(0.7);
         filter: brightness(0.5) contrast(0.7) blur(3px);
         opacity: 0.7;
-        clip-path: polygon(
-            20% 15%, 35% 12%, 45% 18%, 55% 14%, 65% 17%, 80% 12%, 88% 16%,
-            87% 35%, 85% 45%, 87% 55%, 86% 65%, 87% 80%, 85% 88%,
-            80% 87%, 65% 86%, 55% 87%, 45% 85%, 35% 87%, 15% 86%
-        );
-        box-shadow: 
+        clip-path: polygon(20% 15%, 30% 10%, 38% 18%, 42% 12%, 58% 12%, 62% 18%, 70% 10%, 80% 15%,
+                83% 20%, 84% 28%, 83% 38%, 84% 50%, 83% 62%, 84% 72%, 83% 80%,
+                80% 85%, 70% 90%, 62% 82%, 58% 88%, 42% 88%, 38% 82%, 30% 90%, 20% 85%, 17% 80%, 16% 72%, 17% 62%, 16% 50%, 17% 38%, 16% 28%, 17% 20%);
+        box-shadow:
             inset 0 0 120px rgba(0, 0, 0, 0.7),
             inset 0 0 250px rgba(0, 0, 0, 0.6),
             0 25px 60px rgba(0, 0, 0, 0.5);
     }
+
     75% {
         transform: scale(0.5);
         filter: brightness(0.3) contrast(0.5) blur(5px);
         opacity: 0.5;
-        clip-path: polygon(
-            30% 25%, 45% 22%, 55% 28%, 65% 24%, 75% 27%, 85% 23%,
-            84% 45%, 82% 55%, 84% 65%, 83% 75%, 84% 85%,
-            75% 84%, 65% 83%, 55% 84%, 45% 82%, 25% 83%
-        );
-        box-shadow: 
+        clip-path: polygon(30% 25%, 40% 18%, 48% 28%, 50% 22%, 50% 22%, 52% 28%, 60% 18%, 70% 25%,
+                75% 30%, 76% 38%, 75% 48%, 76% 52%, 75% 62%, 76% 70%,
+                70% 75%, 60% 82%, 52% 72%, 50% 78%, 48% 72%, 40% 82%, 30% 75%, 25% 70%, 24% 62%, 25% 52%, 24% 48%, 25% 38%, 24% 30%);
+        box-shadow:
             inset 0 0 150px rgba(0, 0, 0, 0.8),
             inset 0 0 300px rgba(0, 0, 0, 0.7),
             0 30px 70px rgba(0, 0, 0, 0.6);
     }
+
     90% {
         transform: scale(0.3);
-        filter: brightness(0.2) contrast(0.3) blur(8px);
+        filter: brightness(0.2) contrast(0.3) blur(7px);
         opacity: 0.3;
-        clip-path: polygon(
-            40% 40%, 50% 38%, 60% 42%, 70% 39%, 80% 41%,
-            79% 50%, 78% 60%, 79% 70%, 78% 80%,
-            70% 79%, 60% 78%, 50% 79%, 40% 78%
-        );
-        box-shadow: 
+        clip-path: polygon(40% 40%, 46% 35%, 48% 42%, 50% 38%, 50% 38%, 52% 42%, 54% 35%, 60% 40%,
+                62% 45%, 63% 48%, 62% 52%, 63% 55%, 62% 60%,
+                60% 62%, 54% 65%, 52% 58%, 50% 62%, 48% 58%, 46% 65%, 40% 62%, 38% 60%, 37% 55%, 38% 52%, 37% 48%, 38% 45%);
+        box-shadow:
             inset 0 0 180px rgba(0, 0, 0, 0.9),
             inset 0 0 350px rgba(0, 0, 0, 0.8),
             0 35px 80px rgba(0, 0, 0, 0.7);
     }
+
     100% {
         transform: scale(0.1);
-        filter: brightness(0.1) contrast(0.2) blur(12px);
+        filter: brightness(0.1) contrast(0.2) blur(10px);
         opacity: 0;
         clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-        box-shadow: 
+        box-shadow:
             inset 0 0 200px rgba(0, 0, 0, 1),
             inset 0 0 400px rgba(0, 0, 0, 0.9),
             0 40px 100px rgba(0, 0, 0, 0.8);
@@ -483,14 +490,18 @@ body {
 }
 
 @keyframes crinkleOverlay {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, 0) scale(1);
         opacity: 0.3;
     }
+
     33% {
         transform: translate(-10px, 15px) scale(1.05);
         opacity: 0.25;
     }
+
     66% {
         transform: translate(15px, -10px) scale(0.95);
         opacity: 0.35;
@@ -501,9 +512,11 @@ body {
     0% {
         opacity: 0.3;
     }
+
     50% {
         opacity: 0.15;
     }
+
     100% {
         opacity: 0;
     }
@@ -513,17 +526,212 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
-/* Section Styles */
-section {
-    padding: 80px 0;
+/* Animation optimisée pour mobile - froissement depuis les bords */
+@keyframes crinkleAndFadeMobile {
+    0% {
+        transform: scale(1);
+        filter: brightness(1) contrast(1) blur(0px);
+        opacity: 1;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+    }
+
+    15% {
+        transform: scale(1.005);
+        filter: brightness(1.01) contrast(1.02) blur(0.15px);
+        opacity: 1;
+        clip-path: polygon(4% 3%, 6% 1%, 94% 1%, 96% 3%, 97% 6%, 99% 94%, 96% 97%, 94% 99%, 6% 99%, 3% 97%, 1% 94%, 3% 6%);
+        box-shadow: inset 0 0 38px rgba(0, 0, 0, 0.35);
+    }
+
+    35% {
+        transform: scale(0.97);
+        filter: brightness(0.92) contrast(0.98) blur(0.6px);
+        opacity: 0.92;
+        clip-path: polygon(8% 6%, 12% 2%, 16% 5%, 84% 2%, 88% 5%, 92% 6%, 94% 10%, 96% 14%, 98% 18%, 98% 82%, 96% 86%, 94% 90%, 92% 94%, 88% 97%, 84% 98%, 16% 98%, 12% 97%, 8% 94%, 6% 90%, 4% 86%, 2% 82%, 2% 18%, 4% 14%, 6% 10%);
+        box-shadow: inset 0 0 48px rgba(0, 0, 0, 0.45), 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    55% {
+        transform: scale(0.88);
+        filter: brightness(0.8) contrast(0.88) blur(1.2px);
+        opacity: 0.8;
+        clip-path: polygon(15% 12%, 20% 8%, 25% 11%, 30% 9%, 70% 8%, 75% 11%, 80% 12%, 85% 15%, 88% 20%, 90% 25%, 92% 30%, 92% 70%, 90% 75%, 88% 80%, 85% 85%, 80% 88%, 75% 91%, 70% 92%, 30% 92%, 25% 91%, 20% 88%, 15% 85%, 12% 80%, 10% 75%, 8% 70%, 8% 30%, 10% 25%, 12% 20%);
+        box-shadow: inset 0 0 65px rgba(0, 0, 0, 0.55), 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    75% {
+        transform: scale(0.65);
+        filter: brightness(0.5) contrast(0.65) blur(2.5px);
+        opacity: 0.5;
+        clip-path: polygon(25% 22%, 32% 18%, 38% 22%, 42% 20%, 58% 18%, 62% 22%, 68% 25%, 72% 28%, 75% 32%, 78% 38%, 80% 42%, 80% 58%, 78% 62%, 75% 68%, 72% 72%, 68% 75%, 62% 78%, 58% 80%, 42% 80%, 38% 78%, 32% 75%, 28% 72%, 25% 68%, 22% 62%, 20% 58%, 20% 42%, 22% 38%, 25% 32%, 28% 28%);
+        box-shadow: inset 0 0 85px rgba(0, 0, 0, 0.75), 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    100% {
+        transform: scale(0.05);
+        filter: brightness(0.1) contrast(0.2) blur(7px);
+        opacity: 0;
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+        box-shadow: inset 0 0 110px rgba(0, 0, 0, 1), 0 16px 45px rgba(0, 0, 0, 0.65);
+    }
+}
+
+@keyframes heroCycle {
+
+    /* 0% - 33%: Purple Wave (Visible) */
+    0% {
+        background-position: 0% 50%;
+        transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    16% {
+        background-position: 100% 50%;
+    }
+
+    30% {
+        background-position: 0% 50%;
+        transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    /* 33% - 36%: Tilt and Recede (Transition to Dark) */
+    36% {
+        transform: perspective(1000px) rotateX(60deg) translateZ(-1500px) scale(0.2);
+        opacity: 0;
+    }
+
+    /* 36% - 95%: Dark Theme & Rabbit Scene (Hidden Purple BG) */
+    95% {
+        transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
+        opacity: 0;
+    }
+
+    /* 95% - 100%: Smooth Fade In */
+    100% {
+        transform: perspective(1000px) rotateX(0deg) translateZ(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Rabbit Scene Styles */
+.hero-rabbit-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    /* Behind content but visible when purple BG is gone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: rabbitSceneCycle 30s linear infinite;
+    pointer-events: none;
+}
+
+.scene-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cogwheel {
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    /* Start off-screen */
+    width: 300px;
+    height: 300px;
+    transform: translateY(-50%);
+    animation: spinCog 4s linear infinite;
+    filter: brightness(0) invert(1);
+}
+
+.rabbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    animation: slideRabbit 0.5s ease-in-out infinite alternate;
+    filter: brightness(0) invert(1);
+}
+
+@keyframes rabbitSceneCycle {
+
+    /* 0-66%: Hidden (Purple BG then Dark Theme/Typewriter) */
+    0%,
+    60% {
+        opacity: 0;
+    }
+
+    /* 66-95%: Visible (Rabbit Scene) */
+    66% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    /* 95-100%: Fade Out */
+    95%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes spinCog {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+        left: -150px;
+    }
+
+    to {
+        transform: translateY(-50%) rotate(360deg);
+        left: 110%;
+    }
+
+    /* Moves across screen */
+}
+
+@keyframes slideRabbit {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(5deg) scale(1.05);
+    }
+
+    /* Slight rotation and scale to simulate effort */
+}
+
+@keyframes blinkCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 .section-title {
@@ -852,6 +1060,13 @@ section {
         justify-content: center;
     }
 
+    /* Optimisation du froissement sur mobile */
+    .hero::before {
+        animation:
+            gradientShift 10s ease infinite,
+            crinkleAndFadeMobile 18s ease-in-out infinite;
+    }
+
     .section-title {
         font-size: 2rem;
     }
@@ -894,6 +1109,7 @@ section {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -905,6 +1121,7 @@ section {
         opacity: 0;
         transform: translateY(40px) scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -916,6 +1133,7 @@ section {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 0.9;
         transform: translateY(0);
@@ -925,4 +1143,3 @@ section {
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
 }
-
