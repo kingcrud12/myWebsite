@@ -10,16 +10,21 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Enlever le slash initial
 $requestPath = ltrim($requestPath, '/');
 
-// Log pour débogage sur Render
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("POST Request to: " . $requestPath);
 }
 
-// Si c'est une requête vers l'API (send-email.php)
-if (strpos($requestPath, 'server/send-email.php') !== false || 
+$isEmailRequest = (
+    strpos($requestPath, 'server/send-email.php') !== false || 
     strpos($requestPath, 'send-email') !== false ||
     $requestPath === 'server/send-email.php' ||
-    preg_match('/\/?server\/send-email\.php\/?$/', $requestPath)) {
+    $requestPath === 'send-email.php' ||
+    preg_match('/\/?server\/send-email\.php\/?$/', $requestPath) ||
+    preg_match('/\/?send-email\.php\/?$/', $requestPath)
+);
+
+if ($isEmailRequest) {
+    error_log("Router: Email request detected. Path: " . $requestPath . " | Method: " . $_SERVER['REQUEST_METHOD']);
     
     // Définir les headers pour JSON
     header('Content-Type: application/json; charset=utf-8');
@@ -42,21 +47,46 @@ if (strpos($requestPath, 'server/send-email.php') !== false ||
     
     // Inclure le script PHP
     $sendEmailPath = __DIR__ . '/server/send-email.php';
+    error_log("Router: Looking for send-email.php at: " . $sendEmailPath);
+    error_log("Router: File exists: " . (file_exists($sendEmailPath) ? 'YES' : 'NO'));
+    
     if (file_exists($sendEmailPath)) {
         try {
+            error_log("Router: Including send-email.php");
             require_once $sendEmailPath;
+            error_log("Router: send-email.php executed successfully");
         } catch (Exception $e) {
-            error_log("Error including send-email.php: " . $e->getMessage());
+            error_log("Router: Exception including send-email.php: " . $e->getMessage());
+            error_log("Router: Stack trace: " . $e->getTraceAsString());
             http_response_code(500);
+            header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()]);
         } catch (Error $e) {
-            error_log("Fatal error in send-email.php: " . $e->getMessage());
+            error_log("Router: Fatal error in send-email.php: " . $e->getMessage());
+            error_log("Router: Stack trace: " . $e->getTraceAsString());
             http_response_code(500);
+            header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => 'Erreur fatale: ' . $e->getMessage()]);
+        } catch (Throwable $e) {
+            error_log("Router: Throwable error: " . $e->getMessage());
+            error_log("Router: Stack trace: " . $e->getTraceAsString());
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()]);
         }
     } else {
-        error_log("send-email.php not found at: " . $sendEmailPath);
+        error_log("Router: send-email.php not found at: " . $sendEmailPath);
+        error_log("Router: Current directory: " . __DIR__);
+        if (is_dir(__DIR__)) {
+            $dirContents = scandir(__DIR__);
+            error_log("Router: Directory contents: " . implode(', ', $dirContents));
+        }
+        if (is_dir(__DIR__ . '/server')) {
+            $serverContents = scandir(__DIR__ . '/server');
+            error_log("Router: Server directory contents: " . implode(', ', $serverContents));
+        }
         http_response_code(500);
+        header('Content-Type: application/json');
         echo json_encode(['success' => false, 'message' => 'Script non trouvé']);
     }
     exit;

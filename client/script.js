@@ -133,6 +133,21 @@ contactForm.addEventListener('submit', async (e) => {
             }
         });
 
+        // Vérifier que la réponse est valide
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server error:', response.status, errorText);
+            throw new Error(`Erreur serveur: ${response.status}`);
+        }
+
+        // Vérifier que la réponse est du JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            const text = await response.text();
+            console.error('Non-JSON response:', text);
+            throw new Error('Réponse invalide du serveur');
+        }
+
         const result = await response.json();
 
         if (result.success) {
