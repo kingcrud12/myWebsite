@@ -5,7 +5,8 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
 // Définir un timeout pour éviter que le script reste bloqué
-set_time_limit(30);
+set_time_limit(25); // Légèrement moins que le timeout du serveur
+ignore_user_abort(false); // Arrêter le script si le client se déconnecte
 
 // Gestionnaire d'erreur global pour s'assurer qu'une réponse est toujours envoyée
 register_shutdown_function(function() {

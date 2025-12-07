@@ -23,5 +23,6 @@ RUN cd server && composer install --no-dev --optimize-autoloader
 EXPOSE 8080
 
 # Commande de démarrage avec options pour éviter les blocages
-CMD php -d max_execution_time=30 -d default_socket_timeout=10 -S 0.0.0.0:${PORT:-8080} -t . router.php
+# Utiliser -t pour spécifier le répertoire racine et router.php comme routeur
+CMD php -d max_execution_time=30 -d default_socket_timeout=10 -d memory_limit=128M -S 0.0.0.0:${PORT:-8080} router.php
 

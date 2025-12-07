@@ -4,14 +4,19 @@
  * Utilisé pour le déploiement sur Render
  */
 
+// Configuration pour éviter les blocages
+set_time_limit(30);
+ignore_user_abort(false);
+
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
 
 // Enlever le slash initial
 $requestPath = ltrim($requestPath, '/');
 
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    error_log("POST Request to: " . $requestPath);
+// Log pour débogage sur Render
+if (isset($_SERVER['REQUEST_METHOD'])) {
+    error_log("Router: " . $_SERVER['REQUEST_METHOD'] . " request to: " . $requestPath . " from: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
 }
 
 $isEmailRequest = (
@@ -26,24 +31,38 @@ $isEmailRequest = (
 if ($isEmailRequest) {
     error_log("Router: Email request detected. Path: " . $requestPath . " | Method: " . $_SERVER['REQUEST_METHOD']);
     
-    // Définir les headers pour JSON
-    header('Content-Type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type');
+    // Définir les headers pour JSON IMMÉDIATEMENT
+    if (!headers_sent()) {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('X-Content-Type-Options: nosniff');
+    }
+    
+    // Flush les headers immédiatement
+    if (function_exists('fastcgi_finish_request')) {
+        // Ne pas utiliser fastcgi_finish_request ici car on veut envoyer la réponse
+    } else {
+        flush();
+    }
     
     // Gérer les requêtes OPTIONS (preflight)
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        error_log("Router: OPTIONS request, sending 200");
         http_response_code(200);
         exit;
     }
     
     // Vérifier que c'est une requête POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        error_log("Router: Method not allowed: " . $_SERVER['REQUEST_METHOD']);
         http_response_code(405);
         echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
         exit;
     }
+    
+    error_log("Router: POST request validated, proceeding to include send-email.php");
     
     // Inclure le script PHP
     $sendEmailPath = __DIR__ . '/server/send-email.php';
@@ -53,25 +72,44 @@ if ($isEmailRequest) {
     if (file_exists($sendEmailPath)) {
         try {
             error_log("Router: Including send-email.php");
+            // Capturer la sortie pour s'assurer qu'elle est envoyée
+            ob_start();
             require_once $sendEmailPath;
+            $output = ob_get_clean();
+            
+            // Si send-email.php n'a rien retourné, envoyer une réponse par défaut
+            if (empty($output) && !headers_sent()) {
+                error_log("Router: send-email.php returned no output, sending default error");
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => 'Le script n\'a retourné aucune réponse']);
+            } else {
+                echo $output;
+                error_log("Router: send-email.php output sent: " . substr($output, 0, 100));
+            }
             error_log("Router: send-email.php executed successfully");
         } catch (Exception $e) {
             error_log("Router: Exception including send-email.php: " . $e->getMessage());
             error_log("Router: Stack trace: " . $e->getTraceAsString());
-            http_response_code(500);
-            header('Content-Type: application/json');
+            if (!headers_sent()) {
+                http_response_code(500);
+                header('Content-Type: application/json');
+            }
             echo json_encode(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()]);
         } catch (Error $e) {
             error_log("Router: Fatal error in send-email.php: " . $e->getMessage());
             error_log("Router: Stack trace: " . $e->getTraceAsString());
-            http_response_code(500);
-            header('Content-Type: application/json');
+            if (!headers_sent()) {
+                http_response_code(500);
+                header('Content-Type: application/json');
+            }
             echo json_encode(['success' => false, 'message' => 'Erreur fatale: ' . $e->getMessage()]);
         } catch (Throwable $e) {
             error_log("Router: Throwable error: " . $e->getMessage());
             error_log("Router: Stack trace: " . $e->getTraceAsString());
-            http_response_code(500);
-            header('Content-Type: application/json');
+            if (!headers_sent()) {
+                http_response_code(500);
+                header('Content-Type: application/json');
+            }
             echo json_encode(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()]);
         }
     } else {
@@ -85,10 +123,19 @@ if ($isEmailRequest) {
             $serverContents = scandir(__DIR__ . '/server');
             error_log("Router: Server directory contents: " . implode(', ', $serverContents));
         }
-        http_response_code(500);
-        header('Content-Type: application/json');
+        if (!headers_sent()) {
+            http_response_code(500);
+            header('Content-Type: application/json');
+        }
         echo json_encode(['success' => false, 'message' => 'Script non trouvé']);
     }
+    
+    // Forcer la sortie
+    if (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+    flush();
+    error_log("Router: Exiting after email request");
     exit;
 }
 
