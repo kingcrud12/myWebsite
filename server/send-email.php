@@ -176,20 +176,28 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = SMTP_USERNAME;
     $mail->Password = SMTP_PASSWORD;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    
+    // Essayer d'abord le port 465 avec SSL (plus fiable sur Render)
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL direct
+    $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
     
-    // Timeouts SMTP pour éviter que le script reste bloqué
-    $mail->Timeout = 10; // Timeout de connexion (secondes)
+    // Timeouts SMTP augmentés pour Render
+    $mail->Timeout = 30; // Timeout de connexion (secondes) - augmenté pour Render
     $mail->SMTPKeepAlive = false; // Ne pas garder la connexion ouverte
+    
+    // Options SSL/TLS pour Render
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
             'verify_peer_name' => false,
-            'allow_self_signed' => true
+            'allow_self_signed' => true,
+            'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT
         )
     );
+    
+    // Activer le mode debug pour voir les détails de connexion
+    $mail->SMTPDebug = 0; // 0 = pas de debug, 2 = debug complet (à activer si besoin)
     
     error_log("send-email.php: SMTP configuration completed");
 
@@ -258,17 +266,44 @@ Message:
 {$message}
     ";
 
-    // Envoyer l'email
-    error_log("send-email.php: Attempting to send email");
-    $sendResult = $mail->send();
-    error_log("send-email.php: Email send result: " . ($sendResult ? 'SUCCESS' : 'FAILED'));
+    // Envoyer l'email avec gestion d'erreur améliorée
+    error_log("send-email.php: Attempting to connect to SMTP server");
+    error_log("send-email.php: SMTP Host: " . $mail->Host . ", Port: " . $mail->Port . ", Encryption: " . $mail->SMTPSecure);
     
-    if (!$sendResult) {
-        error_log("send-email.php: Send failed. Error: " . $mail->ErrorInfo);
-        throw new Exception("Échec de l'envoi: " . $mail->ErrorInfo);
+    try {
+        // Tester la connexion avant d'envoyer
+        if (!$mail->smtpConnect()) {
+            error_log("send-email.php: SMTP connection failed");
+            throw new Exception("SMTP Error: Could not connect to SMTP host. Connection failed.");
+        }
+        error_log("send-email.php: SMTP connection successful");
+        
+        // Envoyer l'email
+        error_log("send-email.php: Attempting to send email");
+        $sendResult = $mail->send();
+        error_log("send-email.php: Email send result: " . ($sendResult ? 'SUCCESS' : 'FAILED'));
+        
+        if (!$sendResult) {
+            error_log("send-email.php: Send failed. Error: " . $mail->ErrorInfo);
+            throw new Exception("Échec de l'envoi: " . $mail->ErrorInfo);
+        }
+        
+        // Fermer la connexion SMTP
+        $mail->smtpClose();
+        error_log("send-email.php: SMTP connection closed");
+        error_log("send-email.php: Email sent successfully");
+        
+    } catch (Exception $smtpException) {
+        // Fermer la connexion en cas d'erreur
+        try {
+            if (method_exists($mail, 'smtpClose')) {
+                $mail->smtpClose();
+            }
+        } catch (Exception $closeException) {
+            // Ignorer les erreurs de fermeture
+        }
+        throw $smtpException;
     }
-    
-    error_log("send-email.php: Email sent successfully");
 
     // Réponse de succès
     $response = json_encode([
