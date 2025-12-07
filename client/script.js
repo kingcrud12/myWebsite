@@ -124,9 +124,13 @@ contactForm.addEventListener('submit', async (e) => {
         formDataToSend.append('subject', formData.subject);
         formDataToSend.append('message', formData.message);
 
-        const response = await fetch('/server/send-email.php', {
+        // Utiliser le chemin relatif qui sera routé par router.php
+        const response = await fetch('server/send-email.php', {
             method: 'POST',
-            body: formDataToSend
+            body: formDataToSend,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
 
         const result = await response.json();

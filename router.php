@@ -10,11 +10,44 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Enlever le slash initial
 $requestPath = ltrim($requestPath, '/');
 
+// Log pour débogage sur Render
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log("POST Request to: " . $requestPath);
+}
+
 // Si c'est une requête vers l'API (send-email.php)
 if (strpos($requestPath, 'server/send-email.php') !== false || 
-    strpos($requestPath, 'send-email') !== false) {
+    strpos($requestPath, 'send-email') !== false ||
+    $requestPath === 'server/send-email.php' ||
+    preg_match('/\/?server\/send-email\.php\/?$/', $requestPath)) {
+    
+    // Définir les headers pour JSON
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    
+    // Gérer les requêtes OPTIONS (preflight)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(200);
+        exit;
+    }
+    
+    // Vérifier que c'est une requête POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
+        exit;
+    }
+    
     // Inclure le script PHP
-    require_once __DIR__ . '/server/send-email.php';
+    $sendEmailPath = __DIR__ . '/server/send-email.php';
+    if (file_exists($sendEmailPath)) {
+        require_once $sendEmailPath;
+    } else {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Script non trouvé']);
+    }
     exit;
 }
 
