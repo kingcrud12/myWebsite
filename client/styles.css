@@ -903,22 +903,51 @@ section {
 }
 
 .about-content {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.about-text {
+    flex: 1;
 }
 
 .about-intro {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
-    text-align: center;
+    text-align: left;
 }
 
 .about-text p {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
     line-height: 1.8;
-    text-align: center;
+    text-align: left;
+}
+
+.about-image {
+    flex: 0 0 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
 }
 
 .skills {
@@ -929,14 +958,14 @@ section {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
-    text-align: center;
+    text-align: left;
 }
 
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .skill-tag {
@@ -1240,7 +1269,52 @@ section {
     }
 
     .about-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .about-image {
+        flex: 0 0 auto;
+        order: -1;
+    }
+
+    .profile-img {
+        max-width: 300px;
+    }
+
+    .about-intro,
+    .about-text p,
+    .skills h3 {
+        text-align: center;
+    }
+
+    .skills-grid {
+        justify-content: center;
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 2rem;
         padding: 0 1rem;
+    }
+
+    .about-image {
+        flex: 0 0 auto;
+        order: -1;
+    }
+
+    .profile-img {
+        max-width: 350px;
+    }
+
+    .about-intro,
+    .about-text p,
+    .skills h3 {
+        text-align: center;
+    }
+
+    .skills-grid {
+        justify-content: center;
     }
 }
 
