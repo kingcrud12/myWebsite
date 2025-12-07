@@ -23,8 +23,21 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== '') {
     }
 }
 
+// Si c'est une requête vers le script de débogage réseau
+if (strpos($requestPath, 'server/debug-network.php') !== false) {
+    error_log("Router: Debug network request detected. Path: " . $requestPath);
+    $debugNetworkPath = __DIR__ . '/server/debug-network.php';
+    if (file_exists($debugNetworkPath)) {
+        require_once $debugNetworkPath;
+    } else {
+        http_response_code(404);
+        echo "Debug script not found.";
+    }
+    exit;
+}
+
 $isEmailRequest = (
-    strpos($requestPath, 'server/send-email.php') !== false || 
+    strpos($requestPath, 'server/send-email.php') !== false ||
     strpos($requestPath, 'send-email') !== false ||
     $requestPath === 'server/send-email.php' ||
     $requestPath === 'send-email.php' ||
@@ -34,7 +47,7 @@ $isEmailRequest = (
 
 if ($isEmailRequest) {
     error_log("Router: Email request detected. Path: " . $requestPath . " | Method: " . $_SERVER['REQUEST_METHOD']);
-    
+
     // Définir les headers pour JSON IMMÉDIATEMENT
     if (!headers_sent()) {
         header('Content-Type: application/json; charset=utf-8');
@@ -43,21 +56,21 @@ if ($isEmailRequest) {
         header('Access-Control-Allow-Headers: Content-Type');
         header('X-Content-Type-Options: nosniff');
     }
-    
+
     // Flush les headers immédiatement
     if (function_exists('fastcgi_finish_request')) {
         // Ne pas utiliser fastcgi_finish_request ici car on veut envoyer la réponse
     } else {
         flush();
     }
-    
+
     // Gérer les requêtes OPTIONS (preflight)
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         error_log("Router: OPTIONS request, sending 200");
         http_response_code(200);
         exit;
     }
-    
+
     // Vérifier que c'est une requête POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         error_log("Router: Method not allowed: " . $_SERVER['REQUEST_METHOD']);
@@ -65,14 +78,14 @@ if ($isEmailRequest) {
         echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
         exit;
     }
-    
+
     error_log("Router: POST request validated, proceeding to include send-email.php");
-    
+
     // Inclure le script PHP
     $sendEmailPath = __DIR__ . '/server/send-email.php';
     error_log("Router: Looking for send-email.php at: " . $sendEmailPath);
     error_log("Router: File exists: " . (file_exists($sendEmailPath) ? 'YES' : 'NO'));
-    
+
     if (file_exists($sendEmailPath)) {
         try {
             error_log("Router: Including send-email.php");
@@ -80,7 +93,7 @@ if ($isEmailRequest) {
             ob_start();
             require_once $sendEmailPath;
             $output = ob_get_clean();
-            
+
             // Si send-email.php n'a rien retourné, envoyer une réponse par défaut
             if (empty($output) && !headers_sent()) {
                 error_log("Router: send-email.php returned no output, sending default error");
@@ -100,7 +113,7 @@ if ($isEmailRequest) {
                 header('Content-Type: application/json; charset=utf-8');
             }
             echo json_encode([
-                'success' => false, 
+                'success' => false,
                 'message' => 'Erreur serveur lors du traitement de la requête.',
                 'error' => $errorMessage
             ]);
@@ -113,7 +126,7 @@ if ($isEmailRequest) {
                 header('Content-Type: application/json; charset=utf-8');
             }
             echo json_encode([
-                'success' => false, 
+                'success' => false,
                 'message' => 'Erreur fatale sur le serveur.',
                 'error' => $errorMessage
             ]);
@@ -126,7 +139,7 @@ if ($isEmailRequest) {
                 header('Content-Type: application/json; charset=utf-8');
             }
             echo json_encode([
-                'success' => false, 
+                'success' => false,
                 'message' => 'Erreur inattendue sur le serveur.',
                 'error' => $errorMessage
             ]);
@@ -148,7 +161,7 @@ if ($isEmailRequest) {
         }
         echo json_encode(['success' => false, 'message' => 'Script non trouvé']);
     }
-    
+
     // Forcer la sortie
     if (ob_get_level() > 0) {
         ob_end_flush();
@@ -195,14 +208,14 @@ $filePath = __DIR__ . '/client/' . $requestPath;
 if (file_exists($filePath) && strpos(realpath($filePath), realpath(__DIR__ . '/client')) === 0) {
     // Déterminer le type MIME
     $mimeType = mime_content_type($filePath);
-    
+
     // Types MIME spécifiques
     if (pathinfo($filePath, PATHINFO_EXTENSION) === 'css') {
         $mimeType = 'text/css';
     } elseif (pathinfo($filePath, PATHINFO_EXTENSION) === 'js') {
         $mimeType = 'application/javascript';
     }
-    
+
     header('Content-Type: ' . $mimeType);
     readfile($filePath);
     exit;

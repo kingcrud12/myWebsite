@@ -4,6 +4,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
+// Force le flush du buffer pour éviter les timeouts côté client
+if (function_exists('ob_implicit_flush')) {
+    ob_implicit_flush(true);
+}
+
 // Définir un timeout pour éviter que le script reste bloqué
 set_time_limit(25); // Légèrement moins que le timeout du serveur
 ignore_user_abort(false); // Arrêter le script si le client se déconnecte
@@ -182,13 +187,13 @@ try {
     $mail->Username = SMTP_USERNAME;
     $mail->Password = SMTP_PASSWORD;
 
-    // Essayer d'abord le port 465 avec SSL (plus fiable sur Render)
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL direct
-    $mail->Port = 465;
+    // Utiliser STARTTLS sur le port 587 (plus standard et souvent moins bloqué)
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
 
-    // Timeouts SMTP augmentés pour Render
-    $mail->Timeout = 30; // Timeout de connexion (secondes) - augmenté pour Render
+    // Timeouts réduits pour échouer vite au lieu de bloquer
+    $mail->Timeout = 10; // 10 secondes max pour la connexion
     $mail->SMTPKeepAlive = false; // Ne pas garder la connexion ouverte
 
     // Options SSL/TLS pour Render
