@@ -1,25 +1,72 @@
 <?php
+// Activer l'affichage des erreurs pour le débogage (à désactiver en production)
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Log de débogage
+error_log("send-email.php: Request method = " . $_SERVER['REQUEST_METHOD']);
+
 // Vérifier que la requête est en POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    error_log("send-email.php: Method not allowed");
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
     exit;
 }
 
+// Vérifier que vendor/autoload.php existe
+$vendorPath = __DIR__ . '/vendor/autoload.php';
+if (!file_exists($vendorPath)) {
+    error_log("send-email.php: vendor/autoload.php not found at: " . $vendorPath);
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Dépendances non trouvées']);
+    exit;
+}
+
 // Charger PHPMailer
-// Charger PHPMailer
-require_once __DIR__ . '/vendor/autoload.php';
+require_once $vendorPath;
+error_log("send-email.php: PHPMailer loaded successfully");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Charger la configuration
-require_once __DIR__ . '/config.php';
+// Charger la configuration depuis les variables d'environnement ou config.php
+$configPath = __DIR__ . '/config.php';
+if (file_exists($configPath)) {
+    require_once $configPath;
+    error_log("send-email.php: Config file loaded");
+} else {
+    // Utiliser les variables d'environnement si config.php n'existe pas (production)
+    error_log("send-email.php: config.php not found, using environment variables");
+    if (!defined('SMTP_USERNAME')) {
+        $smtpUsername = getenv('SMTP_USERNAME');
+        define('SMTP_USERNAME', $smtpUsername ?: '');
+    }
+    if (!defined('SMTP_PASSWORD')) {
+        $smtpPassword = getenv('SMTP_PASSWORD');
+        define('SMTP_PASSWORD', $smtpPassword ?: '');
+    }
+    error_log("send-email.php: Environment variables loaded");
+}
+
+// Vérifier que les credentials SMTP sont définis
+$smtpUser = defined('SMTP_USERNAME') ? SMTP_USERNAME : '';
+$smtpPass = defined('SMTP_PASSWORD') ? SMTP_PASSWORD : '';
+
+if (empty($smtpUser) || empty($smtpPass)) {
+    error_log("send-email.php: SMTP credentials not configured. USERNAME: " . ($smtpUser ? 'SET' : 'NOT SET') . ", PASSWORD: " . ($smtpPass ? 'SET' : 'NOT SET'));
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Configuration SMTP manquante. Veuillez configurer SMTP_USERNAME et SMTP_PASSWORD.']);
+    exit;
+}
+
+error_log("send-email.php: SMTP credentials configured successfully");
 
 // Récupérer les données du formulaire
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
@@ -128,13 +175,30 @@ Message:
 
 } catch (Exception $e) {
     // En cas d'erreur
+    error_log('Erreur PHPMailer Exception: ' . $e->getMessage());
+    error_log('Stack trace: ' . $e->getTraceAsString());
+    
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.'
+        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.',
+        'error' => $e->getMessage()
     ]);
+} catch (Error $e) {
+    // Erreur fatale PHP
+    error_log('Erreur fatale PHP: ' . $e->getMessage());
+    error_log('Stack trace: ' . $e->getTraceAsString());
+    
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Erreur serveur. Veuillez réessayer plus tard.',
+        'error' => $e->getMessage()
+    ]);
+}
 
-    // Log de l'erreur (optionnel, pour le débogage)
-    error_log('Erreur PHPMailer: ' . $mail->ErrorInfo);
+// S'assurer qu'une réponse est toujours envoyée
+if (!headers_sent()) {
+    error_log("send-email.php: Script completed");
 }
 ?>

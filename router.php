@@ -43,8 +43,19 @@ if (strpos($requestPath, 'server/send-email.php') !== false ||
     // Inclure le script PHP
     $sendEmailPath = __DIR__ . '/server/send-email.php';
     if (file_exists($sendEmailPath)) {
-        require_once $sendEmailPath;
+        try {
+            require_once $sendEmailPath;
+        } catch (Exception $e) {
+            error_log("Error including send-email.php: " . $e->getMessage());
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()]);
+        } catch (Error $e) {
+            error_log("Fatal error in send-email.php: " . $e->getMessage());
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Erreur fatale: ' . $e->getMessage()]);
+        }
     } else {
+        error_log("send-email.php not found at: " . $sendEmailPath);
         http_response_code(500);
         echo json_encode(['success' => false, 'message' => 'Script non trouvé']);
     }
