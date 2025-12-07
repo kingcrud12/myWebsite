@@ -916,16 +916,19 @@ section {
 
 .about-intro {
     font-size: 1.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: var(--text-primary);
-    text-align: left;
+    text-align: justify;
+    line-height: 1.8;
+    text-justify: inter-word;
 }
 
 .about-text p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: var(--text-secondary);
     line-height: 1.8;
-    text-align: left;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .about-image {
@@ -1091,7 +1094,7 @@ section {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     color: var(--text-primary);
-    text-align: center;
+    text-align: left;
 }
 
 .contact-item {
@@ -1099,7 +1102,7 @@ section {
     gap: 1rem;
     margin-bottom: 2rem;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .contact-icon {
@@ -1114,20 +1117,21 @@ section {
 }
 
 .contact-item strong {
-    display: block;
-    margin-bottom: 0.25rem;
+    display: inline;
+    margin-right: 0.5rem;
     color: var(--text-primary);
 }
 
 .contact-item p {
+    display: inline;
     color: var(--text-secondary);
 }
 
 .contact-note {
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
     margin-top: 2rem;
-    text-align: center;
+    text-align: left;
 }
 
 .contact-form {
