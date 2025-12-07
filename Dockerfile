@@ -10,17 +10,11 @@ RUN apt-get update && apt-get install -y \
 # Activer le module rewrite d'Apache
 RUN a2enmod rewrite
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
 # Copier les fichiers du projet
 COPY . .
-
-# Installer les dépendances PHP
-RUN cd server && composer install --no-dev --optimize-autoloader
 
 # Configurer Apache pour écouter sur le port 8080 (requis par Render)
 RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf

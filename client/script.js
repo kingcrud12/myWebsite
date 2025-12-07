@@ -101,13 +101,13 @@ let isSubmitting = false;
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     // Empêcher les envois multiples
     if (isSubmitting) {
         console.log('Form submission already in progress, ignoring duplicate submit');
         return;
     }
-    
+
     isSubmitting = true;
 
     // Get form data
@@ -136,28 +136,23 @@ contactForm.addEventListener('submit', async (e) => {
             message: formData.message
         };
 
-        // Utiliser le chemin relatif qui sera routé par router.php
-        // Ajouter un timeout pour éviter que la requête reste en pending
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 secondes timeout
-        
-        const response = await fetch('server/send-email.php', {
+        // Utiliser l'endpoint Formspree
+        const response = await fetch('https://formspree.io/f/manrbred', {
             method: 'POST',
             body: JSON.stringify(jsonData),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },
-            signal: controller.signal
+            }
         });
-        
-        clearTimeout(timeoutId);
+
+
 
         // Vérifier que la réponse est valide
         if (!response.ok) {
             let errorText = '';
             let errorJson = null;
-            
+
             try {
                 errorText = await response.text();
                 // Essayer de parser comme JSON
@@ -169,14 +164,14 @@ contactForm.addEventListener('submit', async (e) => {
             } catch (e) {
                 errorText = 'Impossible de lire la réponse du serveur';
             }
-            
+
             console.error('Server error:', {
                 status: response.status,
                 statusText: response.statusText,
                 errorText: errorText,
                 errorJson: errorJson
             });
-            
+
             const errorMessage = errorJson?.message || errorText || `Erreur serveur: ${response.status}`;
             throw new Error(errorMessage);
         }
@@ -205,9 +200,9 @@ contactForm.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error('Form submission error:', error);
-        
+
         let errorMessage = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
-        
+
         if (error.name === 'AbortError') {
             errorMessage = 'La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
             console.error('Request timeout:', error);
@@ -222,7 +217,7 @@ contactForm.addEventListener('submit', async (e) => {
                 console.error('Server error details:', error.error);
             }
         }
-        
+
         showError(errorMessage);
     } finally {
         // Reset button state
