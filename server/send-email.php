@@ -44,6 +44,53 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Lire le body JSON
+$jsonInput = file_get_contents('php://input');
+$data = json_decode($jsonInput, true);
+
+// Vérifier que le JSON est valide
+if (json_last_error() !== JSON_ERROR_NONE) {
+    error_log("send-email.php: Invalid JSON - " . json_last_error_msg());
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Format JSON invalide']);
+    exit;
+}
+
+// Vérifier que tous les champs requis sont présents
+$requiredFields = ['name', 'email', 'subject', 'message'];
+$missingFields = [];
+
+foreach ($requiredFields as $field) {
+    if (!isset($data[$field]) || trim($data[$field]) === '') {
+        $missingFields[] = $field;
+    }
+}
+
+// Si des champs manquent, refuser la requête et fermer le traitement
+if (!empty($missingFields)) {
+    error_log("send-email.php: Missing required fields: " . implode(', ', $missingFields));
+    http_response_code(400);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Champs manquants: ' . implode(', ', $missingFields)
+    ]);
+    exit;
+}
+
+// Extraire et nettoyer les données
+$name = trim($data['name']);
+$email = trim($data['email']);
+$subject = trim($data['subject']);
+$message = trim($data['message']);
+
+// Validation de l'email
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    error_log("send-email.php: Invalid email format");
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Adresse email invalide']);
+    exit;
+}
+
 // Vérifier que vendor/autoload.php existe
 // Essayer d'abord dans server/vendor (où composer install est exécuté)
 $vendorPath = __DIR__ . '/vendor/autoload.php';
@@ -113,25 +160,8 @@ if (empty($smtpUser) || empty($smtpPass)) {
 
 error_log("send-email.php: SMTP credentials configured successfully");
 
-// Récupérer les données du formulaire
-$name = isset($_POST['name']) ? trim($_POST['name']) : '';
-$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-$subject = isset($_POST['subject']) ? trim($_POST['subject']) : '';
-$message = isset($_POST['message']) ? trim($_POST['message']) : '';
-
-// Validation des champs
-if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Tous les champs sont requis']);
-    exit;
-}
-
-// Validation de l'email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Adresse email invalide']);
-    exit;
-}
+// Les données JSON ont déjà été validées plus haut
+// Utiliser les variables déjà extraites
 
 try {
     error_log("send-email.php: Starting email creation");
@@ -251,22 +281,36 @@ Message:
 
 } catch (Exception $e) {
     // En cas d'erreur
-    error_log('send-email.php: Exception caught: ' . $e->getMessage());
+    $errorMessage = $e->getMessage();
+    error_log('send-email.php: Exception caught: ' . $errorMessage);
     error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
     
     if (!headers_sent()) {
         http_response_code(500);
     }
+    
+    // Inclure le message d'erreur dans la réponse (sans détails sensibles)
+    $userMessage = 'Une erreur est survenue lors de l\'envoi.';
+    if (strpos($errorMessage, 'SMTP') !== false || strpos($errorMessage, 'Connection') !== false) {
+        $userMessage = 'Erreur de connexion au serveur email. Veuillez réessayer plus tard.';
+    } elseif (strpos($errorMessage, 'Authentication') !== false || strpos($errorMessage, 'credentials') !== false) {
+        $userMessage = 'Erreur d\'authentification. Veuillez contacter l\'administrateur.';
+    } elseif (strpos($errorMessage, 'Timeout') !== false) {
+        $userMessage = 'Le serveur a mis trop de temps à répondre. Veuillez réessayer.';
+    }
+    
     $errorResponse = json_encode([
         'success' => false,
-        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.'
+        'message' => $userMessage,
+        'error' => $errorMessage // Pour le débogage côté client
     ]);
     echo $errorResponse;
-    error_log("send-email.php: Error response sent");
+    error_log("send-email.php: Error response sent: " . $userMessage);
     
 } catch (Error $e) {
     // Erreur fatale PHP
-    error_log('send-email.php: Fatal error: ' . $e->getMessage());
+    $errorMessage = $e->getMessage();
+    error_log('send-email.php: Fatal error: ' . $errorMessage);
     error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
     
     if (!headers_sent()) {
@@ -274,7 +318,8 @@ Message:
     }
     $errorResponse = json_encode([
         'success' => false,
-        'message' => 'Erreur serveur. Veuillez réessayer plus tard.'
+        'message' => 'Erreur serveur. Veuillez réessayer plus tard.',
+        'error' => $errorMessage // Pour le débogage côté client
     ]);
     echo $errorResponse;
     error_log("send-email.php: Fatal error response sent");

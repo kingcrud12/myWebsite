@@ -14,9 +14,13 @@ $requestPath = parse_url($requestUri, PHP_URL_PATH);
 // Enlever le slash initial
 $requestPath = ltrim($requestPath, '/');
 
-// Log pour débogage sur Render
-if (isset($_SERVER['REQUEST_METHOD'])) {
-    error_log("Router: " . $_SERVER['REQUEST_METHOD'] . " request to: " . $requestPath . " from: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+// Log pour débogage sur Render (seulement pour les vraies requêtes, pas les connexions préventives)
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== '') {
+    // Vérifier que c'est une vraie requête (a des headers ou du contenu)
+    $hasContent = !empty($_POST) || !empty($_GET) || !empty(file_get_contents('php://input'));
+    if ($hasContent || $_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET') {
+        error_log("Router: " . $_SERVER['REQUEST_METHOD'] . " request to: " . $requestPath . " from: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+    }
 }
 
 $isEmailRequest = (
@@ -88,29 +92,44 @@ if ($isEmailRequest) {
             }
             error_log("Router: send-email.php executed successfully");
         } catch (Exception $e) {
-            error_log("Router: Exception including send-email.php: " . $e->getMessage());
+            $errorMessage = $e->getMessage();
+            error_log("Router: Exception including send-email.php: " . $errorMessage);
             error_log("Router: Stack trace: " . $e->getTraceAsString());
             if (!headers_sent()) {
                 http_response_code(500);
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
             }
-            echo json_encode(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()]);
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Erreur serveur lors du traitement de la requête.',
+                'error' => $errorMessage
+            ]);
         } catch (Error $e) {
-            error_log("Router: Fatal error in send-email.php: " . $e->getMessage());
+            $errorMessage = $e->getMessage();
+            error_log("Router: Fatal error in send-email.php: " . $errorMessage);
             error_log("Router: Stack trace: " . $e->getTraceAsString());
             if (!headers_sent()) {
                 http_response_code(500);
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
             }
-            echo json_encode(['success' => false, 'message' => 'Erreur fatale: ' . $e->getMessage()]);
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Erreur fatale sur le serveur.',
+                'error' => $errorMessage
+            ]);
         } catch (Throwable $e) {
-            error_log("Router: Throwable error: " . $e->getMessage());
+            $errorMessage = $e->getMessage();
+            error_log("Router: Throwable error: " . $errorMessage);
             error_log("Router: Stack trace: " . $e->getTraceAsString());
             if (!headers_sent()) {
                 http_response_code(500);
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
             }
-            echo json_encode(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()]);
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Erreur inattendue sur le serveur.',
+                'error' => $errorMessage
+            ]);
         }
     } else {
         error_log("Router: send-email.php not found at: " . $sendEmailPath);

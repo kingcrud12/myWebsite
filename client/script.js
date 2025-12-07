@@ -96,8 +96,19 @@ const btnSubmit = contactForm.querySelector('.btn-submit');
 const btnText = btnSubmit.querySelector('.btn-text');
 const btnLoader = btnSubmit.querySelector('.btn-loader');
 
+// Protection contre les envois multiples
+let isSubmitting = false;
+
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Empêcher les envois multiples
+    if (isSubmitting) {
+        console.log('Form submission already in progress, ignoring duplicate submit');
+        return;
+    }
+    
+    isSubmitting = true;
 
     // Get form data
     const formData = {
@@ -117,12 +128,13 @@ contactForm.addEventListener('submit', async (e) => {
     formMessage.className = 'form-message';
 
     try {
-        // Envoyer les données au script PHP
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        formDataToSend.append('email', formData.email);
-        formDataToSend.append('subject', formData.subject);
-        formDataToSend.append('message', formData.message);
+        // Préparer les données en JSON
+        const jsonData = {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message
+        };
 
         // Utiliser le chemin relatif qui sera routé par router.php
         // Ajouter un timeout pour éviter que la requête reste en pending
@@ -131,8 +143,9 @@ contactForm.addEventListener('submit', async (e) => {
         
         const response = await fetch('server/send-email.php', {
             method: 'POST',
-            body: formDataToSend,
+            body: JSON.stringify(jsonData),
             headers: {
+                'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
             signal: controller.signal
@@ -142,20 +155,46 @@ contactForm.addEventListener('submit', async (e) => {
 
         // Vérifier que la réponse est valide
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Server error:', response.status, errorText);
-            throw new Error(`Erreur serveur: ${response.status}`);
+            let errorText = '';
+            let errorJson = null;
+            
+            try {
+                errorText = await response.text();
+                // Essayer de parser comme JSON
+                try {
+                    errorJson = JSON.parse(errorText);
+                } catch (e) {
+                    // Ce n'est pas du JSON, garder le texte brut
+                }
+            } catch (e) {
+                errorText = 'Impossible de lire la réponse du serveur';
+            }
+            
+            console.error('Server error:', {
+                status: response.status,
+                statusText: response.statusText,
+                errorText: errorText,
+                errorJson: errorJson
+            });
+            
+            const errorMessage = errorJson?.message || errorText || `Erreur serveur: ${response.status}`;
+            throw new Error(errorMessage);
         }
 
         // Vérifier que la réponse est du JSON
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             const text = await response.text();
-            console.error('Non-JSON response:', text);
+            console.error('Non-JSON response:', {
+                contentType: contentType,
+                text: text,
+                status: response.status
+            });
             throw new Error('Réponse invalide du serveur');
         }
 
         const result = await response.json();
+        console.log('Form submission success:', result);
 
         if (result.success) {
             showSuccess(result.message || 'Message envoyé avec succès! Je vous répondrai bientôt.');
@@ -165,18 +204,29 @@ contactForm.addEventListener('submit', async (e) => {
         }
 
     } catch (error) {
+        console.error('Form submission error:', error);
+        
+        let errorMessage = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
+        
         if (error.name === 'AbortError') {
-            showError('La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
+            errorMessage = 'La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
             console.error('Request timeout:', error);
         } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
-            showError('Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com');
+            errorMessage = 'Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com';
             console.error('Network error:', error);
-        } else {
-            showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
-            console.error('Form submission error:', error);
+        } else if (error.message) {
+            // Utiliser le message d'erreur du serveur s'il est disponible
+            errorMessage = error.message;
+            // Si le message contient des détails techniques, les logger mais ne pas les afficher
+            if (error.error) {
+                console.error('Server error details:', error.error);
+            }
         }
+        
+        showError(errorMessage);
     } finally {
         // Reset button state
+        isSubmitting = false;
         btnText.style.display = 'inline';
         btnLoader.style.display = 'none';
         btnSubmit.disabled = false;
