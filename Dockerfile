@@ -22,6 +22,6 @@ RUN cd server && composer install --no-dev --optimize-autoloader
 # Exposer le port (Render utilisera la variable PORT)
 EXPOSE 8080
 
-# Commande de démarrage
-CMD php -S 0.0.0.0:${PORT:-8080} router.php
+# Commande de démarrage avec options pour éviter les blocages
+CMD php -d max_execution_time=30 -d default_socket_timeout=10 -S 0.0.0.0:${PORT:-8080} -t . router.php
 

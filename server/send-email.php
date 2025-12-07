@@ -4,10 +4,33 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+// Définir un timeout pour éviter que le script reste bloqué
+set_time_limit(30);
+
+// Gestionnaire d'erreur global pour s'assurer qu'une réponse est toujours envoyée
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error !== NULL && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        error_log("Fatal error in send-email.php: " . $error['message'] . " in " . $error['file'] . " on line " . $error['line']);
+        if (!headers_sent()) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(500);
+        }
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erreur serveur fatale. Veuillez réessayer plus tard.'
+        ]);
+    }
+});
+
+// Envoyer les headers immédiatement pour éviter que la requête reste en pending
+if (!headers_sent()) {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('X-Content-Type-Options: nosniff');
+}
 
 // Log de débogage
 error_log("send-email.php: Request method = " . $_SERVER['REQUEST_METHOD']);
@@ -21,17 +44,38 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Vérifier que vendor/autoload.php existe
+// Essayer d'abord dans server/vendor (où composer install est exécuté)
 $vendorPath = __DIR__ . '/vendor/autoload.php';
 if (!file_exists($vendorPath)) {
-    error_log("send-email.php: vendor/autoload.php not found at: " . $vendorPath);
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Dépendances non trouvées']);
-    exit;
+    // Essayer aussi à la racine au cas où
+    $vendorPathRoot = dirname(__DIR__) . '/vendor/autoload.php';
+    if (file_exists($vendorPathRoot)) {
+        $vendorPath = $vendorPathRoot;
+        error_log("send-email.php: Using root vendor/autoload.php");
+    } else {
+        error_log("send-email.php: vendor/autoload.php not found at: " . __DIR__ . '/vendor/autoload.php');
+        error_log("send-email.php: Also checked: " . $vendorPathRoot);
+        error_log("send-email.php: Current directory: " . __DIR__);
+        error_log("send-email.php: Parent directory: " . dirname(__DIR__));
+        if (is_dir(__DIR__ . '/vendor')) {
+            error_log("send-email.php: server/vendor directory exists");
+        } else {
+            error_log("send-email.php: server/vendor directory does NOT exist");
+        }
+        if (is_dir(dirname(__DIR__) . '/vendor')) {
+            error_log("send-email.php: root/vendor directory exists");
+        } else {
+            error_log("send-email.php: root/vendor directory does NOT exist");
+        }
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Dépendances non trouvées. Vérifiez que composer install a été exécuté.']);
+        exit;
+    }
 }
 
 // Charger PHPMailer
 require_once $vendorPath;
-error_log("send-email.php: PHPMailer loaded successfully");
+error_log("send-email.php: PHPMailer loaded successfully from: " . $vendorPath);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -89,25 +133,44 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 try {
+    error_log("send-email.php: Starting email creation");
+    
     // Créer une instance de PHPMailer
     $mail = new PHPMailer(true);
+    error_log("send-email.php: PHPMailer instance created");
 
-    // Configuration du serveur SMTP
+    // Configuration du serveur SMTP avec timeouts
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = SMTP_USERNAME; // Votre adresse Gmail
-    $mail->Password = SMTP_PASSWORD; // Votre mot de passe d'application
+    $mail->Username = SMTP_USERNAME;
+    $mail->Password = SMTP_PASSWORD;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
+    
+    // Timeouts SMTP pour éviter que le script reste bloqué
+    $mail->Timeout = 10; // Timeout de connexion (secondes)
+    $mail->SMTPKeepAlive = false; // Ne pas garder la connexion ouverte
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+    
+    error_log("send-email.php: SMTP configuration completed");
 
     // Expéditeur et destinataire
+    error_log("send-email.php: Setting email addresses");
     $mail->setFrom(SMTP_USERNAME, 'Site Web - Yann Dipita');
     $mail->addAddress('dipitay@gmail.com', 'Yann Dipita');
     $mail->addReplyTo($email, $name);
+    error_log("send-email.php: Email addresses set");
 
     // Contenu de l'email
+    error_log("send-email.php: Setting email content");
     $mail->isHTML(true);
     $mail->Subject = 'Nouveau message du site web: ' . $subject;
 
@@ -165,40 +228,76 @@ Message:
     ";
 
     // Envoyer l'email
-    $mail->send();
+    error_log("send-email.php: Attempting to send email");
+    $sendResult = $mail->send();
+    error_log("send-email.php: Email send result: " . ($sendResult ? 'SUCCESS' : 'FAILED'));
+    
+    if (!$sendResult) {
+        error_log("send-email.php: Send failed. Error: " . $mail->ErrorInfo);
+        throw new Exception("Échec de l'envoi: " . $mail->ErrorInfo);
+    }
+    
+    error_log("send-email.php: Email sent successfully");
 
     // Réponse de succès
-    echo json_encode([
+    $response = json_encode([
         'success' => true,
         'message' => 'Message envoyé avec succès! Je vous répondrai bientôt.'
     ]);
+    error_log("send-email.php: Sending success response");
+    echo $response;
+    error_log("send-email.php: Success response sent");
 
 } catch (Exception $e) {
     // En cas d'erreur
-    error_log('Erreur PHPMailer Exception: ' . $e->getMessage());
-    error_log('Stack trace: ' . $e->getTraceAsString());
+    error_log('send-email.php: Exception caught: ' . $e->getMessage());
+    error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
     
-    http_response_code(500);
-    echo json_encode([
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
+    $errorResponse = json_encode([
         'success' => false,
-        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.',
-        'error' => $e->getMessage()
+        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.'
     ]);
+    echo $errorResponse;
+    error_log("send-email.php: Error response sent");
+    
 } catch (Error $e) {
     // Erreur fatale PHP
-    error_log('Erreur fatale PHP: ' . $e->getMessage());
-    error_log('Stack trace: ' . $e->getTraceAsString());
+    error_log('send-email.php: Fatal error: ' . $e->getMessage());
+    error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
     
-    http_response_code(500);
-    echo json_encode([
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
+    $errorResponse = json_encode([
         'success' => false,
-        'message' => 'Erreur serveur. Veuillez réessayer plus tard.',
-        'error' => $e->getMessage()
+        'message' => 'Erreur serveur. Veuillez réessayer plus tard.'
     ]);
+    echo $errorResponse;
+    error_log("send-email.php: Fatal error response sent");
+    
+} catch (Throwable $e) {
+    // Toute autre erreur
+    error_log('send-email.php: Throwable error: ' . $e->getMessage());
+    
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
+    $errorResponse = json_encode([
+        'success' => false,
+        'message' => 'Erreur inattendue. Veuillez réessayer plus tard.'
+    ]);
+    echo $errorResponse;
+    error_log("send-email.php: Throwable error response sent");
 }
 
 // S'assurer qu'une réponse est toujours envoyée
-if (!headers_sent()) {
-    error_log("send-email.php: Script completed");
+error_log("send-email.php: Script completed");
+// Forcer la sortie pour s'assurer que la réponse est envoyée
+if (ob_get_level() > 0) {
+    ob_end_flush();
 }
+flush();
 ?>

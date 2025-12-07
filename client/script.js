@@ -125,13 +125,20 @@ contactForm.addEventListener('submit', async (e) => {
         formDataToSend.append('message', formData.message);
 
         // Utiliser le chemin relatif qui sera routé par router.php
+        // Ajouter un timeout pour éviter que la requête reste en pending
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 secondes timeout
+        
         const response = await fetch('server/send-email.php', {
             method: 'POST',
             body: formDataToSend,
             headers: {
                 'Accept': 'application/json'
-            }
+            },
+            signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
 
         // Vérifier que la réponse est valide
         if (!response.ok) {
@@ -158,8 +165,16 @@ contactForm.addEventListener('submit', async (e) => {
         }
 
     } catch (error) {
-        showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
-        console.error('Form submission error:', error);
+        if (error.name === 'AbortError') {
+            showError('La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
+            console.error('Request timeout:', error);
+        } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            showError('Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com');
+            console.error('Network error:', error);
+        } else {
+            showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com');
+            console.error('Form submission error:', error);
+        }
     } finally {
         // Reset button state
         btnText.style.display = 'inline';
