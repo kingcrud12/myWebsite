@@ -9,7 +9,7 @@ set_time_limit(25); // Légèrement moins que le timeout du serveur
 ignore_user_abort(false); // Arrêter le script si le client se déconnecte
 
 // Gestionnaire d'erreur global pour s'assurer qu'une réponse est toujours envoyée
-register_shutdown_function(function() {
+register_shutdown_function(function () {
     $error = error_get_last();
     if ($error !== NULL && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
         error_log("Fatal error in send-email.php: " . $error['message'] . " in " . $error['file'] . " on line " . $error['line']);
@@ -37,6 +37,11 @@ if (!headers_sent()) {
 error_log("send-email.php: Request method = " . $_SERVER['REQUEST_METHOD']);
 
 // Vérifier que la requête est en POST
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     error_log("send-email.php: Method not allowed");
     http_response_code(405);
@@ -71,7 +76,7 @@ if (!empty($missingFields)) {
     error_log("send-email.php: Missing required fields: " . implode(', ', $missingFields));
     http_response_code(400);
     echo json_encode([
-        'success' => false, 
+        'success' => false,
         'message' => 'Champs manquants: ' . implode(', ', $missingFields)
     ]);
     exit;
@@ -165,7 +170,7 @@ error_log("send-email.php: SMTP credentials configured successfully");
 
 try {
     error_log("send-email.php: Starting email creation");
-    
+
     // Créer une instance de PHPMailer
     $mail = new PHPMailer(true);
     error_log("send-email.php: PHPMailer instance created");
@@ -176,16 +181,16 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = SMTP_USERNAME;
     $mail->Password = SMTP_PASSWORD;
-    
+
     // Essayer d'abord le port 465 avec SSL (plus fiable sur Render)
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL direct
     $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
-    
+
     // Timeouts SMTP augmentés pour Render
     $mail->Timeout = 30; // Timeout de connexion (secondes) - augmenté pour Render
     $mail->SMTPKeepAlive = false; // Ne pas garder la connexion ouverte
-    
+
     // Options SSL/TLS pour Render
     $mail->SMTPOptions = array(
         'ssl' => array(
@@ -195,10 +200,10 @@ try {
             'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT
         )
     );
-    
+
     // Activer le mode debug pour voir les détails de connexion
     $mail->SMTPDebug = 0; // 0 = pas de debug, 2 = debug complet (à activer si besoin)
-    
+
     error_log("send-email.php: SMTP configuration completed");
 
     // Expéditeur et destinataire
@@ -269,7 +274,7 @@ Message:
     // Envoyer l'email avec gestion d'erreur améliorée
     error_log("send-email.php: Attempting to connect to SMTP server");
     error_log("send-email.php: SMTP Host: " . $mail->Host . ", Port: " . $mail->Port . ", Encryption: " . $mail->SMTPSecure);
-    
+
     try {
         // Tester la connexion avant d'envoyer
         if (!$mail->smtpConnect()) {
@@ -277,22 +282,22 @@ Message:
             throw new Exception("SMTP Error: Could not connect to SMTP host. Connection failed.");
         }
         error_log("send-email.php: SMTP connection successful");
-        
+
         // Envoyer l'email
         error_log("send-email.php: Attempting to send email");
         $sendResult = $mail->send();
         error_log("send-email.php: Email send result: " . ($sendResult ? 'SUCCESS' : 'FAILED'));
-        
+
         if (!$sendResult) {
             error_log("send-email.php: Send failed. Error: " . $mail->ErrorInfo);
             throw new Exception("Échec de l'envoi: " . $mail->ErrorInfo);
         }
-        
+
         // Fermer la connexion SMTP
         $mail->smtpClose();
         error_log("send-email.php: SMTP connection closed");
         error_log("send-email.php: Email sent successfully");
-        
+
     } catch (Exception $smtpException) {
         // Fermer la connexion en cas d'erreur
         try {
@@ -319,11 +324,11 @@ Message:
     $errorMessage = $e->getMessage();
     error_log('send-email.php: Exception caught: ' . $errorMessage);
     error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
-    
+
     if (!headers_sent()) {
         http_response_code(500);
     }
-    
+
     // Inclure le message d'erreur dans la réponse (sans détails sensibles)
     $userMessage = 'Une erreur est survenue lors de l\'envoi.';
     if (strpos($errorMessage, 'SMTP') !== false || strpos($errorMessage, 'Connection') !== false) {
@@ -333,7 +338,7 @@ Message:
     } elseif (strpos($errorMessage, 'Timeout') !== false) {
         $userMessage = 'Le serveur a mis trop de temps à répondre. Veuillez réessayer.';
     }
-    
+
     $errorResponse = json_encode([
         'success' => false,
         'message' => $userMessage,
@@ -341,13 +346,13 @@ Message:
     ]);
     echo $errorResponse;
     error_log("send-email.php: Error response sent: " . $userMessage);
-    
+
 } catch (Error $e) {
     // Erreur fatale PHP
     $errorMessage = $e->getMessage();
     error_log('send-email.php: Fatal error: ' . $errorMessage);
     error_log('send-email.php: Stack trace: ' . $e->getTraceAsString());
-    
+
     if (!headers_sent()) {
         http_response_code(500);
     }
@@ -358,11 +363,11 @@ Message:
     ]);
     echo $errorResponse;
     error_log("send-email.php: Fatal error response sent");
-    
+
 } catch (Throwable $e) {
     // Toute autre erreur
     error_log('send-email.php: Throwable error: ' . $e->getMessage());
-    
+
     if (!headers_sent()) {
         http_response_code(500);
     }
