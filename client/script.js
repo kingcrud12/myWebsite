@@ -191,11 +191,11 @@ contactForm.addEventListener('submit', async (e) => {
         const result = await response.json();
         console.log('Form submission success:', result);
 
-        if (result.success) {
-            showSuccess(result.message || 'Message envoyé avec succès! Je vous répondrai bientôt.');
+        if (result.ok) {
+            showSuccess('Message envoyé avec succès! Je vous répondrai bientôt.');
             contactForm.reset();
         } else {
-            showError(result.message || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+            showError(result.error || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
         }
 
     } catch (error) {
