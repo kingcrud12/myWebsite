@@ -5,8 +5,33 @@
  */
 
 // Configuration pour éviter les blocages
+// Configuration pour éviter les blocages
 set_time_limit(30);
 ignore_user_abort(false);
+
+// --- SECURITY HEADERS ---
+// Prevent Clickjacking
+header('X-Frame-Options: DENY');
+
+// Prevent MIME-type sniffing
+header('X-Content-Type-Options: nosniff');
+
+// Control Referrer Information
+header('Referrer-Policy: strict-origin-when-cross-origin');
+
+// Enforce HTTPS (1 year) - Uncomment if you have SSL enabled (Render usually does)
+header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+
+// Content Security Policy (CSP)
+// - default-src: self only
+// - script-src: self only (external scripts blocked)
+// - style-src: self + Google Fonts + inline styles (needed for existing CSS)
+// - font-src: self + Google Fonts
+// - img-src: self + data: (for SVGs/encoded)
+// - connect-src: self + Formspree (for form submission)
+// - form-action: self + Formspree
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none';");
+// ------------------------
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
