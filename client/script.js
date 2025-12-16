@@ -99,6 +99,47 @@ const btnLoader = btnSubmit.querySelector('.btn-loader');
 // Protection contre les envois multiples
 let isSubmitting = false;
 
+// Regex Patterns for Security
+const securityPatterns = {
+    // Name: Letters, spaces, hyphens, apostrophes. 2-50 chars.
+    name: /^[a-zA-ZÀ-ÿ\s'-]{2,50}$/,
+
+    // Email: Standard email validation
+    email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+
+    // Text: Reject HTML tags, script tags, and common injection patterns
+    // We look for malicious patterns and return FALSE if found (to reject)
+    unsafe: /<[^>]*>|javascript:|data:|vbscript:|on\w+=/i
+};
+
+function validateInput(data) {
+    // 1. Validate Name
+    if (!securityPatterns.name.test(data.name)) {
+        return {
+            valid: false,
+            message: "Le nom contient des caractères non autorisés (lettres, espaces et tirets uniquement)."
+        };
+    }
+
+    // 2. Validate Email
+    if (!securityPatterns.email.test(data.email)) {
+        return {
+            valid: false,
+            message: "L'adresse email n'est pas valide."
+        };
+    }
+
+    // 3. Check for XSS/Injection in Subject and Message
+    if (securityPatterns.unsafe.test(data.subject) || securityPatterns.unsafe.test(data.message)) {
+        return {
+            valid: false,
+            message: "Votre message contient des caractères ou du code non autorisés."
+        };
+    }
+
+    return { valid: true };
+}
+
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -112,11 +153,19 @@ contactForm.addEventListener('submit', async (e) => {
 
     // Get form data
     const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        subject: document.getElementById('subject').value.trim(),
+        message: document.getElementById('message').value.trim()
     };
+
+    // Security Validation
+    const validation = validateInput(formData);
+    if (!validation.valid) {
+        showError(validation.message);
+        isSubmitting = false;
+        return;
+    }
 
     // Show loading state
     btnText.style.display = 'none';
