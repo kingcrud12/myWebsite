@@ -2440,3 +2440,211 @@ section {
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
 }
+
+/* =========================================
+   PREMIUM ACTIVITY PAGE STYLES
+   ========================================= */
+
+body.activity-page {
+    background-color: #0f172a;
+    /* Slate 900 */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+    color: #e2e8f0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body.activity-page .navbar {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.activity-page .logo {
+    color: white;
+}
+
+body.activity-page .nav-link {
+    color: #cbd5e1;
+}
+
+body.activity-page .nav-link:hover,
+body.activity-page .nav-link.active {
+    color: white;
+}
+
+/* Hero Section */
+.activity-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+}
+
+.activity-hero .project-title {
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.activity-hero .project-subtitle {
+    color: #94a3b8;
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 1.5rem auto 0;
+}
+
+/* Grid & Cards */
+.activity-grid-section {
+    padding: 4rem 0 8rem;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.video-series-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.video-series-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Make each card glow with its specific color on hover */
+.video-series-card:nth-child(1):hover {
+    border-color: #fbc2eb;
+    box-shadow: 0 20px 80px rgba(251, 194, 235, 0.15);
+}
+
+.video-series-card:nth-child(2):hover {
+    border-color: #84fab0;
+    box-shadow: 0 20px 80px rgba(132, 250, 176, 0.15);
+}
+
+.video-series-card:nth-child(3):hover {
+    border-color: #f093fb;
+    box-shadow: 0 20px 80px rgba(240, 147, 251, 0.15);
+}
+
+.video-series-card:nth-child(4):hover {
+    border-color: #e0c3fc;
+    box-shadow: 0 20px 80px rgba(224, 195, 252, 0.15);
+}
+
+.video-thumbnail {
+    height: 220px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-thumbnail::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.play-icon {
+    font-size: 2.5rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.video-series-card:hover .play-icon {
+    transform: scale(1.2);
+    background: white;
+    color: black;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+}
+
+.series-count {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(15, 23, 42, 0.7);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
+}
+
+.video-info {
+    padding: 2rem;
+}
+
+.video-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.video-desc {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.video-meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.video-meta .tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.video-series-card:hover .video-meta .tag {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Footer override for activity page */
+body.activity-page .footer {
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

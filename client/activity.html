@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité - Vlogs & Devlogs | Yann Dipita</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+
+<body class="activity-page">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" aria-label="Yann Dipita">Collaborons</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+                <li><a href="index.html#about" class="nav-link">À propos</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projets</a></li>
+                <li><a href="activity.html" class="nav-link active">Activité</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="project-hero activity-hero">
+        <div class="container">
+            <div class="project-hero-content center-content">
+                <span class="project-badge" data-aos="fade-down">Behind the Code</span>
+                <h1 class="project-title" data-aos="fade-up">Suivez mon Activité</h1>
+                <p class="project-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    Plongez dans les coulisses du développement. Vlogs, défis et réalisation de projets au jour le jour.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="activity-grid-section">
+        <div class="container">
+            <div class="activity-grid">
+
+                <!-- Series 1: Reconcil -->
+                <div class="video-series-card" data-aos="fade-up">
+                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                        <span class="play-icon">▶</span>
+                        <span class="series-count">5 Épisodes</span>
+                    </div>
+                    <div class="video-info">
+                        <h3>Reconcil Afro Beauty</h3>
+                        <p class="video-desc">Création d'une boutique en ligne complète de A à Z. Du design Figma au
+                            déploiement final.</p>
+                        <div class="video-meta">
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Fullstack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series 2: Easy Task -->
+                <div class="video-series-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                        <span class="play-icon">▶</span>
+                        <span class="series-count">3 Épisodes</span>
+                    </div>
+                    <div class="video-info">
+                        <h3>Easy Task App</h3>
+                        <p class="video-desc">Développement d'une application mobile de productivité. Focus sur l'UX
+                            mobile et React Native.</p>
+                        <div class="video-meta">
+                            <span class="tag">Mobile</span>
+                            <span class="tag">React Native</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series 3: Selenium Tool -->
+                <div class="video-series-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <span class="play-icon">▶</span>
+                        <span class="series-count">7 Épisodes</span>
+                    </div>
+                    <div class="video-info">
+                        <h3>Selenium UI Library</h3>
+                        <p class="video-desc">Construction d'une librairie Open Source. Architecture Python, packaging
+                            et documentation.</p>
+                        <div class="video-meta">
+                            <span class="tag">Open Source</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series 4: Easy Flight -->
+                <div class="video-series-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
+                        <span class="play-icon">▶</span>
+                        <span class="series-count">4 Épisodes</span>
+                    </div>
+                    <div class="video-info">
+                        <h3>Easy Flight</h3>
+                        <p class="video-desc">Création d'un comparateur de vol ultra-rapide. Optimisation API et
+                            algorithmes de tri.</p>
+                        <div class="video-meta">
+                            <span class="tag">Web App</span>
+                            <span class="tag">Performance</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Yann Dipita. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+
+</html>
