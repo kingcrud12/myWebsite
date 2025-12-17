@@ -993,12 +993,207 @@ section {
     background: var(--bg-secondary);
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
 }
+
+.carousel-track-container {
+    overflow: hidden;
+    padding: 10px 0;
+    /* Space for shadow */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.project-slide {
+    min-width: 100%;
+    padding: 0 5px;
+    /* Slight gap between slides if needed, though they are full width */
+}
+
+/* Featured Project Styles (Card Base) */
+.featured-project {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    /* More opaque for light background */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Darker border for visibility */
+    border-radius: 24px;
+    padding: 3rem;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+    /* Softer, more modern shadow */
+    height: 100%;
+    /* Ensure equal height */
+}
+
+/* Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Placeholder Image Style */
+.featured-placeholder-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featured-project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(8, 145, 178, 0.1), transparent 40%);
+    pointer-events: none;
+}
+
+.featured-project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(8, 145, 178, 0.3);
+}
+
+.featured-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.featured-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(6, 182, 212, 0.3);
+}
+
+.featured-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #1f2937;
+    /* Dark text */
+    /* Removed white gradient text effect for better visibility */
+}
+
+.featured-description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    /* Dark gray text */
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.featured-image-container {
+    flex: 1.2;
+    position: relative;
+    perspective: 1000px;
+    z-index: 2;
+}
+
+.featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s ease;
+    transform: rotateY(-5deg) rotateX(2deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featured-project:hover .featured-image {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+@media (max-width: 968px) {
+    .featured-project {
+        flex-direction: column-reverse;
+        /* Stack image on top, text below? Or reverse? Usually text below image or text above. Let's stick to previous: image top or bottom. */
+        /* Actually, in the previous code it was flex-direction: column-reverse; which means image (last child) comes first? No, image is last child.
+           flex-direction: column-reverse puts the last item first. So Image on Top, Content at Bottom.
+           Let's verify the HTML structure: content is first, image is second.
+           column-reverse: Image (2) on top, Content (1) below. Correct. */
+        flex-direction: column-reverse;
+        padding: 2rem;
+        gap: 2rem;
+        text-align: center;
+        /* Center text on mobile for better look */
+    }
+
+    .project-tags {
+        justify-content: center;
+        /* Center tags */
+    }
+
+    .featured-image-container {
+        width: 100%;
+    }
+
+    .featured-image {
+        transform: none;
+    }
+
+    .featured-project:hover .featured-image {
+        transform: scale(1.02);
+    }
+
+    .carousel-container {
+        padding: 0 1rem;
+        /* Add side padding on mobile */
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    /* Hide dots if convenient or make them smaller */
+    .featured-title {
+        font-size: 2rem;
+    }
+}
+
+
 
 .project-card {
     background: white;

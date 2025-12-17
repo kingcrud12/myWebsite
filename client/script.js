@@ -409,3 +409,64 @@ function runTypingCycle() {
     // Text remains hidden during Rabbit Scene (20-30s)
     // Will reset at 30s (0s) by the next cycle call
 }
+
+// Project Carousel Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.carousel-track');
+    // Guard clause in case carousel elements don't exist
+    if (!track) return;
+
+    const slides = Array.from(track.children);
+    const dotsNav = document.querySelector('.carousel-dots');
+    const dots = Array.from(dotsNav.children);
+
+    let currentIndex = 0;
+    let autoPlayInterval;
+
+    // Update slide position
+    const updateSlidePosition = () => {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    // Update dots
+    const updateDots = (index) => {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    };
+
+    // Move to next slide
+    const moveToNextSlide = () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlidePosition();
+        updateDots(currentIndex);
+    };
+
+    // Auto Play
+    const startAutoPlay = () => {
+        stopAutoPlay(); // Clear existing interval
+        autoPlayInterval = setInterval(moveToNextSlide, 5000); // Change slide every 5 seconds
+    };
+
+    const stopAutoPlay = () => {
+        clearInterval(autoPlayInterval);
+    };
+
+    // Event Listeners
+    dotsNav.addEventListener('click', (e) => {
+        const targetDot = e.target.closest('.dot');
+        if (!targetDot) return;
+
+        const targetIndex = parseInt(targetDot.dataset.index);
+        currentIndex = targetIndex;
+        updateSlidePosition();
+        updateDots(currentIndex);
+        startAutoPlay();
+    });
+
+    // Pause on hover
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+
+    // Initial Start
+    startAutoPlay();
+});
