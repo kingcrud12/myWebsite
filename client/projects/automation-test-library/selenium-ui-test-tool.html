@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium UI Tool - Open Source Library | Portfolio</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="project-page">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo" aria-label="Yann Dipita">Collaborons</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../index.html#home" class="nav-link">Accueil</a></li>
+                <li><a href="../../index.html#about" class="nav-link">À propos</a></li>
+                <li><a href="../../index.html#projects" class="nav-link">Projets</a></li>
+                <li><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <span class="project-badge" data-aos="fade-down">Open Source / Library</span>
+                <h1 class="project-title" data-aos="fade-up">Selenium UI Test Tool</h1>
+                <p class="project-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    L'automatisation web rendue accessible aux développeurs.
+                </p>
+
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <span class="stat-number">PyPl</span>
+                        <span class="stat-label">Package</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">MIT</span>
+                        <span class="stat-label">License</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">DevX</span>
+                        <span class="stat-label">Focus</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-hero-visual">
+                <div class="floating-card card-1" style="border-left: 4px solid #f093fb;">
+                    <div class="card-header" style="background: #f093fb;"></div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="floating-chart" style="right: 30%;">
+                    <!-- Code logic simulation -->
+                    <div
+                        style="background: #333; color: #f093fb; padding: 10px; border-radius: 8px; font-family: monospace;">
+                        def test_ui():<br>
+                        &nbsp;&nbsp;browser.open()<br>
+                        &nbsp;&nbsp;assert True
+                    </div>
+                </div>
+                <div class="hero-glow"
+                    style="background: radial-gradient(circle at 40% 60%, rgba(240, 147, 251, 0.4), transparent 70%);">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-context">
+        <div class="container">
+            <div class="context-grid">
+                <div class="context-text" data-aos="fade-right">
+                    <h2>Le Contexte</h2>
+                    <p>
+                        Selenium est puissant, mais verbeux. Configurer un driver et écrire des tests robustes demande
+                        beaucoup de code boilerplate (répétitif).
+                    </p>
+                </div>
+                <div class="solution-text" data-aos="fade-left">
+                    <h2>La Solution Library</h2>
+                    <p>
+                        Un wrapper Python élégant qui simplifie l'API de Selenium.
+                    </p>
+                    <ul class="features-list">
+                        <li>
+                            <span class="feature-icon">🧹</span>
+                            <div>
+                                <strong>Code Propre</strong>
+                                <p>Transforme 10 lignes de Selenium en 1 ligne lisible.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">🛠️</span>
+                            <div>
+                                <strong>Utilitaires</strong>
+                                <p>Gestion automatique des waits et des drivers.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-stack">
+        <div class="container">
+            <h2 class="section-title center">Architecture & Tech Stack</h2>
+            <div class="stack-grid">
+                <div class="stack-card" data-aos="zoom-in">
+                    <div class="stack-icon" style="color: #3776AB;">P</div>
+                    <h3>Python</h3>
+                </div>
+                <div class="stack-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stack-icon" style="color: #43B02A;">S</div>
+                    <h3>Selenium WebDriver</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-gallery">
+        <div class="container">
+            <h2 class="section-title center">Immersion</h2>
+
+            <div class="gallery-carousel">
+                <div class="gallery-track">
+                    <div class="gallery-slide">
+                        <div class="featured-placeholder-image"
+                            style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 400px;">
+                            <span style="font-size: 5rem;">📦</span>
+                        </div>
+                        <p class="slide-caption">Package Installation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="next-project">
+        <div class="container">
+            <h2 class="section-title center">Projet Suivant</h2>
+
+            <a href="../project-management-tool.html" class="next-project-card">
+                <div class="next-content">
+                    <h3>PMT</h3>
+                    <p>Outil de gestion de projet complet.</p>
+                    <span class="btn-text">Voir le projet <span class="arrow">→</span></span>
+                </div>
+                <div class="next-visual">
+                    <img src="../../mpmt-project.png" alt="PMT"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Yann Dipita. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+
+</html>
