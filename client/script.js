@@ -3,6 +3,33 @@ const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
+const themeToggle = document.getElementById('themeToggle');
+
+// Theme Management
+const initTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+};
+
+// Toggle Theme
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+}
+
+// Initialize theme on load
+initTheme();
 
 // Smooth scroll and active nav link
 navLinks.forEach(link => {
@@ -96,9 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // Contact Form
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
-const btnSubmit = contactForm.querySelector('.btn-submit');
-const btnText = btnSubmit.querySelector('.btn-text');
-const btnLoader = btnSubmit.querySelector('.btn-loader');
+let btnSubmit, btnText, btnLoader;
+
+if (contactForm) {
+    btnSubmit = contactForm.querySelector('.btn-submit');
+    btnText = btnSubmit.querySelector('.btn-text');
+    btnLoader = btnSubmit.querySelector('.btn-loader');
+}
+
 
 // Protection contre les envois multiples
 let isSubmitting = false;
@@ -144,333 +176,369 @@ function validateInput(data) {
     return { valid: true };
 }
 
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    // Empêcher les envois multiples
-    if (isSubmitting) {
-        console.log('Form submission already in progress, ignoring duplicate submit');
-        return;
-    }
+        // Empêcher les envois multiples
+        if (isSubmitting) {
+            console.log('Form submission already in progress, ignoring duplicate submit');
+            return;
+        }
 
-    isSubmitting = true;
+        isSubmitting = true;
 
-    // Get form data
-    const formData = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        subject: document.getElementById('subject').value.trim(),
-        message: document.getElementById('message').value.trim()
-    };
-
-    // Security Validation
-    const validation = validateInput(formData);
-    if (!validation.valid) {
-        showError(validation.message);
-        isSubmitting = false;
-        return;
-    }
-
-    // Show loading state
-    btnText.style.display = 'none';
-    btnLoader.style.display = 'inline';
-    btnSubmit.disabled = true;
-
-    // Hide previous messages
-    formMessage.style.display = 'none';
-    formMessage.className = 'form-message';
-
-    try {
-        // Préparer les données en JSON
-        const jsonData = {
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject,
-            message: formData.message
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim()
         };
 
-        // Utiliser l'endpoint Formspree
-        const response = await fetch('https://formspree.io/f/manrbred', {
-            method: 'POST',
-            body: JSON.stringify(jsonData),
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+        // Security Validation
+        const validation = validateInput(formData);
+        if (!validation.valid) {
+            showError(validation.message);
+            isSubmitting = false;
+            return;
+        }
+
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'inline';
+        btnSubmit.disabled = true;
+
+        // Hide previous messages
+        formMessage.style.display = 'none';
+        formMessage.className = 'form-message';
+
+        try {
+            // Préparer les données en JSON
+            const jsonData = {
+                name: formData.name,
+                email: formData.email,
+                subject: formData.subject,
+                message: formData.message
+            };
+
+            // Utiliser l'endpoint Formspree
+            const response = await fetch('https://formspree.io/f/manrbred', {
+                method: 'POST',
+                body: JSON.stringify(jsonData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            });
+
+
+
+            // Vérifier que la réponse est valide
+            if (!response.ok) {
+                let errorText = '';
+                let errorJson = null;
+
+                try {
+                    errorText = await response.text();
+                    // Essayer de parser comme JSON
+                    try {
+                        errorJson = JSON.parse(errorText);
+                    } catch (e) {
+                        // Ce n'est pas du JSON, garder le texte brut
+                    }
+                } catch (e) {
+                    errorText = 'Impossible de lire la réponse du serveur';
+                }
+
+                console.error('Server error:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    errorText: errorText,
+                    errorJson: errorJson
+                });
+
+                const errorMessage = errorJson?.message || errorText || `Erreur serveur: ${response.status}`;
+                throw new Error(errorMessage);
+            }
+
+            // Vérifier que la réponse est du JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const text = await response.text();
+                console.error('Non-JSON response:', {
+                    contentType: contentType,
+                    text: text,
+                    status: response.status
+                });
+                throw new Error('Réponse invalide du serveur');
+            }
+
+            const result = await response.json();
+            console.log('Form submission success:', result);
+
+            if (result.ok) {
+                showSuccess('Message envoyé avec succès! Je vous répondrai bientôt.');
+                contactForm.reset();
+            } else {
+                showError(result.error || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+            }
+
+        } catch (error) {
+            console.error('Form submission error:', error);
+
+            let errorMessage = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
+
+            if (error.name === 'AbortError') {
+                errorMessage = 'La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
+                console.error('Request timeout:', error);
+            } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                errorMessage = 'Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com';
+                console.error('Network error:', error);
+            } else if (error.message) {
+                // Utiliser le message d'erreur du serveur s'il est disponible
+                errorMessage = error.message;
+                // Si le message contient des détails techniques, les logger mais ne pas les afficher
+                if (error.error) {
+                    console.error('Server error details:', error.error);
+                }
+            }
+
+            showError(errorMessage);
+        } finally {
+            // Reset button state
+            isSubmitting = false;
+            btnText.style.display = 'inline';
+            btnLoader.style.display = 'none';
+            btnSubmit.disabled = false;
+        }
+    });
+
+    function showSuccess(message = 'Message envoyé avec succès!') {
+        formMessage.textContent = message;
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showError(message) {
+        formMessage.textContent = message;
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Alternative: Simple form submission using Formspree or similar service
+    // You can also use this approach by replacing the form action:
+    /*
+    contactForm.addEventListener('submit', (e) => {
+        // Form will submit to Formspree endpoint
+        // Make sure to add: action="https://formspree.io/f/YOUR_FORM_ID" method="POST" to form tag
+    });
+    */
+
+    // Add smooth reveal animations on scroll
+    const revealElements = document.querySelectorAll('.project-card, .about-content, .contact-content');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+                revealObserver.unobserve(entry.target);
             }
         });
-
-
-
-        // Vérifier que la réponse est valide
-        if (!response.ok) {
-            let errorText = '';
-            let errorJson = null;
-
-            try {
-                errorText = await response.text();
-                // Essayer de parser comme JSON
-                try {
-                    errorJson = JSON.parse(errorText);
-                } catch (e) {
-                    // Ce n'est pas du JSON, garder le texte brut
-                }
-            } catch (e) {
-                errorText = 'Impossible de lire la réponse du serveur';
-            }
-
-            console.error('Server error:', {
-                status: response.status,
-                statusText: response.statusText,
-                errorText: errorText,
-                errorJson: errorJson
-            });
-
-            const errorMessage = errorJson?.message || errorText || `Erreur serveur: ${response.status}`;
-            throw new Error(errorMessage);
-        }
-
-        // Vérifier que la réponse est du JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            const text = await response.text();
-            console.error('Non-JSON response:', {
-                contentType: contentType,
-                text: text,
-                status: response.status
-            });
-            throw new Error('Réponse invalide du serveur');
-        }
-
-        const result = await response.json();
-        console.log('Form submission success:', result);
-
-        if (result.ok) {
-            showSuccess('Message envoyé avec succès! Je vous répondrai bientôt.');
-            contactForm.reset();
-        } else {
-            showError(result.error || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
-        }
-
-    } catch (error) {
-        console.error('Form submission error:', error);
-
-        let errorMessage = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
-
-        if (error.name === 'AbortError') {
-            errorMessage = 'La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
-            console.error('Request timeout:', error);
-        } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
-            errorMessage = 'Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com';
-            console.error('Network error:', error);
-        } else if (error.message) {
-            // Utiliser le message d'erreur du serveur s'il est disponible
-            errorMessage = error.message;
-            // Si le message contient des détails techniques, les logger mais ne pas les afficher
-            if (error.error) {
-                console.error('Server error details:', error.error);
-            }
-        }
-
-        showError(errorMessage);
-    } finally {
-        // Reset button state
-        isSubmitting = false;
-        btnText.style.display = 'inline';
-        btnLoader.style.display = 'none';
-        btnSubmit.disabled = false;
-    }
-});
-
-function showSuccess(message = 'Message envoyé avec succès!') {
-    formMessage.textContent = message;
-    formMessage.className = 'form-message success';
-    formMessage.style.display = 'block';
-
-    // Scroll to message
-    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function showError(message) {
-    formMessage.textContent = message;
-    formMessage.className = 'form-message error';
-    formMessage.style.display = 'block';
-
-    // Scroll to message
-    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// Alternative: Simple form submission using Formspree or similar service
-// You can also use this approach by replacing the form action:
-/*
-contactForm.addEventListener('submit', (e) => {
-    // Form will submit to Formspree endpoint
-    // Make sure to add: action="https://formspree.io/f/YOUR_FORM_ID" method="POST" to form tag
-});
-*/
-
-// Add smooth reveal animations on scroll
-const revealElements = document.querySelectorAll('.project-card, .about-content, .contact-content');
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, {
-    threshold: 0.1
-});
-
-revealElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    revealObserver.observe(element);
-});
-
-
-// Typewriter Effect
-const heroBg = document.querySelector('.hero-bg');
-const heroDescription = document.querySelector('.hero-description');
-const originalText = "Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et automatisation.";
-
-// Clear text initially
-heroDescription.textContent = originalText;
-
-function typeWriter(text, element, speed = 50) {
-    element.textContent = '';
-    element.classList.add('typing-cursor');
-
-    let i = 0;
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        } else {
-            // Typing finished
-            // Keep cursor for a while then remove if needed, or keep blinking
-        }
-    }
-    type();
-}
-
-// Synchronize with CSS animation
-if (heroBg && heroDescription) {
-    // Initial state
-    heroDescription.style.opacity = '1';
-
-    // Listen for animation iteration to sync
-    heroBg.addEventListener('animationiteration', () => {
-        runTypingCycle();
+    }, {
+        threshold: 0.1
     });
 
-    // Also start the cycle initially (sync with the first run of CSS animation)
-    // The CSS animation starts immediately. We need to match the timing.
-    // Cycle is 20s.
-    // 0-35% (0-7s): Visible
-    // 35-45% (7-9s): Fade Out
-    // 45% (9s): Start Typing
+    revealElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        revealObserver.observe(element);
+    });
 
-    runTypingCycle();
-}
 
-function runTypingCycle() {
-    // Cycle is 30s
-    // 0-10s: Purple BG (Visible)
-    // 10-20s: Dark Theme (Typewriter)
-    // 20-30s: Rabbit Scene (Text should be hidden or visible? Let's hide it to focus on rabbit)
+    // Typewriter Effect
+    const heroBg = document.querySelector('.hero-bg');
+    const heroDescription = document.querySelector('.hero-description');
+    const originalText = "Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et automatisation.";
 
-    // Reset
-    heroDescription.style.transition = 'none';
-    heroDescription.style.opacity = '1';
+    // Clear text initially
     heroDescription.textContent = originalText;
-    heroDescription.classList.remove('typing-cursor');
 
-    // Schedule Fade Out at 10s (33%) - Transition to Dark Theme
-    setTimeout(() => {
-        heroDescription.style.transition = 'opacity 1s ease';
-        heroDescription.style.opacity = '0';
-    }, 10000);
+    function typeWriter(text, element, speed = 50) {
+        element.textContent = '';
+        element.classList.add('typing-cursor');
 
-    // Schedule Typing Start at 12s (40%) - On Dark Theme
-    setTimeout(() => {
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                // Typing finished
+                // Keep cursor for a while then remove if needed, or keep blinking
+            }
+        }
+        type();
+    }
+
+    // Synchronize with CSS animation
+    if (heroBg && heroDescription) {
+        // Initial state
+        heroDescription.style.opacity = '1';
+
+        // Listen for animation iteration to sync
+        heroBg.addEventListener('animationiteration', () => {
+            runTypingCycle();
+        });
+
+        // Also start the cycle initially (sync with the first run of CSS animation)
+        // The CSS animation starts immediately. We need to match the timing.
+        // Cycle is 20s.
+        // 0-35% (0-7s): Visible
+        // 35-45% (7-9s): Fade Out
+        // 45% (9s): Start Typing
+
+        runTypingCycle();
+    }
+
+    function runTypingCycle() {
+        // Cycle is 40s
+        // Phase 1 (0-20s): Code Card visible 0-9s
+        // Phase 2 (20-40s): Rabbit Scene + Code Card visible 20-29s
+
+        // --- PHASE 1 START (0s) ---
         heroDescription.style.transition = 'none';
         heroDescription.style.opacity = '1';
-        typeWriter(originalText, heroDescription, 50);
-    }, 12000);
+        heroDescription.textContent = originalText;
+        heroDescription.classList.remove('typing-cursor');
 
-    // Schedule Fade Out at 20s (66%) - Transition to Rabbit Scene
-    setTimeout(() => {
-        heroDescription.style.transition = 'opacity 1s ease';
-        heroDescription.style.opacity = '0';
-    }, 20000);
+        // Typing Start at 1s
+        setTimeout(() => {
+            heroDescription.textContent = '';
+            typeWriter(originalText, heroDescription, 50);
+        }, 1000);
 
-    // Text remains hidden during Rabbit Scene (20-30s)
-    // Will reset at 30s (0s) by the next cycle call
-}
+        // Fade Out at 8s
+        setTimeout(() => {
+            heroDescription.style.transition = 'opacity 1s ease';
+            heroDescription.style.opacity = '0';
+        }, 8000);
 
-// Project Carousel Logic
-document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.carousel-track');
-    // Guard clause in case carousel elements don't exist
-    if (!track) return;
+        // --- PHASE 2 START (20s) ---
+        // Reset and show text again for Phase 2
+        setTimeout(() => {
+            heroDescription.style.transition = 'none';
+            heroDescription.style.opacity = '1';
+            heroDescription.textContent = ''; // Clear for typing
+            typeWriter(originalText, heroDescription, 50);
+        }, 20000); // 20s = 50% of 40s cycle
 
-    const slides = Array.from(track.children);
-    const dotsNav = document.querySelector('.carousel-dots');
-    const dots = Array.from(dotsNav.children);
+        // Fade Out at 28s
+        setTimeout(() => {
+            heroDescription.style.transition = 'opacity 1s ease';
+            heroDescription.style.opacity = '0';
+        }, 28000);
+    }
 
-    let currentIndex = 0;
-    let autoPlayInterval;
+    // Project Carousel Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.querySelector('.carousel-track');
+        // Guard clause in case carousel elements don't exist
+        if (!track) return;
 
-    // Update slide position
-    const updateSlidePosition = () => {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    };
+        const slides = Array.from(track.children);
+        const dotsNav = document.querySelector('.carousel-dots');
+        const dots = Array.from(dotsNav.children);
 
-    // Update dots
-    const updateDots = (index) => {
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
-    };
+        let currentIndex = 0;
+        let autoPlayInterval;
 
-    // Move to next slide
-    const moveToNextSlide = () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlidePosition();
-        updateDots(currentIndex);
-    };
+        // Update slide position
+        const updateSlidePosition = () => {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
 
-    // Auto Play
-    const startAutoPlay = () => {
-        stopAutoPlay(); // Clear existing interval
-        autoPlayInterval = setInterval(moveToNextSlide, 5000); // Change slide every 5 seconds
-    };
+        // Update dots
+        const updateDots = (index) => {
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        };
 
-    const stopAutoPlay = () => {
-        clearInterval(autoPlayInterval);
-    };
+        // Move to next slide
+        const moveToNextSlide = () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlidePosition();
+            updateDots(currentIndex);
+        };
 
-    // Event Listeners
-    dotsNav.addEventListener('click', (e) => {
-        const targetDot = e.target.closest('.dot');
-        if (!targetDot) return;
+        // Auto Play
+        const startAutoPlay = () => {
+            stopAutoPlay(); // Clear existing interval
+            autoPlayInterval = setInterval(moveToNextSlide, 5000); // Change slide every 5 seconds
+        };
 
-        const targetIndex = parseInt(targetDot.dataset.index);
-        currentIndex = targetIndex;
-        updateSlidePosition();
-        updateDots(currentIndex);
+        const stopAutoPlay = () => {
+            clearInterval(autoPlayInterval);
+        };
+
+        // Event Listeners
+        dotsNav.addEventListener('click', (e) => {
+            const targetDot = e.target.closest('.dot');
+            if (!targetDot) return;
+
+            const targetIndex = parseInt(targetDot.dataset.index);
+            currentIndex = targetIndex;
+            updateSlidePosition();
+            updateDots(currentIndex);
+            startAutoPlay();
+        });
+
+        // Pause on hover
+        track.addEventListener('mouseenter', stopAutoPlay);
+        track.addEventListener('mouseleave', startAutoPlay);
+
+        // Initial Start
         startAutoPlay();
     });
 
-    // Pause on hover
-    track.addEventListener('mouseenter', stopAutoPlay);
-    track.addEventListener('mouseleave', startAutoPlay);
+    // Activity Page View Cycling
+    window.addEventListener('load', () => {
+        const gridView = document.getElementById('activity-grid-view');
+        const animView = document.getElementById('activity-animation-view');
 
-    // Initial Start
-    startAutoPlay();
-});
+        if (gridView && animView) {
+            console.log('Activity Page: Animation Cycle Initialized');
+            let isGridView = true;
+
+            // Cycle every 5 seconds
+            setInterval(() => {
+                console.log('Activity Page: Switching View');
+                if (isGridView) {
+                    // Switch to Animation
+                    gridView.classList.remove('active-view');
+                    setTimeout(() => {
+                        animView.classList.add('active-view');
+                    }, 500); // Wait for fade out
+                } else {
+                    // Switch to Grid
+                    animView.classList.remove('active-view');
+                    setTimeout(() => {
+                        gridView.classList.add('active-view');
+                    }, 500);
+                }
+                isGridView = !isGridView;
+            }, 5000);
+        }
+    })
+};

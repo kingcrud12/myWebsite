@@ -32,15 +32,33 @@
                 <span></span>
                 <span></span>
             </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
         </div>
     </nav>
 
     <header class="project-hero activity-hero">
         <div class="container">
-            <div class="project-hero-content center-content">
-                <span class="project-badge" data-aos="fade-down">Behind the Code</span>
-                <h1 class="project-title" data-aos="fade-up">Suivez mon Activité</h1>
-                <p class="project-subtitle" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-hero-content center-content" data-aos="fade-up">
+                <span class="project-badge">Behind the Code</span>
+                <h1 class="project-title">Suivez mon Activité</h1>
+                <p class="project-subtitle">
                     Plongez dans les coulisses du développement. Vlogs, défis et réalisation de projets au jour le jour.
                 </p>
             </div>
@@ -49,76 +67,107 @@
 
     <section class="activity-grid-section">
         <div class="container">
-            <div class="activity-grid">
+            <!-- View 1: Grid -->
+            <div id="activity-grid-view" class="activity-view active-view">
+                <div class="activity-grid">
 
-                <!-- Series 1: Reconcil -->
-                <div class="video-series-card" data-aos="fade-up">
-                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
-                        <span class="play-icon">▶</span>
-                        <span class="series-count">5 Épisodes</span>
+                    <!-- Series 1: Reconcil -->
+                    <div class="video-series-card">
+                        <div class="video-thumbnail"
+                            style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                            <span class="play-icon">▶</span>
+                            <span class="series-count">5 Épisodes</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Reconcil Afro Beauty</h3>
+                            <p class="video-desc">Création d'une boutique en ligne complète de A à Z. Du design Figma au
+                                déploiement final.</p>
+                            <div class="video-meta">
+                                <span class="tag">E-commerce</span>
+                                <span class="tag">Fullstack</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <h3>Reconcil Afro Beauty</h3>
-                        <p class="video-desc">Création d'une boutique en ligne complète de A à Z. Du design Figma au
-                            déploiement final.</p>
-                        <div class="video-meta">
-                            <span class="tag">E-commerce</span>
-                            <span class="tag">Fullstack</span>
+
+                    <!-- Series 2: Easy Task -->
+                    <div class="video-series-card">
+                        <div class="video-thumbnail"
+                            style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                            <span class="play-icon">▶</span>
+                            <span class="series-count">3 Épisodes</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Easy Task App</h3>
+                            <p class="video-desc">Développement d'une application mobile de productivité. Focus sur l'UX
+                                mobile et React Native.</p>
+                            <div class="video-meta">
+                                <span class="tag">Mobile</span>
+                                <span class="tag">React Native</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Series 3: Selenium Tool -->
+                    <div class="video-series-card">
+                        <div class="video-thumbnail"
+                            style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span class="play-icon">▶</span>
+                            <span class="series-count">7 Épisodes</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Selenium UI Library</h3>
+                            <p class="video-desc">Construction d'une librairie Open Source. Architecture Python,
+                                packaging
+                                et documentation.</p>
+                            <div class="video-meta">
+                                <span class="tag">Open Source</span>
+                                <span class="tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Series 4: Easy Flight -->
+                    <div class="video-series-card">
+                        <div class="video-thumbnail"
+                            style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
+                            <span class="play-icon">▶</span>
+                            <span class="series-count">4 Épisodes</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Easy Flight</h3>
+                            <p class="video-desc">Création d'un comparateur de vol ultra-rapide. Optimisation API et
+                                algorithmes de tri.</p>
+                            <div class="video-meta">
+                                <span class="tag">Web App</span>
+                                <span class="tag">Performance</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Series 2: Easy Task -->
-                <div class="video-series-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
-                        <span class="play-icon">▶</span>
-                        <span class="series-count">3 Épisodes</span>
-                    </div>
-                    <div class="video-info">
-                        <h3>Easy Task App</h3>
-                        <p class="video-desc">Développement d'une application mobile de productivité. Focus sur l'UX
-                            mobile et React Native.</p>
-                        <div class="video-meta">
-                            <span class="tag">Mobile</span>
-                            <span class="tag">React Native</span>
+            <!-- View 2: 3D Animation Scene -->
+            <div id="activity-animation-view" class="activity-view">
+                <div class="animation-container">
+                    <div class="dev-scene">
+                        <!-- Placeholder for the generated image -->
+                        <div id="generated-scene-placeholder" class="scene-image-container">
+                            <div class="loading-text">Chargement de la simulation...</div>
+                        </div>
+                        <div class="scene-overlay">
+                            <div class="floating-code-block" style="top: 20%; left: 10%;">const app = build();</div>
+                            <div class="floating-code-block" style="bottom: 30%; right: 15%;">import { iOS } from
+                                'mobile';</div>
+                            <div class="floating-piece piece-1">📱</div>
+                            <div class="floating-piece piece-2">⚙️</div>
+                            <div class="floating-piece piece-3">💾</div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Series 3: Selenium Tool -->
-                <div class="video-series-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <span class="play-icon">▶</span>
-                        <span class="series-count">7 Épisodes</span>
-                    </div>
-                    <div class="video-info">
-                        <h3>Selenium UI Library</h3>
-                        <p class="video-desc">Construction d'une librairie Open Source. Architecture Python, packaging
-                            et documentation.</p>
-                        <div class="video-meta">
-                            <span class="tag">Open Source</span>
-                            <span class="tag">Python</span>
-                        </div>
+                    <div class="scene-caption">
+                        <h3>En pleine création...</h3>
+                        <p>Développement de la prochaine fonctionnalité iOS en temps réel.</p>
                     </div>
                 </div>
-
-                <!-- Series 4: Easy Flight -->
-                <div class="video-series-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="video-thumbnail" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
-                        <span class="play-icon">▶</span>
-                        <span class="series-count">4 Épisodes</span>
-                    </div>
-                    <div class="video-info">
-                        <h3>Easy Flight</h3>
-                        <p class="video-desc">Création d'un comparateur de vol ultra-rapide. Optimisation API et
-                            algorithmes de tri.</p>
-                        <div class="video-meta">
-                            <span class="tag">Web App</span>
-                            <span class="tag">Performance</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>

@@ -32,19 +32,37 @@
                 <span></span>
                 <span></span>
             </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
         </div>
     </nav>
 
     <header class="project-hero">
         <div class="container">
-            <div class="project-hero-content">
-                <span class="project-badge" data-aos="fade-down">Mobile App / Freemium</span>
-                <h1 class="project-title" data-aos="fade-up">Easy Task</h1>
-                <p class="project-subtitle" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-hero-content" data-aos="fade-up">
+                <span class="project-badge">Mobile App / Freemium</span>
+                <h1 class="project-title">Easy Task</h1>
+                <p class="project-subtitle">
                     Organisez votre vie simplement, où que vous soyez.
                 </p>
 
-                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">iOS</span>
                         <span class="stat-label">& Android</span>
@@ -203,6 +221,7 @@
             once: true
         });
     </script>
+    <script src="../script.js"></script>
 </body>
 
 </html>
