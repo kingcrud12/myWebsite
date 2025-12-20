@@ -97,131 +97,73 @@
 
 <body>
     <!-- Page Container for 3D Flip -->
-    <div class="page-container">
-        <!-- Front Side: Navbar + Hero -->
-        <div class="page-front">
-            <!-- Navigation -->
-            <nav class="navbar" id="navbar">
-                <div class="nav-container">
-                    <div class="logo" aria-label="Yann Dipita">Collaborons</div>
-                    <ul class="nav-menu" id="navMenu">
-                        <li><a href="#home" class="nav-link">Accueil</a></li>
-                        <li><a href="#about" class="nav-link">À propos</a></li>
-                        <li><a href="#projects" class="nav-link">Projets</a></li>
-                        <li><a href="activity.html" class="nav-link">Activité</a></li>
-                        <li><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                    <div class="hamburger" id="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
-                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </nav>
-
-            <section id="home" class="hero">
-                <div class="hero-bg"></div>
-                <!-- Immersive 3D Scene Removed -->
-                <div class="hero-rabbit-scene">
-                    <div class="scene-container">
-                        <img class="cogwheel" src="roue.svg" alt="Cogwheel">
-                        <img class="rabbit" src="rabit.svg" alt="Rabbit">
-                    </div>
-                </div>
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">
-                            <span class="greeting">Bonjour, je suis</span>
-                            <span class="name">Yann Dipita</span>
-                            <span class="role">Développeur Web & Mobile</span>
-                        </h1>
-                        <p class="hero-description">
-                            Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et
-                            automatisation.
-                        </p>
-                        <div class="hero-buttons">
-                            <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-                            <a href="#contact" class="btn btn-secondary">Me contacter</a>
-                        </div>
-                    </div>
-                    <div class="hero-visual">
-                        <!-- 1. Original Code Snippet Card -->
-                        <div class="floating-card">
-                            <div class="code-snippet">
-                                <div class="code-line"><span class="keyword">const</span> <span
-                                        class="variable">developer</span> = {</div>
-                                <div class="code-line indent">name: <span class="string">'Yann Dipita'</span>,</div>
-                                <div class="code-line indent">skills: [<span class="string">'Web Dev'</span>, <span
-                                        class="string">'Mobile'</span>, <span class="string">'Automation'</span>],</div>
-                                <div class="code-line indent">passion: <span class="string">'Créer des solutions
-                                        innovantes'</span></div>
-                                <div class="code-line">};</div>
-                            </div>
-                        </div>
-
-                        <!-- 2. New 3D Immersive Scene removed from here -->
-                    </div>
-                </div>
-                <div class="scroll-indicator">
-                    <div class="mouse"></div>
-                </div>
-            </section>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo" aria-label="Yann Dipita">Collaborons</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Accueil</a></li>
+                <li><a href="#about" class="nav-link">À propos</a></li>
+                <li><a href="#projects" class="nav-link">Projets</a></li>
+                <li><a href="activity.html" class="nav-link">Activité</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
         </div>
-        <!-- Back Side: Matrix Scene -->
-        <div class="page-back">
-            <div class="matrix-scene">
-                <!-- Matrix Background -->
-                <div class="matrix-grid"></div>
+    </nav>
 
-                <!-- Geometric Shapes -->
-                <div class="geometric-shape shape-1"></div>
-                <div class="geometric-shape shape-2"></div>
-                <div class="geometric-shape shape-3"></div>
-                <div class="geometric-shape shape-4"></div>
-
-                <!-- Web Sphere -->
-                <div class="web-sphere">
-                    <div class="sphere-inner">
-                        <div class="sphere-layer-1"></div>
-                        <div class="sphere-layer-2"></div>
-                        <div class="sphere-layer-3"></div>
-                    </div>
-                    <div class="sphere-shadow"></div>
-                    <div class="sphere-glow"></div>
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="greeting">Bonjour, je suis</span>
+                    <span class="name">Yann Dipita</span>
+                    <span class="role">Développeur Web & Mobile</span>
+                </h1>
+                <p class="hero-description">
+                    Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et
+                    automatisation.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-secondary">Me contacter</a>
                 </div>
-
-                <!-- Skills Text Floating -->
-                <div class="skill-text skill-1">Web Design</div>
-                <div class="skill-text skill-2">Web Development</div>
-                <div class="skill-text skill-3">Mobile Development</div>
-                <div class="skill-text skill-4">API & Backend</div>
-                <div class="skill-text skill-5">UI/UX Design</div>
-                <div class="skill-text skill-6">Test Automation</div>
-                <div class="skill-text skill-7">DevOps</div>
-                <div class="skill-text skill-8">Full Stack</div>
+            </div>
+            <div class="hero-visual">
+                <div class="profile-photo-container">
+                    <img src="profile.jpg" alt="Yann Dipita" class="hero-profile-img">
+                    <div class="photo-glow"></div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
 
     <!-- About Section -->
     <section id="about" class="about">
