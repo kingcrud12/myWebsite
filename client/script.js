@@ -8,12 +8,12 @@ const themeToggle = document.getElementById('themeToggle');
 // Theme Management
 const initTheme = () => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
+    // Default to Dark if no saved theme, or if saved theme is dark
+    // Only go to light if explicitly saved as 'light'
+    if (savedTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
     }
 };
 
