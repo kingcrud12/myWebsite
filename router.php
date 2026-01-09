@@ -30,7 +30,7 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload'
 // - img-src: self + data: (for SVGs/encoded)
 // - connect-src: self + Formspree (for form submission)
 // - form-action: self + Formspree
-header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none';");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none';");
 // ------------------------
 
 $requestUri = $_SERVER['REQUEST_URI'];

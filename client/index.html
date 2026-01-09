@@ -472,7 +472,72 @@
             });
         }
 
-        // Form Submission
+        // Form Security & Submission
+        const Security = {
+            // Patterns to block (XSS, SQLi, etc.)
+            DANGEROUS_PATTERNS: [
+                /<script\b[^>]*>([\s\S]*?)<\/script>/gim,
+                /javascript:/gim,
+                /onload=/gim,
+                /onerror=/gim,
+                /onclick=/gim,
+                /'\s*OR\s*'\d+'='\d+/gim, // Basic SQLi
+                /--/gim, // SQL comment
+                /;\s*DROP\s+TABLE/gim
+            ],
+
+            sanitize: function (input) {
+                if (typeof input !== 'string') return '';
+                // Convert to plain text (strip HTML)
+                const div = document.createElement('div');
+                div.textContent = input;
+                let sanitized = div.innerHTML;
+
+                // Remove potential dangerous characters
+                // We allow basic punctuation but block characters often used in code injections if they look suspicious
+                // For a contact form, strictly removing < and > is usually safe and effective against HTML injection
+                sanitized = sanitized.replace(/[<>]/g, '');
+
+                return sanitized.trim();
+            },
+
+            validate: function (data) {
+                const errors = [];
+
+                // 1. Check for dangerous patterns
+                for (const [key, value] of Object.entries(data)) {
+                    for (const pattern of this.DANGEROUS_PATTERNS) {
+                        if (pattern.test(value)) {
+                            console.warn(`Security threat detected in field ${key}`);
+                            errors.push("Contenu suspect détecté. Veuillez reformuler votre message.");
+                            return errors; // Return immediately on security threat
+                        }
+                    }
+                }
+
+                // 2. Field specific validation
+                if (data.name.length < 2 || data.name.length > 100) {
+                    errors.push("Le nom doit contenir entre 2 et 100 caractères.");
+                }
+
+                // Basic email regex (browser already handles 'type=email' but good to double check structure)
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    errors.push("L'adresse email n'est pas valide.");
+                }
+
+                if (data.subject.length < 3 || data.subject.length > 200) {
+                    errors.push("Le sujet doit contenir entre 3 et 200 caractères.");
+                }
+
+                if (data.message.length < 10 || data.message.length > 5000) {
+                    errors.push("Le message doit contenir entre 10 et 5000 caractères.");
+                }
+
+                return errors;
+            }
+        };
+
         document.getElementById('contactForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -483,17 +548,59 @@
             const btnLoader = form.querySelector('.btn-loader');
             const messageDiv = document.getElementById('formMessage');
 
+            // Reset UI
+            messageDiv.classList.add('hidden');
+            messageDiv.className = 'hidden p-4 rounded-xl text-center font-medium';
+
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+
+            // 1. Sanitize Data (Clean it up before use)
+            // Note: We don't overwrite the form fields in the UI immediately to avoid confusing the user,
+            // but we send sanitized data.
+            const sanitizedData = {
+                name: Security.sanitize(data.name),
+                email: Security.sanitize(data.email),
+                subject: Security.sanitize(data.subject),
+                message: Security.sanitize(data.message)
+            };
+
+            // 2. Validate Data
+            const errors = Security.validate(sanitizedData);
+
+            if (errors.length > 0) {
+                messageDiv.className = 'p-4 rounded-xl text-center font-medium bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400';
+                messageDiv.innerHTML = errors.join('<br>'); // Allow break tags for multiple errors
+                messageDiv.classList.remove('hidden');
+
+                // Shake animation for visual feedback
+                form.classList.add('animate-pulse');
+                setTimeout(() => form.classList.remove('animate-pulse'), 500);
+                return;
+            }
+
             // Loading state
             button.disabled = true;
             btnText.textContent = 'Envoi...';
             btnIcon.classList.add('hidden');
             btnLoader.classList.remove('hidden');
-            messageDiv.classList.add('hidden');
 
             try {
+                // Create new FormData with sanitized values
+                const submissionData = new FormData();
+                for (const [key, value] of Object.entries(sanitizedData)) {
+                    submissionData.append(key, value);
+                }
+
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: new FormData(form),
+                    body: submissionData,
                     headers: {
                         'Accept': 'application/json'
                     }
@@ -502,7 +609,7 @@
                 if (response.ok) {
                     form.reset();
                     messageDiv.className = 'p-4 rounded-xl text-center font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400';
-                    messageDiv.textContent = "Merci ! Votre message a bien été envoyé.";
+                    messageDiv.textContent = "Merci ! Votre message a bien été envoyé en toute sécurité.";
                     messageDiv.classList.remove('hidden');
                 } else {
                     throw new Error('Erreur lors de l\'envoi');
