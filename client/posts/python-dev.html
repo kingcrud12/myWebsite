@@ -86,8 +86,13 @@
                 <a href="../blog.html"
                     class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
                     <span class="material-symbols-outlined text-sm">arrow_back</span>
-                    <span>Retour au Blog</span>
+                    <span data-i18n="nav.back">Retour au Blog</span>
                 </a>
+                <button
+                    class="ml-4 px-3 py-1.5 rounded-full text-xs font-bold glass hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors uppercase"
+                    id="langToggle">
+                    FR
+                </button>
                 <button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                     id="themeToggle">
                     <span class="material-symbols-outlined dark:hidden">dark_mode</span>
@@ -109,12 +114,15 @@
                 <div
                     class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-blue-500 font-semibold text-sm tracking-wide uppercase mb-4">
                     <span class="material-symbols-outlined text-lg">code</span>
-                    Python Developer Path
+                    <span data-i18n="header.badge">Python Developer Path</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-display font-extrabold tracking-tight leading-tight">
-                    Devenir un <span class="text-primary">Développeur Python</span> à l'ère de l'IA
+                    <span data-i18n="header.title_start">Devenir un</span> <span class="text-primary"
+                        data-i18n="header.title_highlight">Développeur Python</span> <span
+                        data-i18n="header.title_end">à l'ère de l'IA</span>
                 </h1>
-                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
+                    data-i18n="header.subtitle">
                     Un guide complet pour maîtriser le langage n°1 de l'IA, de l'automatisation et du backend.
                 </p>
             </header>
@@ -123,18 +131,19 @@
             <section class="mb-16">
                 <div class="glass p-8 rounded-3xl">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 font-display">
-                        <span class="text-3xl">🐍</span> C’est quoi un développeur Python ?
+                        <span class="text-3xl">🐍</span> <span data-i18n="intro.title">C’est quoi un développeur Python
+                            ?</span>
                     </h2>
-                    <p class="text-slate-300 mb-6 text-lg leading-relaxed">
+                    <p class="text-slate-300 mb-6 text-lg leading-relaxed" data-i18n="intro.desc">
                         Un développeur Python est un professionnel qui utilise le langage Python pour concevoir,
                         automatiser, analyser ou tester des systèmes informatiques. Python est lisible, polyvalent et au
                         cœur de l’IA et de la data.
                     </p>
                     <div class="bg-indigo-500/10 border border-indigo-500/20 p-6 rounded-2xl">
-                        <p class="font-semibold text-indigo-300 mb-2">Un développeur Python ne se limite pas à « coder »
-                            :</p>
-                        <p class="text-slate-400">👉 Il résout des problèmes, automatise des tâches, sécurise la qualité
-                            logicielle, exploite les données et collabore avec l’IA.</p>
+                        <p class="font-semibold text-indigo-300 mb-2" data-i18n="intro.note_title">Un développeur Python
+                            ne se limite pas à « coder » :</p>
+                        <p class="text-slate-400" data-i18n="intro.note_desc">👉 Il résout des problèmes, automatise des
+                            tâches, sécurise la qualité logicielle, exploite les données et collabore avec l’IA.</p>
                     </div>
                 </div>
             </section>
@@ -142,67 +151,74 @@
             <!-- 2. Sur quoi travailler ? (Grid) -->
             <section class="mb-16">
                 <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 font-display justify-center">
-                    <span class="text-3xl">🧠</span> Sur quoi peut travailler un développeur Python ?
+                    <span class="text-3xl">🧠</span> <span data-i18n="scope.title">Sur quoi peut travailler un
+                        développeur Python ?</span>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Card 1 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-blue-400">
                             <span class="material-symbols-outlined">api</span>
-                            <h3 class="font-bold text-lg">Backend & API</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c1_title">Backend & API</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Création d'API REST (FastAPI, Flask, Django),
-                            microservices, bases de données.</p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: API de login, e-commerce</p>
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c1_desc">Création d'API REST (FastAPI,
+                            Flask, Django), microservices, bases de données.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c1_ex">Ex: API de login, e-commerce
+                        </p>
                     </div>
                     <!-- Card 2 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-green-400">
                             <span class="material-symbols-outlined">check_circle</span>
-                            <h3 class="font-bold text-lg">QA & Testing</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c2_title">QA & Testing</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Tests automatisés (pytest), performance, sécurité, CI/CD.
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c2_desc">Tests automatisés (pytest),
+                            performance, sécurité, CI/CD.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c2_ex">Ex: tests de non-régression
                         </p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: tests de non-régression</p>
                     </div>
                     <!-- Card 3 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-orange-400">
                             <span class="material-symbols-outlined">settings_suggest</span>
-                            <h3 class="font-bold text-lg">Automatisation</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c3_title">Automatisation</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Scripts, manipulation de fichiers (CSV, Excel), process
-                            métiers.</p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: script de traitement de fichiers</p>
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c3_desc">Scripts, manipulation de
+                            fichiers (CSV, Excel), process métiers.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c3_ex">Ex: script de traitement de
+                            fichiers</p>
                     </div>
                     <!-- Card 4 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-purple-400">
                             <span class="material-symbols-outlined">travel_explore</span>
-                            <h3 class="font-bold text-lg">Web Scraping</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c4_title">Web Scraping</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Extraction de données, veille concurrentielle, analyse de
-                            prix.</p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: suivi de prix concurrents</p>
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c4_desc">Extraction de données, veille
+                            concurrentielle, analyse de prix.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c4_ex">Ex: suivi de prix
+                            concurrents</p>
                     </div>
                     <!-- Card 5 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-pink-400">
                             <span class="material-symbols-outlined">analytics</span>
-                            <h3 class="font-bold text-lg">Data & Analyse</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c5_title">Data & Analyse</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Pandas, Numpy, visualisation de données, data pipelines.
-                        </p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: analyse de ventes</p>
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c5_desc">Pandas, Numpy, visualisation de
+                            données, data pipelines.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c5_ex">Ex: analyse de ventes</p>
                     </div>
                     <!-- Card 6 -->
                     <div class="glass-card p-6 rounded-2xl">
                         <div class="flex items-center gap-3 mb-3 text-cyan-400">
                             <span class="material-symbols-outlined">psychology</span>
-                            <h3 class="font-bold text-lg">Intelligence Artificielle</h3>
+                            <h3 class="font-bold text-lg" data-i18n="scope.c6_title">Intelligence Artificielle</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3">Machine Learning, LLM (OpenAI, LangChain), Agents IA.</p>
-                        <p class="text-xs text-slate-500 font-mono">Ex: chatbots, recommandation</p>
+                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c6_desc">Machine Learning, LLM (OpenAI,
+                            LangChain), Agents IA.</p>
+                        <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c6_ex">Ex: chatbots, recommandation
+                        </p>
                     </div>
                 </div>
             </section>
@@ -211,42 +227,46 @@
             <section class="mb-16">
                 <div class="glass p-8 rounded-3xl border-l-4 border-l-cyan-500">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 font-display">
-                        <span class="text-3xl">🤖</span> Pourquoi devenir dev Python à l’ère de l’IA ?
+                        <span class="text-3xl">🤖</span> <span data-i18n="why.title">Pourquoi devenir dev Python à l’ère
+                            de l’IA ?</span>
                     </h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <p class="text-lg font-semibold text-slate-200 mb-4">Contrairement à une idée reçue :</p>
+                            <p class="text-lg font-semibold text-slate-200 mb-4" data-i18n="why.subtitle">Contrairement
+                                à une idée reçue :</p>
                             <ul class="space-y-3 mb-6">
                                 <li class="flex items-center gap-3 text-red-400">
                                     <span class="material-symbols-outlined">cancel</span>
-                                    L’IA ne remplace pas les développeurs
+                                    <span data-i18n="why.myth">L’IA ne remplace pas les développeurs</span>
                                 </li>
                                 <li class="flex items-center gap-3 text-green-400">
                                     <span class="material-symbols-outlined">check_circle</span>
-                                    Elle <span class="font-bold underline decoration-green-500/50">augmente</span> les
-                                    développeurs Python
+                                    <span data-i18n="why.fact">Elle <span
+                                            class="font-bold underline decoration-green-500/50">augmente</span> les
+                                        développeurs Python</span>
                                 </li>
                             </ul>
                             <div class="space-y-2 text-slate-400 text-sm">
-                                <p>🔹 Python est le langage n°1 de l’IA</p>
-                                <p>🔹 Tous les frameworks IA sont en Python</p>
-                                <p>🔹 Les agents IA s’orchestre en Python</p>
+                                <p data-i18n="why.pt1">🔹 Python est le langage n°1 de l’IA</p>
+                                <p data-i18n="why.pt2">🔹 Tous les frameworks IA sont en Python</p>
+                                <p data-i18n="why.pt3">🔹 Les agents IA s’orientent en Python</p>
                             </div>
                         </div>
                         <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                            <h4 class="font-bold text-white mb-4 border-b border-slate-700 pb-2">Ce que l'IA ne fait pas
-                                seule :</h4>
+                            <h4 class="font-bold text-white mb-4 border-b border-slate-700 pb-2"
+                                data-i18n="why.limit_title">Ce que l'IA ne fait pas seule :</h4>
                             <ul class="space-y-2 text-slate-300 text-sm">
-                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Comprendre un
-                                    besoin métier</li>
-                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Concevoir une
-                                    architecture propre</li>
-                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Tester,
-                                    sécuriser, fiabiliser</li>
-                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Automatiser
-                                    intelligemment</li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
+                                        data-i18n="why.limit1">Comprendre un besoin métier</span></li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
+                                        data-i18n="why.limit2">Concevoir une architecture propre</span></li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
+                                        data-i18n="why.limit3">Tester, sécuriser, fiabiliser</span></li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
+                                        data-i18n="why.limit4">Automatiser intelligemment</span></li>
                             </ul>
-                            <div class="mt-4 pt-4 border-t border-slate-700 text-center font-bold text-cyan-400">
+                            <div class="mt-4 pt-4 border-t border-slate-700 text-center font-bold text-cyan-400"
+                                data-i18n="why.conclusion">
                                 👉 Python + IA = Développeur Augmenté
                             </div>
                         </div>
@@ -256,68 +276,84 @@
 
             <!-- 4. Comment devenir dev python ? (Progression) -->
             <section class="mb-16">
-                <h2 class="text-3xl font-bold mb-10 text-center font-display">🚀 Comment devenir développeur Python ?
-                </h2>
+                <h2 class="text-3xl font-bold mb-10 text-center font-display" data-i18n="roadmap.title">🚀 Comment
+                    devenir développeur Python ?</h2>
                 <div class="space-y-4">
                     <!-- Step 1 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-blue-500/20 text-blue-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">Étape
-                            1</div>
+                        <div class="bg-blue-500/20 text-blue-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s1_badge">Étape 1</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">Fondamentaux Python</h3>
-                            <p class="text-slate-400 mb-2">Syntaxe, Variables, fonctions, classes, Exceptions.</p>
-                            <p class="text-sm text-blue-300">🎯 Objectif : penser comme un développeur</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s1_title">Fondamentaux
+                                Python</h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s1_desc">Syntaxe, Variables, fonctions,
+                                classes, Exceptions.</p>
+                            <p class="text-sm text-blue-300" data-i18n="roadmap.s1_goal">🎯 Objectif : penser comme un
+                                développeur</p>
                         </div>
                     </div>
                     <!-- Step 2 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-indigo-500/20 text-indigo-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
-                            Étape 2</div>
+                        <div class="bg-indigo-500/20 text-indigo-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s2_badge">Étape 2</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">Python Professionnel</h3>
-                            <p class="text-slate-400 mb-2">Environnements virtuels, Bonnes pratiques, Typage, Logs.</p>
-                            <p class="text-sm text-indigo-300">🎯 Objectif : écrire du code propre et maintenable</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s2_title">Python
+                                Professionnel</h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s2_desc">Environnements virtuels, Bonnes
+                                pratiques, Typage, Logs.</p>
+                            <p class="text-sm text-indigo-300" data-i18n="roadmap.s2_goal">🎯 Objectif : écrire du code
+                                propre et maintenable</p>
                         </div>
                     </div>
                     <!-- Step 3 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-green-500/20 text-green-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
-                            Étape 3</div>
+                        <div class="bg-green-500/20 text-green-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s3_badge">Étape 3</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">QA & Tests Automatisés</h3>
-                            <p class="text-slate-400 mb-2">pytest, Tests unitaires & API, CI/CD, Performance.</p>
-                            <p class="text-sm text-green-300">🎯 Objectif : garantir la qualité logicielle</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s3_title">QA & Tests
+                                Automatisés</h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s3_desc">pytest, Tests unitaires & API,
+                                CI/CD, Performance.</p>
+                            <p class="text-sm text-green-300" data-i18n="roadmap.s3_goal">🎯 Objectif : garantir la
+                                qualité logicielle</p>
                         </div>
                     </div>
                     <!-- Step 4 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-purple-500/20 text-purple-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
-                            Étape 4</div>
+                        <div class="bg-purple-500/20 text-purple-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s4_badge">Étape 4</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">APIs & Backend</h3>
-                            <p class="text-slate-400 mb-2">FastAPI, Authentification (JWT), Sécurité, Bases de données.
-                            </p>
-                            <p class="text-sm text-purple-300">🎯 Objectif : construire des systèmes réels</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s4_title">APIs & Backend
+                            </h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s4_desc">FastAPI, Authentification (JWT),
+                                Sécurité, Bases de données.</p>
+                            <p class="text-sm text-purple-300" data-i18n="roadmap.s4_goal">🎯 Objectif : construire des
+                                systèmes réels</p>
                         </div>
                     </div>
                     <!-- Step 5 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-orange-500/20 text-orange-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
-                            Étape 5</div>
+                        <div class="bg-orange-500/20 text-orange-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s5_badge">Étape 5</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">Automatisation & Scraping</h3>
-                            <p class="text-slate-400 mb-2">Scripts métiers, Scraping responsable, Orchestration.</p>
-                            <p class="text-sm text-orange-300">🎯 Objectif : gagner du temps et créer de la valeur</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s5_title">Automatisation &
+                                Scraping</h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s5_desc">Scripts métiers, Scraping
+                                responsable, Orchestration.</p>
+                            <p class="text-sm text-orange-300" data-i18n="roadmap.s5_goal">🎯 Objectif : gagner du temps
+                                et créer de la valeur</p>
                         </div>
                     </div>
                     <!-- Step 6 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-cyan-500/20 text-cyan-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">Étape
-                            6</div>
+                        <div class="bg-cyan-500/20 text-cyan-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                            data-i18n="roadmap.s6_badge">Étape 6</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2">Data & IA</h3>
-                            <p class="text-slate-400 mb-2">Manipulation de données, IA générative, APIs IA, Agents.</p>
-                            <p class="text-sm text-cyan-300">🎯 Objectif : devenir un développeur augmenté par l’IA</p>
+                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s6_title">Data & IA</h3>
+                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s6_desc">Manipulation de données, IA
+                                générative, APIs IA, Agents.</p>
+                            <p class="text-sm text-cyan-300" data-i18n="roadmap.s6_goal">🎯 Objectif : devenir un
+                                développeur augmenté par l’IA</p>
                         </div>
                     </div>
                 </div>
@@ -327,13 +363,14 @@
             <section class="mb-16">
                 <div class="bg-slate-900/40 border border-slate-700 rounded-3xl p-8">
                     <div class="text-center mb-10">
-                        <h2 class="text-2xl font-bold font-display mb-4">🗓️ Planning de Formation (1 mois)</h2>
-                        <p class="text-slate-400 mb-6">Dans le cadre du mentorat, je te propose ce planning progressif
-                            d'1h par jour.</p>
+                        <h2 class="text-2xl font-bold font-display mb-4" data-i18n="planning.title">🗓️ Planning de
+                            Formation (1 mois)</h2>
+                        <p class="text-slate-400 mb-6" data-i18n="planning.subtitle">Dans le cadre du mentorat, je te
+                            propose ce planning progressif d'1h par jour.</p>
                         <div class="flex justify-center gap-6 text-sm text-slate-300">
-                            <span>⏱️ 1h / jour</span>
-                            <span>📚 4 modules x 15min</span>
-                            <span>🎯 Consolidations continue</span>
+                            <span data-i18n="planning.m1">⏱️ 1h / jour</span>
+                            <span data-i18n="planning.m2">📚 4 modules x 15min</span>
+                            <span data-i18n="planning.m3">🎯 Consolidations continue</span>
                         </div>
                     </div>
 
@@ -342,35 +379,37 @@
                         <details class="group glass rounded-xl overflow-hidden open">
                             <summary
                                 class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-primary">📅 Semaine 1 – Bases Solides & Découverte
-                                </h3>
+                                <h3 class="font-bold text-lg text-primary" data-i18n="planning.w1_title">📅 Semaine 1 –
+                                    Bases Solides & Découverte</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
                             </summary>
                             <div class="p-6 border-t border-slate-700/50">
                                 <div class="grid md:grid-cols-5 gap-4 text-sm">
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 1</div>
-                                        <div class="text-slate-400">Variables, QA intro, API REST intro, CSV/JSON</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day">Jour 1</div>
+                                        <div class="text-slate-400" data-i18n="planning.w1_d1">Variables, QA intro, API
+                                            REST intro, CSV/JSON</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 2</div>
-                                        <div class="text-slate-400">Conditions, Types de tests, HTTP Methods, JSON
-                                            Python</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day2">Jour 2</div>
+                                        <div class="text-slate-400" data-i18n="planning.w1_d2">Conditions, Types de
+                                            tests, HTTP Methods, JSON Python</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 3</div>
-                                        <div class="text-slate-400">Boucles, Bugs vs Erreurs, Status Codes, Script
-                                            simple</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day3">Jour 3</div>
+                                        <div class="text-slate-400" data-i18n="planning.w1_d3">Boucles, Bugs vs Erreurs,
+                                            Status Codes, Script simple</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 4</div>
-                                        <div class="text-slate-400">Fonctions, Test cases, Postman, Lire CSV</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day4">Jour 4</div>
+                                        <div class="text-slate-400" data-i18n="planning.w1_d4">Fonctions, Test cases,
+                                            Postman, Lire CSV</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 5</div>
-                                        <div class="text-slate-400">Listes/Dicts, Manuels vs Auto, JSON req/res, CLI
-                                            Script</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day5">Jour 5</div>
+                                        <div class="text-slate-400" data-i18n="planning.w1_d5">Listes/Dicts, Manuels vs
+                                            Auto, JSON req/res, CLI Script</div>
                                     </div>
                                 </div>
                             </div>
@@ -380,35 +419,37 @@
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
                                 class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-blue-400">📅 Semaine 2 – Python Pro & QA</h3>
+                                <h3 class="font-bold text-lg text-blue-400" data-i18n="planning.w2_title">📅 Semaine 2 –
+                                    Python Pro & QA</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
                             </summary>
                             <div class="p-6 border-t border-slate-700/50">
                                 <div class="grid md:grid-cols-5 gap-4 text-sm">
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 6</div>
-                                        <div class="text-slate-400">Modules, Intro pytest, Test API publique, Intro
-                                            Pandas</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day6">Jour 6</div>
+                                        <div class="text-slate-400" data-i18n="planning.w2_d1">Modules, Intro pytest,
+                                            Test API publique, Intro Pandas</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 7</div>
-                                        <div class="text-slate-400">Classes, Assertions, Test GET, Auto tâche répétitive
-                                        </div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day7">Jour 7</div>
+                                        <div class="text-slate-400" data-i18n="planning.w2_d2">Classes, Assertions, Test
+                                            GET, Auto tâche répétitive</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 8</div>
-                                        <div class="text-slate-400">Exceptions, Tests négatifs, Test POST, Nettoyage
-                                            data</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day8">Jour 8</div>
+                                        <div class="text-slate-400" data-i18n="planning.w2_d3">Exceptions, Tests
+                                            négatifs, Test POST, Nettoyage data</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 9</div>
-                                        <div class="text-slate-400">Virtualenv, Fixtures, Test PUT/DEL, Logs</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day9">Jour 9</div>
+                                        <div class="text-slate-400" data-i18n="planning.w2_d4">Virtualenv, Fixtures,
+                                            Test PUT/DEL, Logs</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 10</div>
-                                        <div class="text-slate-400">Bonnes pratiques, Architecture tests, Mocks,
-                                            Visualisation</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day10">Jour 10</div>
+                                        <div class="text-slate-400" data-i18n="planning.w2_d5">Bonnes pratiques,
+                                            Architecture tests, Mocks, Visualisation</div>
                                     </div>
                                 </div>
                             </div>
@@ -418,36 +459,37 @@
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
                                 class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-purple-400">📅 Semaine 3 – Backend & Sécurité</h3>
+                                <h3 class="font-bold text-lg text-purple-400" data-i18n="planning.w3_title">📅 Semaine 3
+                                    – Backend & Sécurité</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
                             </summary>
                             <div class="p-6 border-t border-slate-700/50">
                                 <div class="grid md:grid-cols-5 gap-4 text-sm">
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 11</div>
-                                        <div class="text-slate-400">Typing, Tests régression, Intro FastAPI, Scripts
-                                            planifiés</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day11">Jour 11</div>
+                                        <div class="text-slate-400" data-i18n="planning.w3_d1">Typing, Tests régression,
+                                            Intro FastAPI, Scripts planifiés</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 12</div>
-                                        <div class="text-slate-400">Pydantic, Tests erreurs, Routes & Schemas, API ->
-                                            Data</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day12">Jour 12</div>
+                                        <div class="text-slate-400" data-i18n="planning.w3_d2">Pydantic, Tests erreurs,
+                                            Routes & Schemas, API -> Data</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 13</div>
-                                        <div class="text-slate-400">Environnement, Coverage, JWT Auth, Sécurisation
-                                        </div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day13">Jour 13</div>
+                                        <div class="text-slate-400" data-i18n="planning.w3_d3">Environnement, Coverage,
+                                            JWT Auth, Sécurisation</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 14</div>
-                                        <div class="text-slate-400">Refactoring, CI/CD Concept, Routes protégées,
-                                            Pipelines simples</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day14">Jour 14</div>
+                                        <div class="text-slate-400" data-i18n="planning.w3_d4">Refactoring, CI/CD
+                                            Concept, Routes protégées, Pipelines simples</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 15</div>
-                                        <div class="text-slate-400">Clean Code, Rapport tests, Test Auth Auto,
-                                            Cron/Scheduler</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day15">Jour 15</div>
+                                        <div class="text-slate-400" data-i18n="planning.w3_d5">Clean Code, Rapport
+                                            tests, Test Auth Auto, Cron/Scheduler</div>
                                     </div>
                                 </div>
                             </div>
@@ -457,35 +499,37 @@
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
                                 class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-cyan-400">📅 Semaine 4 – Data, Scraping & IA</h3>
+                                <h3 class="font-bold text-lg text-cyan-400" data-i18n="planning.w4_title">📅 Semaine 4 –
+                                    Data, Scraping & IA</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
                             </summary>
                             <div class="p-6 border-t border-slate-700/50">
                                 <div class="grid md:grid-cols-5 gap-4 text-sm">
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 16</div>
-                                        <div class="text-slate-400">Regex, Tests Perf, Benchmark, Analyse simple</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day16">Jour 16</div>
+                                        <div class="text-slate-400" data-i18n="planning.w4_d1">Regex, Tests Perf,
+                                            Benchmark, Analyse simple</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 17</div>
-                                        <div class="text-slate-400">Fichiers avancés, Tests charge, Pagination, Scraping
-                                            (BS4)</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day17">Jour 17</div>
+                                        <div class="text-slate-400" data-i18n="planning.w4_d2">Fichiers avancés, Tests
+                                            charge, Pagination, Scraping (BS4)</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 18</div>
-                                        <div class="text-slate-400">Async, Flaky tests, Async FastAPI, Nettoyage
-                                            Scraping</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day18">Jour 18</div>
+                                        <div class="text-slate-400" data-i18n="planning.w4_d3">Async, Flaky tests, Async
+                                            FastAPI, Nettoyage Scraping</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 19</div>
-                                        <div class="text-slate-400">Multiprocessing, Stratégie test, Sécurisation, API
-                                            OpenAI</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day19">Jour 19</div>
+                                        <div class="text-slate-400" data-i18n="planning.w4_d4">Multiprocessing,
+                                            Stratégie test, Sécurisation, API OpenAI</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1">Jour 20</div>
-                                        <div class="text-slate-400">Révision, Projet Final QA, Projet Final API, Auto
-                                            Intelligente</div>
+                                        <div class="font-bold text-white mb-1" data-i18n="day20">Jour 20</div>
+                                        <div class="text-slate-400" data-i18n="planning.w4_d5">Révision, Projet Final
+                                            QA, Projet Final API, Auto Intelligente</div>
                                     </div>
                                 </div>
                             </div>
@@ -497,16 +541,17 @@
             <!-- Projects & CTA -->
             <section class="text-center pb-20">
                 <div class="mb-16">
-                    <h3 class="text-2xl font-bold mb-6 font-display">🧩 Projets Fil Rouge</h3>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
-                            Projet Tests API</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
-                            API FastAPI Auth</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
-                            Scripts Automation</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
-                            Mini projet Data</span>
+                    <h3 class="text-2xl font-bold mb-6 font-display" data-i18n="projects.title">🧩 Projets Fil Rouge
+                    </h3>
+                    <div class="flex flex-wrap justify-center gap-4 text-slate-300">
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                            data-i18n="projects.p1">✅ Projet Tests API</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                            data-i18n="projects.p2">✅ API FastAPI Auth</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                            data-i18n="projects.p3">✅ Scripts Automation</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                            data-i18n="projects.p4">✅ Mini projet Data</span>
                     </div>
                 </div>
 
@@ -517,16 +562,16 @@
                             class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
                         </div>
 
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display text-white">Prêt à accélérer ton
-                            apprentissage ?</h2>
-                        <p class="text-lg text-slate-400 mb-8 max-w-xl mx-auto">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display text-white" data-i18n="cta.title">
+                            Prêt à accélérer ton apprentissage ?</h2>
+                        <p class="text-lg text-slate-400 mb-8 max-w-xl mx-auto" data-i18n="cta.desc">
                             Rejoins le programme de mentorat pour suivre ce planning étape par étape, avec un
                             accompagnement personnalisé.
                         </p>
 
                         <a href="https://yann-dipita.com/#activity"
                             class="inline-flex items-center gap-2 bg-primary hover:bg-indigo-500 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/25 text-lg">
-                            <span>S'inscrire au Mentorat</span>
+                            <span data-i18n="cta.button">S'inscrire au Mentorat</span>
                             <span class="material-symbols-outlined">rocket_launch</span>
                         </a>
                     </div>
@@ -543,6 +588,303 @@
     </footer>
 
     <script>
+        const translations = {
+            fr: {
+                nav: { back: "Retour au Blog" },
+                header: {
+                    badge: "Python Developer Path",
+                    title_start: "Devenir un",
+                    title_highlight: "Développeur Python",
+                    title_end: "à l'ère de l'IA",
+                    subtitle: "Un guide complet pour maîtriser le langage n°1 de l'IA, de l'automatisation et du backend."
+                },
+                intro: {
+                    title: "C’est quoi un développeur Python ?",
+                    desc: "Un développeur Python est un professionnel qui utilise le langage Python pour concevoir, automatiser, analyser ou tester des systèmes informatiques. Python est lisible, polyvalent et au cœur de l’IA et de la data.",
+                    note_title: "Un développeur Python ne se limite pas à « coder » :",
+                    note_desc: "👉 Il résout des problèmes, automatise des tâches, sécurise la qualité logicielle, exploite les données et collabore avec l’IA."
+                },
+                scope: {
+                    title: "Sur quoi peut travailler un développeur Python ?",
+                    c1_title: "Backend & API",
+                    c1_desc: "Création d'API REST (FastAPI, Flask, Django), microservices, bases de données.",
+                    c1_ex: "Ex: API de login, e-commerce",
+                    c2_title: "QA & Testing",
+                    c2_desc: "Tests automatisés (pytest), performance, sécurité, CI/CD.",
+                    c2_ex: "Ex: tests de non-régression",
+                    c3_title: "Automatisation",
+                    c3_desc: "Scripts, manipulation de fichiers (CSV, Excel), process métiers.",
+                    c3_ex: "Ex: script de traitement de fichiers",
+                    c4_title: "Web Scraping",
+                    c4_desc: "Extraction de données, veille concurrentielle, analyse de prix.",
+                    c4_ex: "Ex: suivi de prix concurrents",
+                    c5_title: "Data & Analyse",
+                    c5_desc: "Pandas, Numpy, visualisation de données, data pipelines.",
+                    c5_ex: "Ex: analyse de ventes",
+                    c6_title: "Intelligence Artificielle",
+                    c6_desc: "Machine Learning, LLM (OpenAI, LangChain), Agents IA.",
+                    c6_ex: "Ex: chatbots, recommandation"
+                },
+                why: {
+                    title: "Pourquoi devenir dev Python à l’ère de l’IA ?",
+                    subtitle: "Contrairement à une idée reçue :",
+                    myth: "L’IA ne remplace pas les développeurs",
+                    fact: "Elle augmente les développeurs Python",
+                    pt1: "🔹 Python est le langage n°1 de l’IA",
+                    pt2: "🔹 Tous les frameworks IA sont en Python",
+                    pt3: "🔹 Les agents IA s’orientent en Python",
+                    limit_title: "Ce que l'IA ne fait pas seule :",
+                    limit1: "Comprendre un besoin métier",
+                    limit2: "Concevoir une architecture propre",
+                    limit3: "Tester, sécuriser, fiabiliser",
+                    limit4: "Automatiser intelligemment",
+                    conclusion: "👉 Python + IA = Développeur Augmenté"
+                },
+                roadmap: {
+                    title: "🚀 Comment devenir développeur Python ?",
+                    s1_badge: "Étape 1",
+                    s1_title: "Fondamentaux Python",
+                    s1_desc: "Syntaxe, Variables, fonctions, classes, Exceptions.",
+                    s1_goal: "🎯 Objectif : penser comme un développeur",
+                    s2_badge: "Étape 2",
+                    s2_title: "Python Professionnel",
+                    s2_desc: "Environnements virtuels, Bonnes pratiques, Typage, Logs.",
+                    s2_goal: "🎯 Objectif : écrire du code propre et maintenable",
+                    s3_badge: "Étape 3",
+                    s3_title: "QA & Tests Automatisés",
+                    s3_desc: "pytest, Tests unitaires & API, CI/CD, Performance.",
+                    s3_goal: "🎯 Objectif : garantir la qualité logicielle",
+                    s4_badge: "Étape 4",
+                    s4_title: "APIs & Backend",
+                    s4_desc: "FastAPI, Authentification (JWT), Sécurité, Bases de données.",
+                    s4_goal: "🎯 Objectif : construire des systèmes réels",
+                    s5_badge: "Étape 5",
+                    s5_title: "Automatisation & Scraping",
+                    s5_desc: "Scripts métiers, Scraping responsable, Orchestration.",
+                    s5_goal: "🎯 Objectif : gagner du temps et créer de la valeur",
+                    s6_badge: "Étape 6",
+                    s6_title: "Data & IA",
+                    s6_desc: "Manipulation de données, IA générative, APIs IA, Agents.",
+                    s6_goal: "🎯 Objectif : devenir un développeur augmenté par l’IA"
+                },
+                planning: {
+                    title: "🗓️ Planning de Formation (1 mois)",
+                    subtitle: "Dans le cadre du mentorat, je te propose ce planning progressif d'1h par jour.",
+                    m1: "⏱️ 1h / jour",
+                    m2: "📚 4 modules x 15min",
+                    m3: "🎯 Consolidations continue",
+                    w1_title: "📅 Semaine 1 – Bases Solides & Découverte",
+                    w1_d1: "Variables, QA intro, API REST intro, CSV/JSON",
+                    w1_d2: "Conditions, Types de tests, HTTP Methods, JSON Python",
+                    w1_d3: "Boucles, Bugs vs Erreurs, Status Codes, Script simple",
+                    w1_d4: "Fonctions, Test cases, Postman, Lire CSV",
+                    w1_d5: "Listes/Dicts, Manuels vs Auto, JSON req/res, CLI Script",
+                    w2_title: "📅 Semaine 2 – Python Pro & QA",
+                    w2_d1: "Modules, Intro pytest, Test API publique, Intro Pandas",
+                    w2_d2: "Classes, Assertions, Test GET, Auto tâche répétitive",
+                    w2_d3: "Exceptions, Tests négatifs, Test POST, Nettoyage data",
+                    w2_d4: "Virtualenv, Fixtures, Test PUT/DEL, Logs",
+                    w2_d5: "Bonnes pratiques, Architecture tests, Mocks, Visualisation",
+                    w3_title: "📅 Semaine 3 – Backend & Sécurité",
+                    w3_d1: "Typing, Tests régression, Intro FastAPI, Scripts planifiés",
+                    w3_d2: "Pydantic, Tests erreurs, Routes & Schemas, API -> Data",
+                    w3_d3: "Environnement, Coverage, JWT Auth, Sécurisation",
+                    w3_d4: "Refactoring, CI/CD Concept, Routes protégées, Pipelines simples",
+                    w3_d5: "Clean Code, Rapport tests, Test Auth Auto, Cron/Scheduler",
+                    w4_title: "📅 Semaine 4 – Data, Scraping & IA",
+                    w4_d1: "Regex, Tests Perf, Benchmark, Analyse simple",
+                    w4_d2: "Fichiers avancés, Tests charge, Pagination, Scraping (BS4)",
+                    w4_d3: "Async, Flaky tests, Async FastAPI, Nettoyage Scraping",
+                    w4_d4: "Multiprocessing, Stratégie test, Sécurisation, API OpenAI",
+                    w4_d5: "Révision, Projet Final QA, Projet Final API, Auto Intelligente"
+                },
+                projects: {
+                    title: "🧩 Projets Fil Rouge",
+                    p1: "✅ Projet Tests API",
+                    p2: "✅ API FastAPI Auth",
+                    p3: "✅ Scripts Automation",
+                    p4: "✅ Mini projet Data"
+                },
+                cta: {
+                    title: "Prêt à accélérer ton apprentissage ?",
+                    desc: "Rejoins le programme de mentorat pour suivre ce planning étape par étape, avec un accompagnement personnalisé.",
+                    button: "S'inscrire au Mentorat"
+                },
+                day: "Jour 1", day2: "Jour 2", day3: "Jour 3", day4: "Jour 4", day5: "Jour 5",
+                day6: "Jour 6", day7: "Jour 7", day8: "Jour 8", day9: "Jour 9", day10: "Jour 10",
+                day11: "Jour 11", day12: "Jour 12", day13: "Jour 13", day14: "Jour 14", day15: "Jour 15",
+                day16: "Jour 16", day17: "Jour 17", day18: "Jour 18", day19: "Jour 19", day20: "Jour 20"
+            },
+            en: {
+                nav: { back: "Back to Blog" },
+                header: {
+                    badge: "Python Developer Path",
+                    title_start: "Become a",
+                    title_highlight: "Python Developer",
+                    title_end: "in the AI Era",
+                    subtitle: "A complete guide to mastering the #1 language for AI, automation, and backend."
+                },
+                intro: {
+                    title: "What is a Python Developer?",
+                    desc: "A Python developer is a professional who uses the Python language to design, automate, analyze, or test computer systems. Python is readable, versatile, and at the heart of AI and data.",
+                    note_title: "A Python developer is not limited to \"coding\":",
+                    note_desc: "👉 They solve problems, automate tasks, ensure software quality, leverage data, and collaborate with AI."
+                },
+                scope: {
+                    title: "What can a Python developer work on?",
+                    c1_title: "Backend & API",
+                    c1_desc: "Creating REST APIs (FastAPI, Flask, Django), microservices, databases.",
+                    c1_ex: "Ex: Login API, e-commerce",
+                    c2_title: "QA & Testing",
+                    c2_desc: "Automated tests (pytest), performance, security, CI/CD.",
+                    c2_ex: "Ex: Regression testing",
+                    c3_title: "Automation",
+                    c3_desc: "Scripts, file manipulation (CSV, Excel), business processes.",
+                    c3_ex: "Ex: File processing script",
+                    c4_title: "Web Scraping",
+                    c4_desc: "Data extraction, competitive intelligence, price analysis.",
+                    c4_ex: "Ex: Competitor price tracking",
+                    c5_title: "Data & Analysis",
+                    c5_desc: "Pandas, Numpy, data visualization, data pipelines.",
+                    c5_ex: "Ex: Sales analysis",
+                    c6_title: "Artificial Intelligence",
+                    c6_desc: "Machine Learning, LLM (OpenAI, LangChain), AI Agents.",
+                    c6_ex: "Ex: Chatbots, recommendation"
+                },
+                why: {
+                    title: "Why become a Python dev in the AI era?",
+                    subtitle: "Contrary to popular belief:",
+                    myth: "AI does not replace developers",
+                    fact: "It augments Python developers",
+                    pt1: "🔹 Python is the #1 language for AI",
+                    pt2: "🔹 All AI frameworks are in Python",
+                    pt3: "🔹 AI agents are orchestrated in Python",
+                    limit_title: "What AI doesn't do alone:",
+                    limit1: "Understand a business need",
+                    limit2: "Design a clean architecture",
+                    limit3: "Test, secure, ensure reliability",
+                    limit4: "Automate intelligently",
+                    conclusion: "👉 Python + AI = Augmented Developer"
+                },
+                roadmap: {
+                    title: "🚀 How to become a Python developer?",
+                    s1_badge: "Step 1",
+                    s1_title: "Python Fundamentals",
+                    s1_desc: "Syntax, Variables, functions, classes, Exceptions.",
+                    s1_goal: "🎯 Objective: Think like a developer",
+                    s2_badge: "Step 2",
+                    s2_title: "Professional Python",
+                    s2_desc: "Virtual environments, Best practices, Typing, Logs.",
+                    s2_goal: "🎯 Objective: Write clean and maintainable code",
+                    s3_badge: "Step 3",
+                    s3_title: "QA & Automated Tests",
+                    s3_desc: "pytest, Unit & API tests, CI/CD, Performance.",
+                    s3_goal: "🎯 Objective: Ensure software quality",
+                    s4_badge: "Step 4",
+                    s4_title: "APIs & Backend",
+                    s4_desc: "FastAPI, Authentication (JWT), Security, Databases.",
+                    s4_goal: "🎯 Objective: Build real systems",
+                    s5_badge: "Step 5",
+                    s5_title: "Automation & Scraping",
+                    s5_desc: "Business scripts, Responsible scraping, Orchestration.",
+                    s5_goal: "🎯 Objective: Save time and create value",
+                    s6_badge: "Step 6",
+                    s6_title: "Data & AI",
+                    s6_desc: "Data manipulation, Generative AI, AI APIs, Agents.",
+                    s6_goal: "🎯 Objective: Become an AI-augmented developer"
+                },
+                planning: {
+                    title: "🗓️ Training Schedule (1 Month)",
+                    subtitle: "As part of the mentorship, I propose this progressive 1-hour/day schedule.",
+                    m1: "⏱️ 1h / day",
+                    m2: "📚 4 modules x 15min",
+                    m3: "🎯 Continuous consolidation",
+                    w1_title: "📅 Week 1 – Solid Foundations & Discovery",
+                    w1_d1: "Variables, QA intro, API REST intro, CSV/JSON",
+                    w1_d2: "Conditions, Test types, HTTP Methods, JSON Python",
+                    w1_d3: "Loops, Bugs vs Errors, Status Codes, Simple script",
+                    w1_d4: "Functions, Test cases, Postman, Reading CSV",
+                    w1_d5: "Lists/Dicts, Manual vs Auto, JSON req/res, CLI Script",
+                    w2_title: "📅 Week 2 – Pro Python & QA",
+                    w2_d1: "Modules, Intro pytest, Public API Test, Intro Pandas",
+                    w2_d2: "Classes, Assertions, GET Test, Task automation",
+                    w2_d3: "Exceptions, Negative tests, POST Test, Data cleaning",
+                    w2_d4: "Virtualenv, Fixtures, PUT/DEL Test, Logs",
+                    w2_d5: "Best practices, Test architecture, Mocks, Visualization",
+                    w3_title: "📅 Week 3 – Backend & Security",
+                    w3_d1: "Typing, Regression tests, Intro FastAPI, Planned scripts",
+                    w3_d2: "Pydantic, Error tests, Routes & Schemas, API -> Data",
+                    w3_d3: "Environment, Coverage, JWT Auth, Security",
+                    w3_d4: "Refactoring, CI/CD Concept, Protected routes, Simple pipelines",
+                    w3_d5: "Clean Code, Test report, Auto Auth Test, Cron/Scheduler",
+                    w4_title: "📅 Week 4 – Data, Scraping & IA",
+                    w4_d1: "Regex, Perf Tests, Benchmark, Simple analysis",
+                    w4_d2: "Advanced files, Load tests, Pagination, Scraping (BS4)",
+                    w4_d3: "Async, Flaky tests, Async FastAPI, Scraping cleaning",
+                    w4_d4: "Multiprocessing, Test strategy, Security, OpenAI API",
+                    w4_d5: "Review, Final QA Project, Final API Project, Intelligent Auto"
+                },
+                projects: {
+                    title: "🧩 Capstone Projects",
+                    p1: "✅ API Testing Project",
+                    p2: "✅ FastAPI Auth API",
+                    p3: "✅ Automation Scripts",
+                    p4: "✅ Mini Data Project"
+                },
+                cta: {
+                    title: "Ready to accelerate your learning?",
+                    desc: "Join the mentorship program to follow this schedule step-by-step, with personalized guidance.",
+                    button: "Sign up for Mentorship"
+                },
+                day: "Day 1", day2: "Day 2", day3: "Day 3", day4: "Day 4", day5: "Day 5",
+                day6: "Day 6", day7: "Day 7", day8: "Day 8", day9: "Day 9", day10: "Day 10",
+                day11: "Day 11", day12: "Day 12", day13: "Day 13", day14: "Day 14", day15: "Day 15",
+                day16: "Day 16", day17: "Day 17", day18: "Day 18", day19: "Day 19", day20: "Day 20"
+            }
+        };
+
+        const I18n = {
+            lang: 'fr',
+            init: function () {
+                const savedLang = localStorage.getItem('lang');
+                if (savedLang) { this.lang = savedLang; }
+                this.updateUI();
+                document.getElementById('langToggle').addEventListener('click', () => {
+                    this.lang = this.lang === 'fr' ? 'en' : 'fr';
+                    localStorage.setItem('lang', this.lang);
+                    this.updateUI();
+                });
+            },
+            updateUI: function () {
+                document.getElementById('langToggle').innerText = this.lang.toUpperCase();
+
+                // Update all elements with data-i18n attribute
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    try {
+                        const value = key.split('.').reduce((obj, k) => obj && obj[k], translations[this.lang]);
+                        if (value) {
+                            // Handle HTML content safely if needed, or just text
+                            // For now using innerText/textContent mostly, but innerHTML for "Augmente" which has nested span
+                            if (key === 'why.fact' || key === 'header.title_highlight') {
+                                // Special case for elements that might contain HTML in translation or wrapping
+                                // Actually for 'why.fact', the translation has HTML tags.
+                                // Let's use innerHTML for everything to be safe with the 'augmente' span
+                                el.innerHTML = value;
+                            } else {
+                                el.textContent = value;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`Translation missing for key: ${key}`);
+                    }
+                });
+            }
+        };
+
+        // Initialize I18n
+        I18n.init();
+
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
 
