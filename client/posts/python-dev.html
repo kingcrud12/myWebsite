@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Devenir Développeur Python | Apprendre le Dev avec Yann</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["'Plus Jakarta Sans'", "sans-serif"],
+                        sans: ["'Inter'", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            /* Slightly lighter for cards inside glass */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+        }
+
+        .bg-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Accordion Styles */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased">
+    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between shadow-xl">
+            <div class="flex items-center gap-2">
+                <a href="../index.html"
+                    class="text-xl font-display font-extrabold tracking-tighter text-primary">YD.</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="../blog.html"
+                    class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span>
+                    <span>Retour au Blog</span>
+                </a>
+                <button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                    id="themeToggle">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative overflow-hidden min-h-screen pt-32 pb-20">
+        <!-- Background Blob -->
+        <div
+            class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
+        </div>
+
+        <article class="max-w-4xl mx-auto px-6">
+            <!-- Header -->
+            <header class="text-center mb-16 space-y-6">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-blue-500 font-semibold text-sm tracking-wide uppercase mb-4">
+                    <span class="material-symbols-outlined text-lg">code</span>
+                    Python Developer Path
+                </div>
+                <h1 class="text-4xl md:text-6xl font-display font-extrabold tracking-tight leading-tight">
+                    Devenir un <span class="text-primary">Développeur Python</span> à l'ère de l'IA
+                </h1>
+                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Un guide complet pour maîtriser le langage n°1 de l'IA, de l'automatisation et du backend.
+                </p>
+            </header>
+
+            <!-- 1. C'est quoi un dev python ? -->
+            <section class="mb-16">
+                <div class="glass p-8 rounded-3xl">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 font-display">
+                        <span class="text-3xl">🐍</span> C’est quoi un développeur Python ?
+                    </h2>
+                    <p class="text-slate-300 mb-6 text-lg leading-relaxed">
+                        Un développeur Python est un professionnel qui utilise le langage Python pour concevoir,
+                        automatiser, analyser ou tester des systèmes informatiques. Python est lisible, polyvalent et au
+                        cœur de l’IA et de la data.
+                    </p>
+                    <div class="bg-indigo-500/10 border border-indigo-500/20 p-6 rounded-2xl">
+                        <p class="font-semibold text-indigo-300 mb-2">Un développeur Python ne se limite pas à « coder »
+                            :</p>
+                        <p class="text-slate-400">👉 Il résout des problèmes, automatise des tâches, sécurise la qualité
+                            logicielle, exploite les données et collabore avec l’IA.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Sur quoi travailler ? (Grid) -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 font-display justify-center">
+                    <span class="text-3xl">🧠</span> Sur quoi peut travailler un développeur Python ?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-blue-400">
+                            <span class="material-symbols-outlined">api</span>
+                            <h3 class="font-bold text-lg">Backend & API</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Création d'API REST (FastAPI, Flask, Django),
+                            microservices, bases de données.</p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: API de login, e-commerce</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-green-400">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <h3 class="font-bold text-lg">QA & Testing</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Tests automatisés (pytest), performance, sécurité, CI/CD.
+                        </p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: tests de non-régression</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-orange-400">
+                            <span class="material-symbols-outlined">settings_suggest</span>
+                            <h3 class="font-bold text-lg">Automatisation</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Scripts, manipulation de fichiers (CSV, Excel), process
+                            métiers.</p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: script de traitement de fichiers</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-purple-400">
+                            <span class="material-symbols-outlined">travel_explore</span>
+                            <h3 class="font-bold text-lg">Web Scraping</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Extraction de données, veille concurrentielle, analyse de
+                            prix.</p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: suivi de prix concurrents</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-pink-400">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <h3 class="font-bold text-lg">Data & Analyse</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Pandas, Numpy, visualisation de données, data pipelines.
+                        </p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: analyse de ventes</p>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-3 text-cyan-400">
+                            <span class="material-symbols-outlined">psychology</span>
+                            <h3 class="font-bold text-lg">Intelligence Artificielle</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Machine Learning, LLM (OpenAI, LangChain), Agents IA.</p>
+                        <p class="text-xs text-slate-500 font-mono">Ex: chatbots, recommandation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Pourquoi Python et IA ? -->
+            <section class="mb-16">
+                <div class="glass p-8 rounded-3xl border-l-4 border-l-cyan-500">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 font-display">
+                        <span class="text-3xl">🤖</span> Pourquoi devenir dev Python à l’ère de l’IA ?
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <p class="text-lg font-semibold text-slate-200 mb-4">Contrairement à une idée reçue :</p>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center gap-3 text-red-400">
+                                    <span class="material-symbols-outlined">cancel</span>
+                                    L’IA ne remplace pas les développeurs
+                                </li>
+                                <li class="flex items-center gap-3 text-green-400">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    Elle <span class="font-bold underline decoration-green-500/50">augmente</span> les
+                                    développeurs Python
+                                </li>
+                            </ul>
+                            <div class="space-y-2 text-slate-400 text-sm">
+                                <p>🔹 Python est le langage n°1 de l’IA</p>
+                                <p>🔹 Tous les frameworks IA sont en Python</p>
+                                <p>🔹 Les agents IA s’orchestre en Python</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                            <h4 class="font-bold text-white mb-4 border-b border-slate-700 pb-2">Ce que l'IA ne fait pas
+                                seule :</h4>
+                            <ul class="space-y-2 text-slate-300 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Comprendre un
+                                    besoin métier</li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Concevoir une
+                                    architecture propre</li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Tester,
+                                    sécuriser, fiabiliser</li>
+                                <li class="flex items-start gap-2"><span class="text-primary">•</span> Automatiser
+                                    intelligemment</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-700 text-center font-bold text-cyan-400">
+                                👉 Python + IA = Développeur Augmenté
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Comment devenir dev python ? (Progression) -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold mb-10 text-center font-display">🚀 Comment devenir développeur Python ?
+                </h2>
+                <div class="space-y-4">
+                    <!-- Step 1 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-blue-500/20 text-blue-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">Étape
+                            1</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">Fondamentaux Python</h3>
+                            <p class="text-slate-400 mb-2">Syntaxe, Variables, fonctions, classes, Exceptions.</p>
+                            <p class="text-sm text-blue-300">🎯 Objectif : penser comme un développeur</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-indigo-500/20 text-indigo-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            Étape 2</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">Python Professionnel</h3>
+                            <p class="text-slate-400 mb-2">Environnements virtuels, Bonnes pratiques, Typage, Logs.</p>
+                            <p class="text-sm text-indigo-300">🎯 Objectif : écrire du code propre et maintenable</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-green-500/20 text-green-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            Étape 3</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">QA & Tests Automatisés</h3>
+                            <p class="text-slate-400 mb-2">pytest, Tests unitaires & API, CI/CD, Performance.</p>
+                            <p class="text-sm text-green-300">🎯 Objectif : garantir la qualité logicielle</p>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-purple-500/20 text-purple-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            Étape 4</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">APIs & Backend</h3>
+                            <p class="text-slate-400 mb-2">FastAPI, Authentification (JWT), Sécurité, Bases de données.
+                            </p>
+                            <p class="text-sm text-purple-300">🎯 Objectif : construire des systèmes réels</p>
+                        </div>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-orange-500/20 text-orange-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            Étape 5</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">Automatisation & Scraping</h3>
+                            <p class="text-slate-400 mb-2">Scripts métiers, Scraping responsable, Orchestration.</p>
+                            <p class="text-sm text-orange-300">🎯 Objectif : gagner du temps et créer de la valeur</p>
+                        </div>
+                    </div>
+                    <!-- Step 6 -->
+                    <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-cyan-500/20 text-cyan-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap">Étape
+                            6</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-white mb-2">Data & IA</h3>
+                            <p class="text-slate-400 mb-2">Manipulation de données, IA générative, APIs IA, Agents.</p>
+                            <p class="text-sm text-cyan-300">🎯 Objectif : devenir un développeur augmenté par l’IA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Le Planning (Accordion) -->
+            <section class="mb-16">
+                <div class="bg-slate-900/40 border border-slate-700 rounded-3xl p-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl font-bold font-display mb-4">🗓️ Planning de Formation (1 mois)</h2>
+                        <p class="text-slate-400 mb-6">Dans le cadre du mentorat, je te propose ce planning progressif
+                            d'1h par jour.</p>
+                        <div class="flex justify-center gap-6 text-sm text-slate-300">
+                            <span>⏱️ 1h / jour</span>
+                            <span>📚 4 modules x 15min</span>
+                            <span>🎯 Consolidations continue</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Semaine 1 -->
+                        <details class="group glass rounded-xl overflow-hidden open">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-primary">📅 Semaine 1 – Bases Solides & Découverte
+                                </h3>
+                                <span
+                                    class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div class="p-6 border-t border-slate-700/50">
+                                <div class="grid md:grid-cols-5 gap-4 text-sm">
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 1</div>
+                                        <div class="text-slate-400">Variables, QA intro, API REST intro, CSV/JSON</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 2</div>
+                                        <div class="text-slate-400">Conditions, Types de tests, HTTP Methods, JSON
+                                            Python</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 3</div>
+                                        <div class="text-slate-400">Boucles, Bugs vs Erreurs, Status Codes, Script
+                                            simple</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 4</div>
+                                        <div class="text-slate-400">Fonctions, Test cases, Postman, Lire CSV</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 5</div>
+                                        <div class="text-slate-400">Listes/Dicts, Manuels vs Auto, JSON req/res, CLI
+                                            Script</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Semaine 2 -->
+                        <details class="group glass rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-blue-400">📅 Semaine 2 – Python Pro & QA</h3>
+                                <span
+                                    class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div class="p-6 border-t border-slate-700/50">
+                                <div class="grid md:grid-cols-5 gap-4 text-sm">
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 6</div>
+                                        <div class="text-slate-400">Modules, Intro pytest, Test API publique, Intro
+                                            Pandas</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 7</div>
+                                        <div class="text-slate-400">Classes, Assertions, Test GET, Auto tâche répétitive
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 8</div>
+                                        <div class="text-slate-400">Exceptions, Tests négatifs, Test POST, Nettoyage
+                                            data</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 9</div>
+                                        <div class="text-slate-400">Virtualenv, Fixtures, Test PUT/DEL, Logs</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 10</div>
+                                        <div class="text-slate-400">Bonnes pratiques, Architecture tests, Mocks,
+                                            Visualisation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Semaine 3 -->
+                        <details class="group glass rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-purple-400">📅 Semaine 3 – Backend & Sécurité</h3>
+                                <span
+                                    class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div class="p-6 border-t border-slate-700/50">
+                                <div class="grid md:grid-cols-5 gap-4 text-sm">
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 11</div>
+                                        <div class="text-slate-400">Typing, Tests régression, Intro FastAPI, Scripts
+                                            planifiés</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 12</div>
+                                        <div class="text-slate-400">Pydantic, Tests erreurs, Routes & Schemas, API ->
+                                            Data</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 13</div>
+                                        <div class="text-slate-400">Environnement, Coverage, JWT Auth, Sécurisation
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 14</div>
+                                        <div class="text-slate-400">Refactoring, CI/CD Concept, Routes protégées,
+                                            Pipelines simples</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 15</div>
+                                        <div class="text-slate-400">Clean Code, Rapport tests, Test Auth Auto,
+                                            Cron/Scheduler</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Semaine 4 -->
+                        <details class="group glass rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-cyan-400">📅 Semaine 4 – Data, Scraping & IA</h3>
+                                <span
+                                    class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div class="p-6 border-t border-slate-700/50">
+                                <div class="grid md:grid-cols-5 gap-4 text-sm">
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 16</div>
+                                        <div class="text-slate-400">Regex, Tests Perf, Benchmark, Analyse simple</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 17</div>
+                                        <div class="text-slate-400">Fichiers avancés, Tests charge, Pagination, Scraping
+                                            (BS4)</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 18</div>
+                                        <div class="text-slate-400">Async, Flaky tests, Async FastAPI, Nettoyage
+                                            Scraping</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 19</div>
+                                        <div class="text-slate-400">Multiprocessing, Stratégie test, Sécurisation, API
+                                            OpenAI</div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-bold text-white mb-1">Jour 20</div>
+                                        <div class="text-slate-400">Révision, Projet Final QA, Projet Final API, Auto
+                                            Intelligente</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects & CTA -->
+            <section class="text-center pb-20">
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold mb-6 font-display">🧩 Projets Fil Rouge</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
+                            Projet Tests API</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
+                            API FastAPI Auth</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
+                            Scripts Automation</span>
+                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300">✅
+                            Mini projet Data</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-1 rounded-3xl inline-block">
+                    <div class="bg-slate-900 rounded-[22px] p-10 md:p-16 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display text-white">Prêt à accélérer ton
+                            apprentissage ?</h2>
+                        <p class="text-lg text-slate-400 mb-8 max-w-xl mx-auto">
+                            Rejoins le programme de mentorat pour suivre ce planning étape par étape, avec un
+                            accompagnement personnalisé.
+                        </p>
+
+                        <a href="https://yann-dipita.com/#activity"
+                            class="inline-flex items-center gap-2 bg-primary hover:bg-indigo-500 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/25 text-lg">
+                            <span>S'inscrire au Mentorat</span>
+                            <span class="material-symbols-outlined">rocket_launch</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-slate-800 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-slate-500 text-sm">© 2024 Yann Dipita. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check theme
+        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            html.classList.remove('dark');
+        } else {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+    </script>
+</body>
+
+</html>
