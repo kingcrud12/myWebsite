@@ -144,7 +144,7 @@
                         </h1>
                         <p class="text-2xl md:text-3xl text-slate-600 dark:text-slate-400 font-light max-w-xl"
                             data-i18n="hero.role">
-                            Développeur Web &amp; Mobile expert en solutions innovantes et performantes.
+                            Développeur Web &amp; passionné de solutions innovantes et performantes.
                         </p>
                     </div>
                     <div class="flex flex-wrap gap-4 pt-4">
@@ -257,6 +257,9 @@
                             class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors">Web</button>
                         <button onclick="filterProjects('mobile')" id="btn-mobile"
                             class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors">Mobile</button>
+                        <button onclick="filterProjects('library')" id="btn-library"
+                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors"
+                            data-i18n="projects.filter_library">Librairie</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
@@ -305,7 +308,7 @@
                         <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
                             <img alt="Reconcil Afro Beauty"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="reconcil afro beauty.png" />
+                                src="reconcil_afro_beauty.png" />
                             <div class="absolute top-4 left-4">
                                 <span
                                     class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
@@ -352,6 +355,89 @@
                                     class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">SwiftUI</span>
                                 <span
                                     class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">CoreData</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://course-platform-d669f.web.app/index.html" target="_blank"
+                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        data-category="web">
+                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                            <img alt="Course Platform"
+                                class="w-full h-full object-cover project-image transition-transform duration-700"
+                                src="course-platform.png" />
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-display font-bold mb-2">Course Platform</h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                    data-i18n="projects.course_desc">Plateforme de formation en ligne interactive.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">HTML/CSS</span>
+                                <span
+                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">JavaScript</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://pypi.org/project/selenium-ui-test-tool/" target="_blank"
+                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        data-category="library">
+                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                            <img alt="Selenium UI Test Tool"
+                                class="w-full h-full object-cover project-image transition-transform duration-700"
+                                src="selenium-tool.png" />
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
+                                    data-i18n="projects.filter_library">Librairie
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-display font-bold mb-2">Selenium UI Test Tool</h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                    data-i18n="projects.selenium_desc">Bibliothèque Python pour simplifier
+                                    l'automatisation des tests UI.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Python</span>
+                                <span
+                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Selenium</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://hashtag-impact.vercel.app/" target="_blank"
+                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        data-category="web">
+                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                            <img alt="Hashtag Impact"
+                                class="w-full h-full object-cover project-image transition-transform duration-700"
+                                src="hashtag-impact.png" />
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-display font-bold mb-2">Hashtag Impact</h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                    data-i18n="projects.hashtag_impact_desc">Plateforme de valorisation des biens
+                                    immobiliers vacants.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Next.js</span>
+                                <span
+                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">TailwindCSS</span>
                             </div>
                         </div>
                     </a>
@@ -689,7 +775,7 @@
                 },
                 hero: {
                     greeting: "Bonjour, je suis",
-                    role: "Développeur Web & Mobile expert en solutions innovantes et performantes.",
+                    role: "Développeur Web & Mobile passionné de solutions innovantes et performantes.",
                     button_projects: "Voir mes projets",
                     button_contact: "Me contacter"
                 },
@@ -704,8 +790,12 @@
                     filter_all: "Tous",
                     featured: "Projet du moment",
                     pmt_desc: "Une plateforme SaaS complète pour la gestion de projets agile, permettant aux équipes de collaborer en temps réel avec des outils de visualisation avancés.",
-                    reconcil_desc: "Boutique de ligne produits de soins capillaires.",
-                    easytask_desc: "Une application iOS intuitive pour gérer vos tâches quotidiennes et vos échéances importantes."
+                    reconcil_desc: "Boutique en ligne produits de soins capillaires.",
+                    easytask_desc: "Une application iOS intuitive pour gérer vos tâches quotidiennes et vos échéances importantes.",
+                    course_desc: "Plateforme de formation en ligne interactive.",
+                    selenium_desc: "Bibliothèque Python pour simplifier l'automatisation des tests UI.",
+                    hashtag_impact_desc: "Plateforme de valorisation des biens immobiliers vacants.",
+                    filter_library: "Librairie"
                 },
                 blog_preview: {
                     badge: "Blog & Ressources",
@@ -764,7 +854,7 @@
                 },
                 hero: {
                     greeting: "Hello, I am",
-                    role: "Web & Mobile Developer expert in innovative and high-performance solutions.",
+                    role: "Web & Mobile Developer who like innovative and high-performance solutions.",
                     button_projects: "View my projects",
                     button_contact: "Contact me"
                 },
@@ -780,7 +870,11 @@
                     featured: "Featured Project",
                     pmt_desc: "A complete SaaS platform for agile project management, allowing teams to collaborate in real-time with advanced visualization tools.",
                     reconcil_desc: "Online store for hair care products.",
-                    easytask_desc: "An intuitive iOS application to manage your daily tasks and important deadlines."
+                    easytask_desc: "An intuitive iOS application to manage your daily tasks and important deadlines.",
+                    course_desc: "Interactive online training platform.",
+                    selenium_desc: "Python library to simplify UI test automation.",
+                    hashtag_impact_desc: "Platform for evaluating vacant real estate properties.",
+                    filter_library: "Library"
                 },
                 blog_preview: {
                     badge: "Blog & Resources",
