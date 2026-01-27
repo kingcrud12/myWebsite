@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com data:; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv; img-src 'self' data: https:; connect-src 'self' https://formspree.io;" />
     <meta name="google-site-verification" content="XY6pclnXX3MzOlSv71C70rKEzqj82_XOp9xFw3LqAIA" />
     <title>Yann Dipita | Développeur Web &amp; Mobile</title>
     <meta name="description"
@@ -38,38 +40,76 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#6366f1",
-                        "background-light": "#f8fafc",
-                        "background-dark": "#0f172a",
+                        primary: "#000000", // Pure Black
+                        secondary: "#333333", // Dark Grey
+                        "background-light": "#ffffff",
+                        "background-dark": "#000000", // Pure Black
+                        "surface-dark": "#000000",
                     },
                     fontFamily: {
                         display: ["'Plus Jakarta Sans'", "sans-serif"],
                         sans: ["'Inter'", "sans-serif"],
                     },
                     borderRadius: {
-                        DEFAULT: "0.75rem",
+                        DEFAULT: "0.5rem",
                     },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'reverse-spin': 'spin 15s linear infinite reverse',
+                    }
                 },
             },
         };
     </script>
     <style>
+        /* Minimalist Glass/Border */
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .dark .glass {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .bg-glow {
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        /* Clean Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #555;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+        /* Selection */
+        ::selection {
+            background: #ffffff;
+            color: black;
+        }
+
+        .dark ::selection {
+            background: #ffffff;
+            color: black;
         }
 
         .project-card:hover .project-image {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         html {
@@ -90,13 +130,23 @@
         }
 
         .calendar-day:hover:not(.disabled) {
-            background-color: rgba(99, 102, 241, 0.1);
-            color: #6366f1;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .dark .calendar-day:hover:not(.disabled) {
+            background-color: #ffffff;
+            color: #000000;
         }
 
         .calendar-day.selected {
-            background-color: #6366f1;
+            background-color: #000000;
             color: white;
+        }
+
+        .dark .calendar-day.selected {
+            background-color: #ffffff;
+            color: black;
         }
 
         .calendar-day.disabled {
@@ -105,104 +155,118 @@
         }
 
         .calendar-day.today {
-            border: 1px solid #6366f1;
+            border: 1px solid #000000;
+        }
+
+        .dark .calendar-day.today {
+            border: 1px solid #ffffff;
         }
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased">
-    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
-        <div class="glass px-6 py-4 rounded-full flex items-center justify-between shadow-xl">
-            <div class="flex items-center gap-2">
-                <span class="text-xl font-display font-extrabold tracking-tighter text-primary">YD.</span>
-            </div>
-            <div class="hidden md:flex items-center gap-8">
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#home"
-                    data-i18n="nav.home">Accueil</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#about"
-                    data-i18n="nav.about">À Propos</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#projects"
-                    data-i18n="nav.projects">Projets</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#activity"
-                    data-i18n="nav.activity">Activité</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1"
-                    href="#virtuallab">
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                    </span>
-                    <span data-i18n="nav.live">Live</span>
+<body class="bg-background-light dark:bg-black text-black dark:text-white font-sans antialiased">
+    <div class="fixed top-0 left-0 w-full h-full bg-white dark:bg-black -z-10 transition-colors duration-300">
+        <!-- Monochrome background -->
+    </div>
+
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Inner Nav -->
+            <div class="glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-sm">
+                <a class="text-2xl font-display font-black tracking-tighter text-black dark:text-white group" href="#">
+                    YD<span
+                        class="text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors">.</span>
                 </a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#contact"
-                    data-i18n="nav.contact">Contact</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <button
-                    class="px-3 py-1.5 rounded-full text-xs font-bold glass hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors uppercase"
-                    id="langToggle">
-                    FR
-                </button>
-                <button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-                    id="themeToggle">
-                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-                </button>
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors" href="#home"
+                        data-i18n="nav.home">Accueil</a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
+                        href="#about" data-i18n="nav.about">À Propos</a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
+                        href="#projects" data-i18n="nav.projects">Projets</a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
+                        href="#activity" data-i18n="nav.activity">Activité</a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors flex items-center gap-1"
+                        href="#virtuallab">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-black dark:bg-white opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-black dark:bg-white"></span>
+                        </span>
+                        <span data-i18n="nav.live">Live</span>
+                    </a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
+                        href="#contact" data-i18n="nav.contact">Contact</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="px-3 py-1.5 rounded-full text-xs font-bold glass hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors uppercase border border-black/10 dark:border-white/10"
+                        id="langToggle">
+                        FR
+                    </button>
+                    <button class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
+                        id="themeToggle">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
     <main class="relative overflow-hidden">
-        <div
-            class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-purple-600 opacity-20 blur-[100px] rounded-full -translate-x-1/2 translate-y-1/2">
-        </div>
-        <section class="min-h-screen flex pt-40 md:pt-48 px-6" id="home">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1 space-y-8">
-                    <div class="space-y-4">
-                        <span
-                            class="inline-block px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase"
-                            data-i18n="hero.greeting">
-                            Bonjour, je suis
-                        </span>
-                        <h1 class="text-6xl md:text-8xl font-display font-extrabold tracking-tight">
-                            Yann <span class="text-primary">Dipita</span>
-                        </h1>
-                        <p class="text-2xl md:text-3xl text-slate-600 dark:text-slate-400 font-light max-w-xl"
-                            data-i18n="hero.role">
-                            Développeur Web &amp; passionné de solutions innovantes et performantes.
-                        </p>
-                    </div>
+        <section class="min-h-screen flex items-center relative pt-20" id="home">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    <span
+                        class="inline-block px-4 py-1.5 rounded-full glass text-black dark:text-white font-semibold text-sm tracking-wide uppercase border border-black/10 dark:border-white/10"
+                        data-i18n="hero.greeting">
+                        Bonjour, je suis
+                    </span>
+                    <h1 class="text-6xl md:text-8xl font-display font-black tracking-tight leading-[1.1]">
+                        Yann
+                        <br />
+                        <span class="text-black dark:text-white">Dipita</span>
+                    </h1>
+                    <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-lg leading-relaxed"
+                        data-i18n="hero.role">
+                        Développeur Web & Mobile passionné de solutions innovantes et performantes.
+                    </p>
                     <div class="flex flex-wrap gap-4 pt-4">
-                        <a class="px-8 py-4 bg-primary text-white font-bold rounded-2xl shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all flex items-center gap-2"
+                        <a class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center gap-2"
                             href="#projects">
                             <span data-i18n="hero.button_projects">Voir mes projets</span>
-                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </a>
-                        <a class="px-8 py-4 glass text-slate-900 dark:text-white font-bold rounded-2xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all"
+                        <a class="px-8 py-4 glass hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full font-bold transition-all flex items-center gap-2 border border-black/10 dark:border-white/10 text-black dark:text-white"
                             href="#contact" data-i18n="hero.button_contact">
                             Me contacter
                         </a>
                     </div>
                 </div>
-                <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
-                    <div class="relative group">
+                <div
+                    class="relative hidden lg:flex justify-center items-center animate-in fade-in slide-in-from-right-8 duration-1000 delay-200">
+                    <!-- Circular Profile Image with Rings (No Colors) -->
+                    <div class="relative w-96 h-96">
+                        <!-- Rotating Rings -->
                         <div
-                            class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-full blur opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-200">
+                            class="absolute inset-0 rounded-full border border-black/5 dark:border-white/5 animate-spin-slow">
                         </div>
                         <div
-                            class="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
-                            <img alt="Yann Dipita Profile"
-                                class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+                            class="absolute inset-4 rounded-full border border-black/5 dark:border-white/5 animate-reverse-spin">
+                        </div>
+
+                        <!-- Main Image Container -->
+                        <div
+                            class="absolute inset-8 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-black bg-neutral-100 dark:bg-neutral-900">
+                            <img alt="Yann Dipita"
+                                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105"
                                 src="profile.jpg" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="py-24 px-6 bg-slate-50/50 dark:bg-slate-900/50" id="about">
+        <section class="py-24 px-6 bg-neutral-50/50 dark:bg-neutral-900/50" id="about">
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div class="relative">
@@ -215,11 +279,11 @@
                             class="absolute -bottom-8 -right-8 glass p-6 rounded-2xl shadow-xl hidden md:block border-primary/20">
                             <div class="flex items-center gap-4">
                                 <div class="bg-primary/20 p-3 rounded-full">
-                                    <span class="material-symbols-outlined text-primary">verified</span>
+                                    <span class="material-symbols-outlined text-black dark:text-white">verified</span>
                                 </div>
                                 <div>
                                     <p class="text-sm font-bold">5+ Années</p>
-                                    <p class="text-xs text-slate-500">D'expérience</p>
+                                    <p class="text-xs text-neutral-500">D'expérience</p>
                                 </div>
                             </div>
                         </div>
@@ -227,8 +291,8 @@
                     <div class="space-y-8">
                         <div class="space-y-4">
                             <h2 class="text-4xl font-display font-extrabold">Expertise &amp; <span
-                                    class="text-primary">Passion</span></h2>
-                            <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
+                                    class="text-neutral-900 dark:text-white">Passion</span></h2>
+                            <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed"
                                 data-i18n="about.description">
                                 Je conçois des interfaces modernes et des architectures robustes pour le web et le
                                 mobile. Spécialisé dans les écosystèmes JavaScript modernes, j'accompagne mes clients de
@@ -237,29 +301,29 @@
                             </p>
                         </div>
                         <div class="space-y-6">
-                            <h3 class="text-sm font-bold uppercase tracking-widest text-slate-500"
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-500"
                                 data-i18n="about.technologies">Technologies
                                 maîtrisées</h3>
                             <div class="flex flex-wrap gap-3">
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">React
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">React
                                     / Next.js</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">React
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">React
                                     Native</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">Node.js</span>
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">Node.js</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">TypeScript</span>
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">TypeScript</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">Tailwind
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">Tailwind
                                     CSS</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">PostgreSQL</span>
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">PostgreSQL</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">Automation</span>
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">Automation</span>
                                 <span
-                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-slate-200 dark:border-slate-800">Docker</span>
+                                    class="px-4 py-2 glass rounded-xl text-sm font-medium hover:bg-primary hover:text-white transition-all cursor-default border-neutral-200 dark:border-neutral-800">Docker</span>
                             </div>
                         </div>
                     </div>
@@ -271,31 +335,32 @@
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div class="space-y-4">
                         <h2 class="text-4xl font-display font-extrabold"><span
-                                data-i18n="projects.title_start">Projets</span> <span class="text-primary"
-                                data-i18n="projects.title_end">Réalisés</span></h2>
-                        <p class="text-slate-600 dark:text-slate-400 max-w-md" data-i18n="projects.subtitle">Une
+                                data-i18n="projects.title_start">Projets</span> <span
+                                class="text-neutral-900 dark:text-white" data-i18n="projects.title_end">Réalisés</span>
+                        </h2>
+                        <p class="text-neutral-600 dark:text-neutral-400 max-w-md" data-i18n="projects.subtitle">Une
                             sélection de mes travaux récents en
                             développement web et mobile.</p>
                     </div>
                     <div class="flex gap-4">
                         <button onclick="filterProjects('all')" id="btn-all"
-                            class="filter-btn px-6 py-2 rounded-full bg-primary text-white font-medium transition-colors"
+                            class="filter-btn px-6 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium transition-all shadow-lg hover:scale-105"
                             data-i18n="projects.filter_all">Tous</button>
                         <button onclick="filterProjects('web')" id="btn-web"
-                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors">Web</button>
+                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-neutral-200 dark:hover:bg-neutral-800 font-medium transition-colors">Web</button>
                         <button onclick="filterProjects('mobile')" id="btn-mobile"
-                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors">Mobile</button>
+                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-neutral-200 dark:hover:bg-neutral-800 font-medium transition-colors">Mobile</button>
                         <button onclick="filterProjects('library')" id="btn-library"
-                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-slate-200 dark:hover:bg-slate-800 font-medium transition-colors"
+                            class="filter-btn px-6 py-2 rounded-full glass hover:bg-neutral-200 dark:hover:bg-neutral-800 font-medium transition-colors"
                             data-i18n="projects.filter_library">Librairie</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-                    <div class="project-item group relative md:col-span-2 lg:col-span-2 overflow-hidden rounded-[2rem] glass project-card border-primary/30"
+                    <div class="project-item group relative md:col-span-2 lg:col-span-2 overflow-hidden rounded-[2rem] glass project-card border-black/20 dark:border-white/20"
                         data-category="saas">
                         <div class="absolute top-6 left-6 z-10">
                             <span
-                                class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
+                                class="px-3 py-1 bg-black dark:bg-white text-white dark:text-black text-[10px] font-bold uppercase tracking-widest rounded-full"
                                 data-i18n="projects.featured">Projet
                                 du moment</span>
                         </div>
@@ -303,11 +368,12 @@
                             <div class="p-8 flex flex-col justify-between h-full space-y-8">
                                 <div>
                                     <div class="flex items-center gap-2 mb-4">
-                                        <span class="text-xs font-bold text-primary uppercase tracking-wider">Web
+                                        <span
+                                            class="text-xs font-bold text-black dark:text-white uppercase tracking-wider">Web
                                             Platform</span>
                                     </div>
                                     <h3 class="text-3xl font-display font-bold mb-4">PMT - Project Management Tool</h3>
-                                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed"
+                                    <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed"
                                         data-i18n="projects.pmt_desc">
                                         Une plateforme SaaS complète pour la gestion de projets agile, permettant aux
                                         équipes de collaborer en temps réel avec des outils de visualisation avancés.
@@ -315,114 +381,114 @@
                                 </div>
                                 <div class="flex flex-wrap gap-2">
                                     <span
-                                        class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Next.js</span>
+                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Next.js</span>
                                     <span
-                                        class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">PostgreSQL</span>
+                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">PostgreSQL</span>
                                     <span
-                                        class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Pusher</span>
+                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Pusher</span>
                                 </div>
                             </div>
-                            <div class="bg-slate-200 dark:bg-slate-800 relative overflow-hidden min-h-[300px]">
+                            <div class="bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden min-h-[300px]">
                                 <img alt="PMT Dashboard"
                                     class="absolute inset-0 w-full h-full object-cover project-image transition-transform duration-700"
                                     src="pmt.png" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent"></div>
                             </div>
                         </div>
                     </div>
                     <a href="https://reconcil-afro-beauty.com/" target="_blank"
                         class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="web">
-                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Reconcil Afro Beauty"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
                                 src="reconcil_afro_beauty.png" />
                             <div class="absolute top-4 left-4">
                                 <span
-                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
+                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
                                 </span>
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-xl font-display font-bold mb-2">Reconcil Beauty Afro</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
                                     data-i18n="projects.reconcil_desc">Boutique de ligne produits
                                     de soins capillaires.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">React
+                                <span class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">React
                                     Native</span>
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Firebase</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Firebase</span>
                             </div>
                         </div>
                     </a>
                     <a href="https://apps.apple.com/fr/app/easy-task/id6756175109" target="_blank"
                         class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="mobile">
-                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Easy Task"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
                                 src="easytask.png" />
                             <div class="absolute top-4 left-4">
                                 <span
-                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Mobile
+                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Mobile
                                 </span>
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-xl font-display font-bold mb-2">Easy Task</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
                                     data-i18n="projects.easytask_desc">Une application iOS intuitive
                                     pour gérer vos tâches quotidiennes et vos échéances importantes.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">SwiftUI</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">SwiftUI</span>
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">CoreData</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">CoreData</span>
                             </div>
                         </div>
                     </a>
                     <a href="https://course-platform-d669f.web.app/index.html" target="_blank"
                         class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="web">
-                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Course Platform"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
                                 src="course-platform.png" />
                             <div class="absolute top-4 left-4">
                                 <span
-                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
+                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
                                 </span>
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-xl font-display font-bold mb-2">Course Platform</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
                                     data-i18n="projects.course_desc">Plateforme de formation en ligne interactive.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">HTML/CSS</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">HTML/CSS</span>
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">JavaScript</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">JavaScript</span>
                             </div>
                         </div>
                     </a>
                     <a href="https://pypi.org/project/selenium-ui-test-tool/" target="_blank"
                         class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="library">
-                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Selenium UI Test Tool"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
                                 src="selenium-tool.png" />
                             <div class="absolute top-4 left-4">
                                 <span
-                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
+                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
                                     data-i18n="projects.filter_library">Librairie
                                 </span>
                             </div>
@@ -430,42 +496,43 @@
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-xl font-display font-bold mb-2">Selenium UI Test Tool</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
                                     data-i18n="projects.selenium_desc">Bibliothèque Python pour simplifier
                                     l'automatisation des tests UI.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Python</span>
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Selenium</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Python</span>
+                                <span
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Selenium</span>
                             </div>
                         </div>
                     </a>
                     <a href="https://hashtag-impact.vercel.app/" target="_blank"
                         class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="web">
-                        <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Hashtag Impact"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
                                 src="hashtag-impact.png" />
                             <div class="absolute top-4 left-4">
                                 <span
-                                    class="px-3 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
+                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
                                 </span>
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-xl font-display font-bold mb-2">Hashtag Impact</h3>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6"
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
                                     data-i18n="projects.hashtag_impact_desc">Plateforme de valorisation des biens
                                     immobiliers vacants.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Next.js</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Next.js</span>
                                 <span
-                                    class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">TailwindCSS</span>
+                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">TailwindCSS</span>
                             </div>
                         </div>
                     </a>
@@ -473,19 +540,19 @@
             </div>
             </div>
         </section>
-        <section class="py-24 px-6 bg-slate-50 dark:bg-slate-900/50" id="blog-preview">
+        <section class="py-24 px-6 bg-neutral-50 dark:bg-neutral-900/50" id="blog-preview">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16 space-y-4">
                     <span
-                        class="inline-block px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase"
+                        class="inline-block px-4 py-1.5 rounded-full glass text-black dark:text-white font-semibold text-sm tracking-wide uppercase"
                         data-i18n="blog_preview.badge">
                         Blog & Ressources
                     </span>
                     <h2 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">
-                        <span data-i18n="blog_preview.title_start">Apprendre le Dev</span> <span class="text-primary"
-                            data-i18n="blog_preview.title_end">avec Yann</span>
+                        <span data-i18n="blog_preview.title_start">Apprendre le Dev</span> <span
+                            class="text-neutral-900 dark:text-white" data-i18n="blog_preview.title_end">avec Yann</span>
                     </h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                    <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto"
                         data-i18n="blog_preview.description">
                         Retrouvez mes articles, tutoriels et guides pour progresser dans votre carrière de développeur.
                     </p>
@@ -504,11 +571,8 @@
                 </div>
             </div>
         </section>
-        <section class="py-24 px-6 relative overflow-hidden" id="activity">
-            <!-- Background elements -->
-            <div
-                class="absolute top-1/2 left-0 -z-10 w-[300px] h-[300px] bg-blue-500 opacity-10 blur-[100px] rounded-full -translate-y-1/2">
-            </div>
+        <section class="py-24 px-6 relative overflow-visible" id="activity">
+            <!-- Background elements removed -->
 
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -516,14 +580,14 @@
                     <div class="space-y-8">
                         <div class="space-y-4">
                             <span
-                                class="inline-block px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase"
+                                class="inline-block px-4 py-1.5 rounded-full glass text-black dark:text-white font-semibold text-sm tracking-wide uppercase border border-black/10 dark:border-white/10"
                                 data-i18n="activity.badge">
                                 Mentorat & Formation
                             </span>
                             <h2 class="text-4xl font-display font-extrabold"><span data-i18n="activity.title_start">Vous
-                                    pouvez aussi</span> <br /><span class="text-primary"
+                                    pouvez aussi</span> <br /><span class="text-black dark:text-white"
                                     data-i18n="activity.title_end">Bénéficier du mentorat mis en place pour </span></h2>
-                            <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
+                            <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed"
                                 data-i18n="activity.description">
                                 Accélérez votre apprentissage avec des sessions privées. Que vous soyez débutant ou
                                 avancé, découvrez comment l'IA peut décupler votre productivité et vous aider à coder
@@ -532,43 +596,43 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="glass p-6 rounded-2xl border border-transparent hover:border-primary/30 transition-all cursor-pointer group"
+                            <div class="glass p-6 rounded-2xl border border-transparent hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group"
                                 onclick="Mentorship.selectType('1h', this)">
                                 <div class="flex justify-between items-start mb-4">
                                     <span class="text-3xl">🚀</span>
                                     <div
-                                        class="w-6 h-6 rounded-full border-2 border-slate-300 dark:border-slate-600 group-hover:border-primary flex items-center justify-center radio-circle">
-                                        <div class="w-3 h-3 rounded-full bg-primary hidden"></div>
+                                        class="w-6 h-6 rounded-full border-2 border-neutral-300 dark:border-neutral-600 group-hover:border-black dark:group-hover:border-white flex items-center justify-center radio-circle">
+                                        <div class="w-3 h-3 rounded-full bg-black dark:bg-white hidden"></div>
                                     </div>
                                 </div>
                                 <h3 class="font-bold text-lg mb-1" data-i18n="activity.card1_title">Session Découverte
                                 </h3>
-                                <p class="text-sm text-slate-500 mb-4" data-i18n="activity.card1_desc">1 heure de
+                                <p class="text-sm text-neutral-500 mb-4" data-i18n="activity.card1_desc">1 heure de
                                     coaching intensif</p>
-                                <p class="font-bold text-primary">60€</p>
+                                <p class="font-bold text-black dark:text-white">60€</p>
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/60 backdrop-blur-sm rounded-2xl">
-                                    <p class="text-white text-xs font-bold px-4 text-center"
+                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/90 dark:bg-white/90 backdrop-blur-sm rounded-2xl">
+                                    <p class="text-white dark:text-black text-xs font-bold px-4 text-center"
                                         data-i18n="activity.card_tooltip">Aucun débit
                                         immédiat.<br>Paiement en fin de session.</p>
                                 </div>
                             </div>
-                            <div class="glass p-6 rounded-2xl border border-transparent hover:border-primary/30 transition-all cursor-pointer group"
+                            <div class="glass p-6 rounded-2xl border border-transparent hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group"
                                 onclick="Mentorship.selectType('2h', this)">
                                 <div class="flex justify-between items-start mb-4">
                                     <span class="text-3xl">⚡️</span>
                                     <div
-                                        class="w-6 h-6 rounded-full border-2 border-slate-300 dark:border-slate-600 group-hover:border-primary flex items-center justify-center radio-circle">
-                                        <div class="w-3 h-3 rounded-full bg-primary hidden"></div>
+                                        class="w-6 h-6 rounded-full border-2 border-neutral-300 dark:border-neutral-600 group-hover:border-black dark:group-hover:border-white flex items-center justify-center radio-circle">
+                                        <div class="w-3 h-3 rounded-full bg-black dark:bg-white hidden"></div>
                                     </div>
                                 </div>
                                 <h3 class="font-bold text-lg mb-1" data-i18n="activity.card2_title">Deep Dive</h3>
-                                <p class="text-sm text-slate-500 mb-4" data-i18n="activity.card2_desc">2 heures
+                                <p class="text-sm text-neutral-500 mb-4" data-i18n="activity.card2_desc">2 heures
                                     d'immersion totale</p>
-                                <p class="font-bold text-primary">100€</p>
+                                <p class="font-bold text-black dark:text-white">100€</p>
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/60 backdrop-blur-sm rounded-2xl">
-                                    <p class="text-white text-xs font-bold px-4 text-center"
+                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/90 dark:bg-white/90 backdrop-blur-sm rounded-2xl">
+                                    <p class="text-white dark:text-black text-xs font-bold px-4 text-center"
                                         data-i18n="activity.card_tooltip">Aucun débit
                                         immédiat.<br>Paiement en fin de session.</p>
                                 </div>
@@ -577,22 +641,22 @@
 
                         <div class="glass p-6 rounded-2xl">
                             <h4 class="font-bold mb-4 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary">check_circle</span>
+                                <span class="material-symbols-outlined text-black dark:text-white">check_circle</span>
                                 <span data-i18n="activity.learn_title">Ce que vous apprendrez</span>
                             </h4>
-                            <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
                                 <li class="flex items-center gap-3">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
                                     <span data-i18n="activity.learn_1">Maîtriser les outils d'IA pour le code (Copilot,
                                         ChatGPT, Claude)</span>
                                 </li>
                                 <li class="flex items-center gap-3">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
                                     <span data-i18n="activity.learn_2">Architecture logicielle moderne & Best
                                         Practices</span>
                                 </li>
                                 <li class="flex items-center gap-3">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
                                     <span data-i18n="activity.learn_3">Review de code et optimisation de vos
                                         projets</span>
                                 </li>
@@ -601,7 +665,7 @@
                     </div>
 
                     <!-- Right Booking -->
-                    <div class="glass p-8 rounded-[2.5rem] shadow-2xl relative">
+                    <div class="glass p-8 rounded-[2.5rem] shadow-2xl relative overflow-visible">
                         <h3 class="font-display font-bold text-2xl mb-6" data-i18n="activity.book_title">Réserver un
                             créneau</h3>
 
@@ -615,18 +679,18 @@
                             <div id="step-date" class="space-y-4">
                                 <div class="flex justify-between items-center mb-4">
                                     <button type="button"
-                                        class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                                        class="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
                                         onclick="Mentorship.changeMonth(-1)">
                                         <span class="material-symbols-outlined text-sm">arrow_back_ios_new</span>
                                     </button>
-                                    <span class="font-bold text-lg capitalize" id="currentMonthYear"></span>
+                                    <span class="font-bold text-lg capitalize" id="currentMonth"></span>
                                     <button type="button"
-                                        class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                                        class="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
                                         onclick="Mentorship.changeMonth(1)">
                                         <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
                                     </button>
                                 </div>
-                                <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 mb-2">
+                                <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-neutral-400 mb-2">
                                     <div>L</div>
                                     <div>M</div>
                                     <div>M</div>
@@ -642,8 +706,8 @@
 
                             <!-- Step 2: Time -->
                             <div id="step-time"
-                                class="hidden space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700 animate-in fade-in slide-in-from-top-4">
-                                <h4 class="font-bold text-xs uppercase tracking-widest text-slate-500"
+                                class="hidden space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-700 animate-in fade-in slide-in-from-top-4">
+                                <h4 class="font-bold text-xs uppercase tracking-widest text-neutral-500"
                                     data-i18n="activity.available_times">Horaires
                                     disponibles</h4>
                                 <div class="grid grid-cols-3 gap-2" id="timeSlots">
@@ -653,22 +717,22 @@
 
                             <!-- Step 3: Info & Submit -->
                             <div id="step-info"
-                                class="hidden space-y-6 pt-4 border-t border-slate-200 dark:border-slate-700 animate-in fade-in slide-in-from-top-4">
+                                class="hidden space-y-6 pt-4 border-t border-neutral-200 dark:border-neutral-700 animate-in fade-in slide-in-from-top-4">
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1"
+                                    <label class="text-xs font-bold uppercase tracking-widest text-neutral-500 ml-1"
                                         data-i18n="activity.your_details">Vos
                                         coordonnées</label>
                                     <div class="grid grid-cols-1 gap-4">
                                         <input
-                                            class="w-full bg-white dark:bg-slate-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-primary placeholder:text-slate-400"
+                                            class="w-full bg-white dark:bg-neutral-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-neutral-400"
                                             type="text" name="name" required placeholder="Votre Nom">
                                         <input
-                                            class="w-full bg-white dark:bg-slate-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-primary placeholder:text-slate-400"
+                                            class="w-full bg-white dark:bg-neutral-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-neutral-400"
                                             type="email" name="email" required placeholder="votre@email.com">
                                     </div>
                                 </div>
                                 <button type="submit" id="bookingSubmitBtn"
-                                    class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-lg hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    class="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <span data-i18n="activity.confirm_booking">Confirmer la réservation</span>
                                     <span class="material-symbols-outlined text-sm">check</span>
                                 </button>
@@ -683,15 +747,16 @@
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16 space-y-4">
                     <span
-                        class="inline-block px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase"
+                        class="inline-block px-4 py-1.5 rounded-full glass text-black dark:text-white font-semibold text-sm tracking-wide uppercase border border-black/10 dark:border-white/10"
                         data-i18n="virtuallab.badge">
                         Live Streaming
                     </span>
                     <h2 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">
-                        <span data-i18n="virtuallab.title_start">Le</span> <span class="text-primary"
-                            data-i18n="virtuallab.title_end">Laboratoire Virtuel</span>
+                        <span data-i18n="virtuallab.title_start">Le</span> <span
+                            class="text-neutral-900 dark:text-white" data-i18n="virtuallab.title_end">Laboratoire
+                            Virtuel</span>
                     </h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                    <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto"
                         data-i18n="virtuallab.description">
                         Rejoignez-moi en direct pour des sessions de code, des expériences et des échanges. Partage
                         d'écran et chat en temps réel.
@@ -700,8 +765,8 @@
                     <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 h-[600px] lg:h-[700px]">
                         <!-- Video Player -->
                         <div
-                            class="lg:col-span-3 h-full rounded-[2rem] overflow-hidden bg-black relative shadow-2xl glass border-primary/20">
-                            <div class="absolute inset-0 flex items-center justify-center bg-slate-900/50 z-0">
+                            class="lg:col-span-3 h-full rounded-[2rem] overflow-hidden bg-black relative shadow-2xl glass border-white/20">
+                            <div class="absolute inset-0 flex items-center justify-center bg-neutral-900/50 z-0">
                                 <p class="text-white/50 animate-pulse">Chargement du stream...</p>
                             </div>
                             <iframe
@@ -713,7 +778,7 @@
 
                         <!-- Chat -->
                         <div
-                            class="lg:col-span-1 h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 relative z-20">
+                            class="lg:col-span-1 h-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 relative z-20">
                             <iframe
                                 src="https://www.twitch.tv/embed/elikia6apples/chat?parent=yann-dipita.com&parent=www.yann-dipita.com&parent=kingcrud12.github.io&parent=localhost&parent=127.0.0.1"
                                 frameborder="0" scrolling="no" height="100%" width="100%" class="w-full h-full">
@@ -724,126 +789,132 @@
                     <div class="mt-6 flex justify-between items-center px-4 max-w-7xl mx-auto">
                         <div class="flex items-center gap-3">
                             <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-                            <span class="text-sm font-bold text-slate-500 uppercase tracking-wider">Status: <span
-                                    class="text-slate-900 dark:text-white">Offline (Check Schedule)</span></span>
+                            <span class="text-sm font-bold text-neutral-500 uppercase tracking-wider">Status: <span
+                                    class="text-neutral-900 dark:text-white">Offline (Check Schedule)</span></span>
                         </div>
                         <a href="https://www.twitch.tv/elikia6apples" target="_blank"
-                            class="text-primary font-bold hover:underline text-sm flex items-center gap-1">
+                            class="text-black dark:text-white font-bold hover:underline text-sm flex items-center gap-1">
                             <span>Voir sur Twitch</span>
                             <span class="material-symbols-outlined text-sm">open_in_new</span>
                         </a>
                     </div>
                 </div>
         </section>
-        <section class="py-24 px-6 bg-slate-50 dark:bg-slate-900/30" id="contact">
+        <section class="py-24 px-6 bg-neutral-50 dark:bg-neutral-900/30" id="contact">
             <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <div class="space-y-8">
-                        <div class="space-y-4">
-                            <h2 class="text-4xl font-display font-extrabold"><span
-                                    data-i18n="contact.title_start">Parlons de votre</span> <span class="text-primary"
-                                    data-i18n="contact.title_end">Projet</span></h2>
-                            <p class="text-slate-600 dark:text-slate-400 text-lg" data-i18n="contact.description">Vous
-                                avez une idée ou un besoin
-                                spécifique ? Je suis disponible pour discuter de vos futurs défis techniques.</p>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <div class="space-y-8">
+                            <div class="space-y-4">
+                                <h2 class="text-4xl font-display font-extrabold"><span
+                                        data-i18n="contact.title_start">Parlons de votre</span> <span
+                                        class="text-neutral-900 dark:text-white"
+                                        data-i18n="contact.title_end">Projet</span></h2>
+                                <p class="text-neutral-600 dark:text-neutral-400 text-lg"
+                                    data-i18n="contact.description">
+                                    Vous
+                                    avez une idée ou un besoin
+                                    spécifique ? Je suis disponible pour discuter de vos futurs défis techniques.</p>
+                            </div>
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4 group">
+                                    <div
+                                        class="w-12 h-12 glass flex items-center justify-center rounded-xl group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all">
+                                        <span class="material-symbols-outlined">mail</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-neutral-500 font-bold uppercase tracking-wider">Email</p>
+                                        <p class="font-medium">dipitay@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 group">
+                                    <div
+                                        class="w-12 h-12 glass flex items-center justify-center rounded-xl group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all">
+                                        <span class="material-symbols-outlined">location_on</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-neutral-500 font-bold uppercase tracking-wider"
+                                            data-i18n="contact.location">Localisation
+                                        </p>
+                                        <p class="font-medium">Remote / France</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 pt-4">
+                                    <a href="https://www.linkedin.com/in/yann-dipita-dev/" target="_blank"
+                                        class="w-10 h-10 glass flex items-center justify-center rounded-lg hover:text-black dark:hover:text-white transition-colors"
+                                        href="#">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                            <path
+                                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <a href="https://github.com/kingcrud12" target="_blank"
+                                        class="w-10 h-10 glass flex items-center justify-center rounded-lg hover:text-black dark:hover:text-white transition-colors"
+                                        href="#">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="space-y-6">
-                            <div class="flex items-center gap-4 group">
-                                <div
-                                    class="w-12 h-12 glass flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-all">
-                                    <span class="material-symbols-outlined">mail</span>
+                        <div class="glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative">
+                            <form class="space-y-6" id="contactForm" action="https://formspree.io/f/manrbred"
+                                method="POST">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-widest text-neutral-500 ml-1"
+                                            data-i18n="contact.field_name">Nom
+                                            Complet</label>
+                                        <input
+                                            class="w-full bg-white dark:bg-neutral-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
+                                            placeholder="John Doe" type="text" name="name" id="name" required />
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-widest text-neutral-500 ml-1"
+                                            data-i18n="contact.field_email">Email</label>
+                                        <input
+                                            class="w-full bg-white dark:bg-neutral-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
+                                            placeholder="john@example.com" type="email" name="email" id="email"
+                                            required />
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Email</p>
-                                    <p class="font-medium">dipitay@gmail.com</p>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-widest text-neutral-500 ml-1"
+                                        data-i18n="contact.field_subject">Sujet</label>
+                                    <input
+                                        class="w-full bg-white dark:bg-neutral-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
+                                        placeholder="Comment puis-je vous aider ?" type="text" name="subject"
+                                        id="subject" required />
                                 </div>
-                            </div>
-                            <div class="flex items-center gap-4 group">
-                                <div
-                                    class="w-12 h-12 glass flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-all">
-                                    <span class="material-symbols-outlined">location_on</span>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-widest text-neutral-500 ml-1"
+                                        data-i18n="contact.field_message">Message</label>
+                                    <textarea
+                                        class="w-full bg-white dark:bg-neutral-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
+                                        placeholder="Votre message ici..." rows="4" name="message" id="message"
+                                        required></textarea>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider"
-                                        data-i18n="contact.location">Localisation
-                                    </p>
-                                    <p class="font-medium">Remote / France</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-4 pt-4">
-                                <a href="https://www.linkedin.com/in/yann-dipita-dev/" target="_blank"
-                                    class="w-10 h-10 glass flex items-center justify-center rounded-lg hover:text-primary transition-colors"
-                                    href="#">
-                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                        <path
-                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
-                                        </path>
-                                    </svg>
-                                </a>
-                                <a href="https://github.com/kingcrud12" target="_blank"
-                                    class="w-10 h-10 glass flex items-center justify-center rounded-lg hover:text-primary transition-colors"
-                                    href="#">
-                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </div>
+                                <button type="submit"
+                                    class="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <span class="btn-text" data-i18n="contact.btn_send">Envoyer le message</span>
+                                    <span class="material-symbols-outlined btn-icon">send</span>
+                                    <span
+                                        class="btn-loader hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white dark:border-black"></span>
+                                </button>
+                                <div id="formMessage" class="hidden p-4 rounded-xl text-center font-medium"></div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative">
-                        <form class="space-y-6" id="contactForm" action="https://formspree.io/f/manrbred" method="POST">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-2">
-                                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1"
-                                        data-i18n="contact.field_name">Nom
-                                        Complet</label>
-                                    <input
-                                        class="w-full bg-white dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary transition-all"
-                                        placeholder="John Doe" type="text" name="name" id="name" required />
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1"
-                                        data-i18n="contact.field_email">Email</label>
-                                    <input
-                                        class="w-full bg-white dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary transition-all"
-                                        placeholder="john@example.com" type="email" name="email" id="email" required />
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1"
-                                    data-i18n="contact.field_subject">Sujet</label>
-                                <input
-                                    class="w-full bg-white dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary transition-all"
-                                    placeholder="Comment puis-je vous aider ?" type="text" name="subject" id="subject"
-                                    required />
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1"
-                                    data-i18n="contact.field_message">Message</label>
-                                <textarea
-                                    class="w-full bg-white dark:bg-slate-800 border-none rounded-2xl p-4 focus:ring-2 focus:ring-primary transition-all"
-                                    placeholder="Votre message ici..." rows="4" name="message" id="message"
-                                    required></textarea>
-                            </div>
-                            <button type="submit"
-                                class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-lg shadow-primary/20 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <span class="btn-text" data-i18n="contact.btn_send">Envoyer le message</span>
-                                <span class="material-symbols-outlined btn-icon">send</span>
-                                <span
-                                    class="btn-loader hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white"></span>
-                            </button>
-                            <div id="formMessage" class="hidden p-4 rounded-xl text-center font-medium"></div>
-                        </form>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
-    <footer class="py-12 border-t border-slate-200 dark:border-slate-800 text-center">
+    <footer class="py-12 border-t border-neutral-200 dark:border-neutral-800 text-center">
         <div class="max-w-7xl mx-auto px-6">
-            <p class="text-slate-500 text-sm">© 2024 Yann Dipita. Tous droits réservés.</p>
+            <p class="text-neutral-500 text-sm">© 2024 Yann Dipita. Tous droits réservés.</p>
         </div>
     </footer>
     <script>
@@ -1098,9 +1169,9 @@
                 }
             });
             navLinks.forEach(link => {
-                link.classList.remove('text-primary');
+                link.classList.remove('text-black', 'dark:text-white');
                 if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('text-primary');
+                    link.classList.add('text-black', 'dark:text-white');
                 }
             });
         });
@@ -1112,13 +1183,13 @@
 
             // Update buttons state
             buttons.forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white');
-                btn.classList.add('glass', 'hover:bg-slate-200', 'dark:hover:bg-slate-800');
+                btn.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg', 'scale-105');
+                btn.classList.add('glass', 'hover:bg-neutral-200', 'dark:hover:bg-neutral-800');
             });
 
             const activeBtn = document.getElementById(`btn-${category}`);
-            activeBtn.classList.remove('glass', 'hover:bg-slate-200', 'dark:hover:bg-slate-800');
-            activeBtn.classList.add('bg-primary', 'text-white');
+            activeBtn.classList.remove('glass', 'hover:bg-neutral-200', 'dark:hover:bg-neutral-800');
+            activeBtn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg', 'scale-105');
 
             // Filter items
             projects.forEach(project => {
@@ -1307,10 +1378,10 @@
 
                 // Visual update
                 document.querySelectorAll('.radio-circle div').forEach(el => el.classList.add('hidden'));
-                document.querySelectorAll('.radio-circle').forEach(el => el.classList.remove('border-primary'));
+                document.querySelectorAll('.radio-circle').forEach(el => el.classList.remove('border-black', 'dark:border-white'));
 
                 const radio = element.querySelector('.radio-circle');
-                radio.classList.add('border-primary');
+                radio.classList.add('border-black', 'dark:border-white');
                 radio.querySelector('div').classList.remove('hidden');
             },
 
@@ -1342,11 +1413,11 @@
 
                 // Visual
                 document.querySelectorAll('.time-slot').forEach(el => {
-                    el.classList.remove('bg-primary', 'text-white');
-                    el.classList.add('glass', 'hover:bg-slate-100', 'dark:hover:bg-slate-800');
+                    el.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
+                    el.classList.add('glass', 'hover:bg-neutral-100', 'dark:hover:bg-neutral-800');
                 });
-                element.classList.remove('glass', 'hover:bg-slate-100', 'dark:hover:bg-slate-800');
-                element.classList.add('bg-primary', 'text-white');
+                element.classList.remove('glass', 'hover:bg-neutral-100', 'dark:hover:bg-neutral-800');
+                element.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-lg');
 
                 // Show info form
                 document.getElementById('step-info').classList.remove('hidden');
@@ -1364,62 +1435,128 @@
                     locale = 'en-US';
                 }
 
-                const header = document.getElementById('currentMonthYear');
-                if (header) header.textContent = this.currentDate.toLocaleDateString(locale, options);
+                document.getElementById('currentMonth').textContent =
+                    this.currentDate.toLocaleDateString(locale, options).replace(/^\w/, c => c.toUpperCase());
 
                 const firstDay = new Date(year, month, 1);
                 const lastDay = new Date(year, month + 1, 0);
 
-                // 0 = Sunday, 1 = Monday. we want Monday = 0
-                let startDay = firstDay.getDay() - 1;
-                if (startDay === -1) startDay = 6;
+                // Starting day of week (0 = Sunday, 1 = Monday, etc.)
+                let startDay = firstDay.getDay();
+                // Adjust for Monday start (French system usually starts Monday)
+                startDay = startDay === 0 ? 6 : startDay - 1;
 
                 const daysInMonth = lastDay.getDate();
+
                 const grid = document.getElementById('calendarGrid');
                 grid.innerHTML = '';
 
-                // Empty cells for alignment
+                // Empty slots for previous month
                 for (let i = 0; i < startDay; i++) {
-                    grid.appendChild(document.createElement('div'));
+                    const div = document.createElement('div');
+                    grid.appendChild(div);
                 }
 
+                // Days
                 const today = new Date();
+                today.setHours(0, 0, 0, 0); // Normalize today
 
                 for (let i = 1; i <= daysInMonth; i++) {
                     const date = new Date(year, month, i);
-                    const isToday = date.toDateString() === today.toDateString();
-                    const isPast = date < new Date().setHours(0, 0, 0, 0);
+                    const dayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
 
-                    const el = document.createElement('div');
-                    el.className = `calendar-day ${isToday ? 'today' : ''} ${isPast ? 'disabled' : ''}`;
-                    el.textContent = i;
+                    const btn = document.createElement('button');
+                    btn.textContent = i;
+                    // FIX: Added text-neutral-700 dark:text-neutral-200 to ensure visibility
+                    btn.className = `calendar-day w-full h-10 rounded-lg text-sm font-medium transition-all
+                        text-neutral-700 dark:text-neutral-200 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black`;
 
-                    if (!isPast) {
-                        el.onclick = () => this.selectDate(date.toISOString().split('T')[0], el);
+                    // Highlight Today
+                    if (date.getTime() === today.getTime()) {
+                        btn.classList.add('today', 'font-bold', 'border-2', 'border-black', 'dark:border-white');
                     }
 
-                    grid.appendChild(el);
+                    // Disable past dates
+                    if (date < today) {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-30', 'cursor-not-allowed', 'font-normal'); // Increased opacity slightly
+                    } else {
+                        btn.onclick = () => this.selectDate(dayStr, btn);
+                    }
+
+                    if (this.selectedDate === dayStr) {
+                        btn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'selected', 'font-bold');
+                    }
+
+                    grid.appendChild(btn);
                 }
             },
 
             renderTimeSlots: function () {
-                const slots = ['10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
                 const container = document.getElementById('timeSlots');
                 container.innerHTML = '';
 
+                const slots = ['10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+
                 slots.forEach(time => {
-                    const el = document.createElement('button');
-                    el.type = 'button';
-                    el.className = 'time-slot py-2 px-3 text-sm font-medium rounded-xl glass hover:bg-slate-100 dark:hover:bg-slate-800 transition-all border border-slate-200 dark:border-slate-700';
-                    el.textContent = time;
-                    el.onclick = () => this.selectTime(time, el);
-                    container.appendChild(el);
+                    const btn = document.createElement('button');
+                    btn.textContent = time;
+                    btn.className = `time-slot w-full py-3 rounded-lg font-medium border border-black/10 dark:border-white/10
+                        hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all glass`;
+                    btn.onclick = () => this.selectTime(time, btn);
+
+                    if (this.selectedTime === time) {
+                        btn.classList.remove('glass');
+                        btn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+                    }
+
+                    container.appendChild(btn);
                 });
+            },
+
+            submit: function () {
+                const type = this.selectedType;
+                const date = this.selectedDate;
+                const time = this.selectedTime;
+
+                // Get info
+                const name = document.getElementById('mentorshipName').value;
+                const email = document.getElementById('mentorshipEmail').value;
+                const topic = document.getElementById('mentorshipTopic').value;
+
+                if (!name || !email || !topic) {
+                    alert('Veuillez remplir tous les champs');
+                    return;
+                }
+
+                // Format message for email (simulated)
+                const message = `
+                    Nouvelle demande de mentorat :
+                    Type : ${type}
+                    Date : ${date}
+                    Heure : ${time}
+                    Nom : ${name}
+                    Email : ${email}
+                    Sujet : ${topic}
+                `;
+
+                // In a real app, this would send data to backend
+                // Here we simulate success
+                const btn = document.querySelector('#step-info button');
+                const originalText = btn.textContent;
+                btn.textContent = "Confirmation...";
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    alert('Demande envoyée avec succès ! Je vous recontacterai bientôt.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    // Reset or close modal
+                }, 1500);
             }
         };
 
-        // Initialize Mentorship
-        if (window.Mentorship) window.Mentorship.init();
+        window.Mentorship.init();
 
         // Handle Booking Form Submission
         document.getElementById('bookingForm').addEventListener('submit', async function (e) {
@@ -1434,7 +1571,7 @@
             }
 
             btn.disabled = true;
-            btn.innerHTML = '<span class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></span> Envoi...';
+            btn.innerHTML = '<span class="animate-spin rounded-full h-5 w-5 border-b-2 border-neutral-900 dark:border-white"></span> Envoi...';
 
             try {
                 const formData = new FormData(this);
@@ -1483,7 +1620,7 @@
                 iconContainer.classList.add('bg-green-100', 'dark:bg-green-900/30');
                 icon.classList.add('text-green-600', 'dark:text-green-400');
                 icon.textContent = 'check_circle';
-                btn.classList.add('bg-primary', 'hover:bg-indigo-700');
+                btn.classList.add('bg-black', 'dark:bg-white', 'dark:text-black', 'hover:bg-neutral-800', 'dark:hover:bg-neutral-200');
                 btn.textContent = t.btn_success;
             } else {
                 const t = translations[I18n.lang].modal;
@@ -1539,30 +1676,30 @@
     <div id="genericModal" class="hidden fixed inset-0 z-[100] overflow-y-auto" aria-labelledby="modal-title"
         role="dialog" aria-modal="true">
         <!-- Background backdrop -->
-        <div class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-0 bg-neutral-900/70 backdrop-blur-sm transition-opacity"></div>
 
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
             <div
-                class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-sm scale-95 opacity-0 duration-300 border border-white/10 glass">
+                class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-neutral-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-sm scale-95 opacity-0 duration-300 border border-white/10 glass">
                 <div class="px-4 pb-4 pt-5 sm:p-6 text-center">
                     <div id="modalIconContainer"
                         class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 mb-6">
                         <span id="modalIcon"
                             class="material-symbols-outlined text-3xl text-green-600 dark:text-green-400">check_circle</span>
                     </div>
-                    <h3 class="text-xl font-display font-bold leading-6 text-slate-900 dark:text-white mb-2"
+                    <h3 class="text-xl font-display font-bold leading-6 text-neutral-900 dark:text-white mb-2"
                         id="modalTitle">
                         Demande envoyée !
                     </h3>
                     <div class="mt-2">
-                        <p class="text-sm text-slate-500 dark:text-slate-400" id="modalMessage">
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400" id="modalMessage">
 
                         </p>
                     </div>
                 </div>
                 <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 justify-center pb-6">
                     <button id="modalBtn" type="button"
-                        class="inline-flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold text-white shadow-lg hover:bg-indigo-700 sm:w-auto min-w-[120px] transition-all"
+                        class="inline-flex w-full justify-center rounded-xl bg-black dark:bg-white dark:text-black px-3 py-3 text-sm font-bold text-white shadow-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 sm:w-auto min-w-[120px] transition-all"
                         onclick="hideModal()">
                         Super !
                     </button>
