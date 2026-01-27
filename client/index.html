@@ -699,26 +699,16 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 h-[600px] lg:h-[700px]">
-                    <!-- Video Player (In Glass) -->
-                    <div
+                    <!-- Video Player -->
+                    <div id="twitch-embed"
                         class="lg:col-span-3 h-full rounded-[2rem] overflow-hidden bg-black relative shadow-2xl glass border-primary/20">
-                        <div class="absolute inset-0 flex items-center justify-center bg-slate-900/50 z-0">
-                            <p class="text-white/50 animate-pulse">Chargement du stream...</p>
-                        </div>
-                        <iframe
-                            src="https://player.twitch.tv/?channel=elikia6apples&parent=yann-dipita.com&parent=www.yann-dipita.com&parent=kingcrud12.github.io&parent=localhost&parent=127.0.0.1"
-                            frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"
-                            class="relative z-10 w-full h-full">
-                        </iframe>
+                        <!-- Twitch Player injected by JS -->
                     </div>
 
-                    <!-- Chat (Solid Background, NO GLASS) -->
-                    <div
+                    <!-- Chat -->
+                    <div id="twitch-chat-embed"
                         class="lg:col-span-1 h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 relative z-20">
-                        <iframe
-                            src="https://www.twitch.tv/embed/elikia6apples/chat?parent=yann-dipita.com&parent=www.yann-dipita.com&parent=kingcrud12.github.io&parent=localhost&parent=127.0.0.1"
-                            frameborder="0" scrolling="no" height="100%" width="100%" class="w-full h-full">
-                        </iframe>
+                        <!-- Chat iframe injected by JS -->
                     </div>
                 </div>
 
@@ -1572,36 +1562,6 @@
         </div>
     </div>
 
-    <!-- Twitch Embed JS -->
-    <script src="https://embed.twitch.tv/v1/index.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize Video
-            new Twitch.Embed("twitch-embed", {
-                width: "100%",
-                height: "100%",
-                channel: "elikia6apples",
-                layout: "video",
-                autoplay: false,
-                parent: ["yann-dipita.com", "www.yann-dipita.com", "localhost", "127.0.0.1"]
-            });
-
-            // Initialize Chat (Separate Embed)
-            // Twitch JS SDK doesn't easily support *just* chat in a separate div via the same constructor nicely without layout tricks.
-            // But we can fallback to the trusty iframe for chat, which is what the SDK does accurately anyway.
-            // OR we can make a second Embed instance for chat? 
-            // Actually, using the raw iframe for chat is often more reliable if we get the parent right.
-            // Let's try to inject the iframe via JS to ensure it runs after load, similar to the SDK.
-
-            const chatContainer = document.getElementById('twitch-chat-embed');
-            const chatFrame = document.createElement('iframe');
-            chatFrame.src = "https://www.twitch.tv/embed/elikia6apples/chat?parent=yann-dipita.com&parent=www.yann-dipita.com&parent=localhost&parent=127.0.0.1";
-            chatFrame.height = "100%";
-            chatFrame.width = "100%";
-            chatFrame.style.border = "none";
-            chatContainer.appendChild(chatFrame);
-        });
-    </script>
 </body>
 
 </html>
