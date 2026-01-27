@@ -125,6 +125,15 @@
                     data-i18n="nav.projects">Projets</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="#activity"
                     data-i18n="nav.activity">Activité</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1"
+                    href="#virtuallab">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    <span data-i18n="nav.live">Live</span>
+                </a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="#contact"
                     data-i18n="nav.contact">Contact</a>
             </div>
@@ -670,6 +679,63 @@
                 </div>
             </div>
         </section>
+        <section class="py-24 px-6 relative overflow-hidden" id="virtuallab">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 space-y-4">
+                    <span
+                        class="inline-block px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase"
+                        data-i18n="virtuallab.badge">
+                        Live Streaming
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">
+                        <span data-i18n="virtuallab.title_start">Le</span> <span class="text-primary"
+                            data-i18n="virtuallab.title_end">Laboratoire Virtuel</span>
+                    </h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                        data-i18n="virtuallab.description">
+                        Rejoignez-moi en direct pour des sessions de code, des expériences et des échanges. Partage
+                        d'écran et chat en temps réel.
+                    </p>
+                </div>
+
+                <div class="glass p-4 rounded-[2rem] shadow-2xl overflow-hidden border-primary/20">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 h-[600px] lg:h-[700px]">
+                        <!-- Video Player -->
+                        <div class="lg:col-span-3 h-full rounded-2xl overflow-hidden bg-black relative group">
+                            <div class="absolute inset-0 flex items-center justify-center bg-slate-900/50 z-0">
+                                <p class="text-white/50 animate-pulse">Chargement du stream...</p>
+                            </div>
+                            <iframe
+                                src="https://player.twitch.tv/?channel=elikia6apples&parent=yann-dipita.com&parent=localhost&parent=127.0.0.1"
+                                frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"
+                                class="relative z-10 w-full h-full">
+                            </iframe>
+                        </div>
+
+                        <!-- Chat -->
+                        <div
+                            class="lg:col-span-1 h-full rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <iframe
+                                src="https://www.twitch.tv/embed/elikia6apples/chat?parent=yann-dipita.com&parent=localhost&parent=127.0.0.1"
+                                frameborder="0" scrolling="no" height="100%" width="100%" class="w-full h-full">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                            <span class="text-sm font-bold text-slate-500 uppercase tracking-wider">Status: <span
+                                    class="text-slate-900 dark:text-white">Offline (Check Schedule)</span></span>
+                        </div>
+                        <a href="https://www.twitch.tv/elikia6apples" target="_blank"
+                            class="text-primary font-bold hover:underline text-sm flex items-center gap-1">
+                            <span>Voir sur Twitch</span>
+                            <span class="material-symbols-outlined text-sm">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="py-24 px-6 bg-slate-50 dark:bg-slate-900/30" id="contact">
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -790,6 +856,7 @@
                     about: "À Propos",
                     projects: "Projets",
                     activity: "Activité",
+                    live: "Live",
                     contact: "Contact"
                 },
                 hero: {
@@ -815,6 +882,12 @@
                     selenium_desc: "Bibliothèque Python pour simplifier l'automatisation des tests UI.",
                     hashtag_impact_desc: "Plateforme de valorisation des biens immobiliers vacants.",
                     filter_library: "Librairie"
+                },
+                virtuallab: {
+                    badge: "Live Streaming",
+                    title_start: "Le",
+                    title_end: "Laboratoire Virtuel",
+                    description: "Rejoignez-moi en direct pour des sessions de code, des expériences et des échanges. Partage d'écran et chat en temps réel."
                 },
                 blog_preview: {
                     badge: "Blog & Ressources",
