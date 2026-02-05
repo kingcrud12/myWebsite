@@ -37,9 +37,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#6366f1",
-                        "background-light": "#f8fafc",
-                        "background-dark": "#0f172a",
+                        primary: "var(--primary-color)",
+                        "background-light": "#ffffff",
+                        "background-dark": "#000000",
                     },
                     fontFamily: {
                         display: ["'Plus Jakarta Sans'", "sans-serif"],
@@ -53,18 +53,31 @@
         };
     </script>
     <style>
+        :root {
+            --primary-color: #000000;
+        }
+
+        .dark {
+            --primary-color: #ffffff;
+        }
+
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            /* Changed to black border for light mode visibility if needed, or stick to white? The original was white. Let's keep it subtle but neutral */
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .dark .glass {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+            /* Neutral glass for dark mode */
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bg-glow {
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            display: none;
+            /* Remove colored glow */
         }
 
         html {
@@ -73,7 +86,7 @@
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased">
+<body class="bg-background-light dark:bg-background-dark text-black dark:text-white font-sans antialiased">
     <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
         <div class="glass px-6 py-4 rounded-full flex items-center justify-between shadow-xl">
             <div class="flex items-center gap-2">
@@ -100,7 +113,7 @@
     </nav>
     <main class="relative overflow-hidden min-h-screen pt-32 pb-20">
         <div
-            class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
+            class="hidden absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
         </div>
 
         <div class="max-w-7xl mx-auto px-6">
@@ -114,7 +127,7 @@
                     <span data-i18n="blog.title_start">Apprendre le Dev</span> <span class="text-primary"
                         data-i18n="blog.title_end">avec Yann</span>
                 </h1>
-                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="blog.subtitle">
+                <p class="text-gray-900 dark:text-gray-100 max-w-2xl mx-auto" data-i18n="blog.subtitle">
                     Guides pratiques, tutoriels et retours d'expérience pour booster votre carrière de développeur.
                 </p>
             </div>
@@ -124,12 +137,12 @@
                 <div
                     class="glass p-8 rounded-3xl border border-transparent hover:border-primary/30 transition-all group cursor-pointer hover:-translate-y-2 duration-300">
                     <div
-                        class="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
+                        class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined text-3xl">psychology</span>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 font-display" data-i18n="blog.card1_title">Penser comme un dév
                     </h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed" data-i18n="blog.card1_desc">
+                    <p class="text-gray-900 dark:text-gray-100 mb-6 leading-relaxed" data-i18n="blog.card1_desc">
                         Adopter le bon mindset pour résoudre des problèmes complexes et progresser rapidement.
                     </p>
                     <a href="#" class="text-primary font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -142,12 +155,12 @@
                 <div
                     class="glass p-8 rounded-3xl border border-transparent hover:border-primary/30 transition-all group cursor-pointer hover:-translate-y-2 duration-300">
                     <div
-                        class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+                        class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined text-3xl">code</span>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 font-display" data-i18n="blog.card2_title">Devenir Dév Python
                     </h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed" data-i18n="blog.card2_desc">
+                    <p class="text-gray-900 dark:text-gray-100 mb-6 leading-relaxed" data-i18n="blog.card2_desc">
                         Du scripting basique au développement d'APIs robustes avec Django et FastAPI.
                     </p>
                     <a href="posts/python-dev.html"
@@ -161,12 +174,12 @@
                 <div
                     class="glass p-8 rounded-3xl border border-transparent hover:border-primary/30 transition-all group cursor-pointer hover:-translate-y-2 duration-300">
                     <div
-                        class="w-14 h-14 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform">
+                        class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined text-3xl">bug_report</span>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 font-display" data-i18n="blog.card3_title">QA Automation Engineer
                     </h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed" data-i18n="blog.card3_desc">
+                    <p class="text-gray-900 dark:text-gray-100 mb-6 leading-relaxed" data-i18n="blog.card3_desc">
                         Maîtrisez Selenium, Cypress et Pytest pour automatiser vos tests et garantir la qualité.
                     </p>
                     <a href="#" class="text-primary font-bold flex items-center gap-2 group-hover:gap-3 transition-all">

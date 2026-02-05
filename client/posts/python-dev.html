@@ -19,9 +19,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#6366f1",
-                        "background-light": "#f8fafc",
-                        "background-dark": "#0f172a",
+                        primary: "var(--primary-color)",
+                        "background-light": "#ffffff",
+                        "background-dark": "#000000",
                     },
                     fontFamily: {
                         display: ["'Plus Jakarta Sans'", "sans-serif"],
@@ -35,29 +35,38 @@
         };
     </script>
     <style>
+        :root {
+            --primary-color: #000000;
+        }
+
+        .dark {
+            --primary-color: #ffffff;
+        }
+
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .dark .glass {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            /* Slightly lighter for cards inside glass */
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .dark .glass-card {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bg-glow {
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            display: none;
         }
 
         html {
@@ -75,7 +84,7 @@
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased">
+<body class="bg-background-light dark:bg-background-dark text-black dark:text-white font-sans antialiased">
     <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
         <div class="glass px-6 py-4 rounded-full flex items-center justify-between shadow-xl">
             <div class="flex items-center gap-2">
@@ -105,14 +114,14 @@
     <main class="relative overflow-hidden min-h-screen pt-32 pb-20">
         <!-- Background Blob -->
         <div
-            class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
+            class="hidden absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary opacity-20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2">
         </div>
 
         <article class="max-w-4xl mx-auto px-6">
             <!-- Header -->
             <header class="text-center mb-16 space-y-6">
                 <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-blue-500 font-semibold text-sm tracking-wide uppercase mb-4">
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-primary font-semibold text-sm tracking-wide uppercase mb-4">
                     <span class="material-symbols-outlined text-lg">code</span>
                     <span data-i18n="header.badge">Python Developer Path</span>
                 </div>
@@ -121,7 +130,7 @@
                         data-i18n="header.title_highlight">Développeur Python</span> <span
                         data-i18n="header.title_end">à l'ère de l'IA</span>
                 </h1>
-                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
+                <p class="text-xl text-gray-900 dark:text-gray-100 max-w-2xl mx-auto leading-relaxed"
                     data-i18n="header.subtitle">
                     Un guide complet pour maîtriser le langage n°1 de l'IA, de l'automatisation et du backend.
                 </p>
@@ -134,15 +143,17 @@
                         <span class="text-3xl">🐍</span> <span data-i18n="intro.title">C’est quoi un développeur Python
                             ?</span>
                     </h2>
-                    <p class="text-slate-300 mb-6 text-lg leading-relaxed" data-i18n="intro.desc">
+                    <p class="text-gray-900 dark:text-white mb-6 text-lg leading-relaxed" data-i18n="intro.desc">
                         Un développeur Python est un professionnel qui utilise le langage Python pour concevoir,
                         automatiser, analyser ou tester des systèmes informatiques. Python est lisible, polyvalent et au
                         cœur de l’IA et de la data.
                     </p>
-                    <div class="bg-indigo-500/10 border border-indigo-500/20 p-6 rounded-2xl">
-                        <p class="font-semibold text-indigo-300 mb-2" data-i18n="intro.note_title">Un développeur Python
+                    <div
+                        class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl">
+                        <p class="font-semibold text-primary mb-2" data-i18n="intro.note_title">Un développeur Python
                             ne se limite pas à « coder » :</p>
-                        <p class="text-slate-400" data-i18n="intro.note_desc">👉 Il résout des problèmes, automatise des
+                        <p class="text-gray-600 dark:text-gray-300" data-i18n="intro.note_desc">👉 Il résout des
+                            problèmes, automatise des
                             tâches, sécurise la qualité logicielle, exploite les données et collabore avec l’IA.</p>
                     </div>
                 </div>
@@ -157,65 +168,71 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Card 1 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-blue-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">api</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c1_title">Backend & API</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c1_desc">Création d'API REST (FastAPI,
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c1_desc">Création
+                            d'API REST (FastAPI,
                             Flask, Django), microservices, bases de données.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c1_ex">Ex: API de login, e-commerce
                         </p>
                     </div>
                     <!-- Card 2 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-green-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">check_circle</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c2_title">QA & Testing</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c2_desc">Tests automatisés (pytest),
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c2_desc">Tests
+                            automatisés (pytest),
                             performance, sécurité, CI/CD.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c2_ex">Ex: tests de non-régression
                         </p>
                     </div>
                     <!-- Card 3 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-orange-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">settings_suggest</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c3_title">Automatisation</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c3_desc">Scripts, manipulation de
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c3_desc">Scripts,
+                            manipulation de
                             fichiers (CSV, Excel), process métiers.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c3_ex">Ex: script de traitement de
                             fichiers</p>
                     </div>
                     <!-- Card 4 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-purple-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">travel_explore</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c4_title">Web Scraping</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c4_desc">Extraction de données, veille
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c4_desc">Extraction de
+                            données, veille
                             concurrentielle, analyse de prix.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c4_ex">Ex: suivi de prix
                             concurrents</p>
                     </div>
                     <!-- Card 5 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-pink-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">analytics</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c5_title">Data & Analyse</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c5_desc">Pandas, Numpy, visualisation de
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c5_desc">Pandas,
+                            Numpy, visualisation de
                             données, data pipelines.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c5_ex">Ex: analyse de ventes</p>
                     </div>
                     <!-- Card 6 -->
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center gap-3 mb-3 text-cyan-400">
+                        <div class="flex items-center gap-3 mb-3 text-primary">
                             <span class="material-symbols-outlined">psychology</span>
                             <h3 class="font-bold text-lg" data-i18n="scope.c6_title">Intelligence Artificielle</h3>
                         </div>
-                        <p class="text-slate-400 text-sm mb-3" data-i18n="scope.c6_desc">Machine Learning, LLM (OpenAI,
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3" data-i18n="scope.c6_desc">Machine
+                            Learning, LLM (OpenAI,
                             LangChain), Agents IA.</p>
                         <p class="text-xs text-slate-500 font-mono" data-i18n="scope.c6_ex">Ex: chatbots, recommandation
                         </p>
@@ -225,37 +242,39 @@
 
             <!-- 3. Pourquoi Python et IA ? -->
             <section class="mb-16">
-                <div class="glass p-8 rounded-3xl border-l-4 border-l-cyan-500">
+                <div class="glass p-8 rounded-3xl border-l-4 border-l-primary">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 font-display">
                         <span class="text-3xl">🤖</span> <span data-i18n="why.title">Pourquoi devenir dev Python à l’ère
                             de l’IA ?</span>
                     </h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <p class="text-lg font-semibold text-slate-200 mb-4" data-i18n="why.subtitle">Contrairement
+                            <p class="text-lg font-semibold text-gray-900 dark:text-gray-200 mb-4"
+                                data-i18n="why.subtitle">Contrairement
                                 à une idée reçue :</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-center gap-3 text-red-400">
+                                <li class="flex items-center gap-3 text-primary">
                                     <span class="material-symbols-outlined">cancel</span>
                                     <span data-i18n="why.myth">L’IA ne remplace pas les développeurs</span>
                                 </li>
-                                <li class="flex items-center gap-3 text-green-400">
+                                <li class="flex items-center gap-3 text-primary">
                                     <span class="material-symbols-outlined">check_circle</span>
                                     <span data-i18n="why.fact">Elle <span
-                                            class="font-bold underline decoration-green-500/50">augmente</span> les
+                                            class="font-bold underline decoration-primary">augmente</span> les
                                         développeurs Python</span>
                                 </li>
                             </ul>
-                            <div class="space-y-2 text-slate-400 text-sm">
+                            <div class="space-y-2 text-gray-600 dark:text-slate-400 text-sm">
                                 <p data-i18n="why.pt1">🔹 Python est le langage n°1 de l’IA</p>
                                 <p data-i18n="why.pt2">🔹 Tous les frameworks IA sont en Python</p>
                                 <p data-i18n="why.pt3">🔹 Les agents IA s’orientent en Python</p>
                             </div>
                         </div>
-                        <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                            <h4 class="font-bold text-white mb-4 border-b border-slate-700 pb-2"
+                        <div
+                            class="bg-gray-100 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-slate-700">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-slate-700 pb-2"
                                 data-i18n="why.limit_title">Ce que l'IA ne fait pas seule :</h4>
-                            <ul class="space-y-2 text-slate-300 text-sm">
+                            <ul class="space-y-2 text-gray-700 dark:text-slate-300 text-sm">
                                 <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
                                         data-i18n="why.limit1">Comprendre un besoin métier</span></li>
                                 <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
@@ -265,7 +284,7 @@
                                 <li class="flex items-start gap-2"><span class="text-primary">•</span> <span
                                         data-i18n="why.limit4">Automatiser intelligemment</span></li>
                             </ul>
-                            <div class="mt-4 pt-4 border-t border-slate-700 text-center font-bold text-cyan-400"
+                            <div class="mt-4 pt-4 border-t border-gray-200 dark:border-slate-700 text-center font-bold text-primary"
                                 data-i18n="why.conclusion">
                                 👉 Python + IA = Développeur Augmenté
                             </div>
@@ -281,93 +300,106 @@
                 <div class="space-y-4">
                     <!-- Step 1 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-blue-500/20 text-blue-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s1_badge">Étape 1</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s1_title">Fondamentaux
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s1_title">Fondamentaux
                                 Python</h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s1_desc">Syntaxe, Variables, fonctions,
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s1_desc">Syntaxe,
+                                Variables, fonctions,
                                 classes, Exceptions.</p>
-                            <p class="text-sm text-blue-300" data-i18n="roadmap.s1_goal">🎯 Objectif : penser comme un
+                            <p class="text-sm text-primary" data-i18n="roadmap.s1_goal">🎯 Objectif : penser comme un
                                 développeur</p>
                         </div>
                     </div>
                     <!-- Step 2 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-indigo-500/20 text-indigo-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s2_badge">Étape 2</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s2_title">Python
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s2_title">Python
                                 Professionnel</h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s2_desc">Environnements virtuels, Bonnes
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s2_desc">Environnements
+                                virtuels, Bonnes
                                 pratiques, Typage, Logs.</p>
-                            <p class="text-sm text-indigo-300" data-i18n="roadmap.s2_goal">🎯 Objectif : écrire du code
+                            <p class="text-sm text-primary" data-i18n="roadmap.s2_goal">🎯 Objectif : écrire du code
                                 propre et maintenable</p>
                         </div>
                     </div>
                     <!-- Step 3 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-green-500/20 text-green-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s3_badge">Étape 3</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s3_title">QA & Tests
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s3_title">QA & Tests
                                 Automatisés</h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s3_desc">pytest, Tests unitaires & API,
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s3_desc">pytest, Tests
+                                unitaires & API,
                                 CI/CD, Performance.</p>
-                            <p class="text-sm text-green-300" data-i18n="roadmap.s3_goal">🎯 Objectif : garantir la
+                            <p class="text-sm text-primary" data-i18n="roadmap.s3_goal">🎯 Objectif : garantir la
                                 qualité logicielle</p>
                         </div>
                     </div>
                     <!-- Step 4 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-purple-500/20 text-purple-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s4_badge">Étape 4</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s4_title">APIs & Backend
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s4_title">APIs & Backend
                             </h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s4_desc">FastAPI, Authentification (JWT),
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s4_desc">FastAPI,
+                                Authentification (JWT),
                                 Sécurité, Bases de données.</p>
-                            <p class="text-sm text-purple-300" data-i18n="roadmap.s4_goal">🎯 Objectif : construire des
+                            <p class="text-sm text-primary" data-i18n="roadmap.s4_goal">🎯 Objectif : construire des
                                 systèmes réels</p>
                         </div>
                     </div>
                     <!-- Step 5 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-orange-500/20 text-orange-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s5_badge">Étape 5</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s5_title">Automatisation &
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s5_title">Automatisation &
                                 Scraping</h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s5_desc">Scripts métiers, Scraping
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s5_desc">Scripts
+                                métiers, Scraping
                                 responsable, Orchestration.</p>
-                            <p class="text-sm text-orange-300" data-i18n="roadmap.s5_goal">🎯 Objectif : gagner du temps
+                            <p class="text-sm text-primary" data-i18n="roadmap.s5_goal">🎯 Objectif : gagner du temps
                                 et créer de la valeur</p>
                         </div>
                     </div>
                     <!-- Step 6 -->
                     <div class="glass p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
-                        <div class="bg-cyan-500/20 text-cyan-400 font-bold px-4 py-2 rounded-lg whitespace-nowrap"
+                        <div class="bg-gray-100 dark:bg-gray-800 text-primary font-bold px-4 py-2 rounded-lg whitespace-nowrap"
                             data-i18n="roadmap.s6_badge">Étape 6</div>
                         <div>
-                            <h3 class="font-bold text-xl text-white mb-2" data-i18n="roadmap.s6_title">Data & IA</h3>
-                            <p class="text-slate-400 mb-2" data-i18n="roadmap.s6_desc">Manipulation de données, IA
+                            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2"
+                                data-i18n="roadmap.s6_title">Data & IA</h3>
+                            <p class="text-gray-600 dark:text-slate-400 mb-2" data-i18n="roadmap.s6_desc">Manipulation
+                                de données, IA
                                 générative, APIs IA, Agents.</p>
-                            <p class="text-sm text-cyan-300" data-i18n="roadmap.s6_goal">🎯 Objectif : devenir un
+                            <p class="text-sm text-primary" data-i18n="roadmap.s6_goal">🎯 Objectif : devenir un
                                 développeur augmenté par l’IA</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. Le Planning (Accordion) -->
             <section class="mb-16">
-                <div class="bg-slate-900/40 border border-slate-700 rounded-3xl p-8">
+                <div
+                    class="bg-gray-100 dark:bg-gray-900/40 border border-gray-200 dark:border-slate-700 rounded-3xl p-8">
                     <div class="text-center mb-10">
                         <h2 class="text-2xl font-bold font-display mb-4" data-i18n="planning.title">🗓️ Planning de
                             Formation (1 mois)</h2>
-                        <p class="text-slate-400 mb-6" data-i18n="planning.subtitle">Dans le cadre du mentorat, je te
+                        <p class="text-gray-600 dark:text-slate-400 mb-6" data-i18n="planning.subtitle">Dans le cadre du
+                            mentorat, je te
                             propose ce planning progressif d'1h par jour.</p>
-                        <div class="flex justify-center gap-6 text-sm text-slate-300">
+                        <div class="flex justify-center gap-6 text-sm text-gray-500 dark:text-slate-300">
                             <span data-i18n="planning.m1">⏱️ 1h / jour</span>
                             <span data-i18n="planning.m2">📚 4 modules x 15min</span>
                             <span data-i18n="planning.m3">🎯 Consolidations continue</span>
@@ -378,7 +410,7 @@
                         <!-- Semaine 1 -->
                         <details class="group glass rounded-xl overflow-hidden open">
                             <summary
-                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+                                class="flex items-center justify-between p-6 cursor-pointer bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
                                 <h3 class="font-bold text-lg text-primary" data-i18n="planning.w1_title">📅 Semaine 1 –
                                     Bases Solides & Découverte</h3>
                                 <span
@@ -387,28 +419,38 @@
                             <div class="p-6 border-t border-slate-700/50">
                                 <div class="grid md:grid-cols-5 gap-4 text-sm">
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1" data-i18n="day">Jour 1</div>
-                                        <div class="text-slate-400" data-i18n="planning.w1_d1">Variables, QA intro, API
+                                        <div class="font-bold text-gray-900 dark:text-white mb-1" data-i18n="day">Jour 1
+                                        </div>
+                                        <div class="text-gray-600 dark:text-slate-400" data-i18n="planning.w1_d1">
+                                            Variables, QA intro, API
                                             REST intro, CSV/JSON</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1" data-i18n="day2">Jour 2</div>
-                                        <div class="text-slate-400" data-i18n="planning.w1_d2">Conditions, Types de
+                                        <div class="font-bold text-gray-900 dark:text-white mb-1" data-i18n="day2">Jour
+                                            2</div>
+                                        <div class="text-gray-600 dark:text-slate-400" data-i18n="planning.w1_d2">
+                                            Conditions, Types de
                                             tests, HTTP Methods, JSON Python</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1" data-i18n="day3">Jour 3</div>
-                                        <div class="text-slate-400" data-i18n="planning.w1_d3">Boucles, Bugs vs Erreurs,
+                                        <div class="font-bold text-gray-900 dark:text-white mb-1" data-i18n="day3">Jour
+                                            3</div>
+                                        <div class="text-gray-600 dark:text-slate-400" data-i18n="planning.w1_d3">
+                                            Boucles, Bugs vs Erreurs,
                                             Status Codes, Script simple</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1" data-i18n="day4">Jour 4</div>
-                                        <div class="text-slate-400" data-i18n="planning.w1_d4">Fonctions, Test cases,
+                                        <div class="font-bold text-gray-900 dark:text-white mb-1" data-i18n="day4">Jour
+                                            4</div>
+                                        <div class="text-gray-600 dark:text-slate-400" data-i18n="planning.w1_d4">
+                                            Fonctions, Test cases,
                                             Postman, Lire CSV</div>
                                     </div>
                                     <div class="space-y-2">
-                                        <div class="font-bold text-white mb-1" data-i18n="day5">Jour 5</div>
-                                        <div class="text-slate-400" data-i18n="planning.w1_d5">Listes/Dicts, Manuels vs
+                                        <div class="font-bold text-gray-900 dark:text-white mb-1" data-i18n="day5">Jour
+                                            5</div>
+                                        <div class="text-gray-600 dark:text-slate-400" data-i18n="planning.w1_d5">
+                                            Listes/Dicts, Manuels vs
                                             Auto, JSON req/res, CLI Script</div>
                                     </div>
                                 </div>
@@ -418,8 +460,8 @@
                         <!-- Semaine 2 -->
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
-                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-blue-400" data-i18n="planning.w2_title">📅 Semaine 2 –
+                                class="flex items-center justify-between p-6 cursor-pointer bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-primary" data-i18n="planning.w2_title">📅 Semaine 2 –
                                     Python Pro & QA</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
@@ -458,8 +500,8 @@
                         <!-- Semaine 3 -->
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
-                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-purple-400" data-i18n="planning.w3_title">📅 Semaine 3
+                                class="flex items-center justify-between p-6 cursor-pointer bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-primary" data-i18n="planning.w3_title">📅 Semaine 3
                                     – Backend & Sécurité</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
@@ -498,8 +540,8 @@
                         <!-- Semaine 4 -->
                         <details class="group glass rounded-xl overflow-hidden">
                             <summary
-                                class="flex items-center justify-between p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
-                                <h3 class="font-bold text-lg text-cyan-400" data-i18n="planning.w4_title">📅 Semaine 4 –
+                                class="flex items-center justify-between p-6 cursor-pointer bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                                <h3 class="font-bold text-lg text-primary" data-i18n="planning.w4_title">📅 Semaine 4 –
                                     Data, Scraping & IA</h3>
                                 <span
                                     class="material-symbols-outlined transform group-open:rotate-180 transition-transform">expand_more</span>
@@ -543,34 +585,40 @@
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold mb-6 font-display" data-i18n="projects.title">🧩 Projets Fil Rouge
                     </h3>
-                    <div class="flex flex-wrap justify-center gap-4 text-slate-300">
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                    <div class="flex flex-wrap justify-center gap-4 text-gray-700 dark:text-slate-300">
+                        <span
+                            class="px-4 py-2 rounded-full border border-gray-200 dark:border-slate-600 bg-gray-100 dark:bg-slate-800/50"
                             data-i18n="projects.p1">✅ Projet Tests API</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                        <span
+                            class="px-4 py-2 rounded-full border border-gray-200 dark:border-slate-600 bg-gray-100 dark:bg-slate-800/50"
                             data-i18n="projects.p2">✅ API FastAPI Auth</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                        <span
+                            class="px-4 py-2 rounded-full border border-gray-200 dark:border-slate-600 bg-gray-100 dark:bg-slate-800/50"
                             data-i18n="projects.p3">✅ Scripts Automation</span>
-                        <span class="px-4 py-2 rounded-full border border-slate-600 bg-slate-800/50"
+                        <span
+                            class="px-4 py-2 rounded-full border border-gray-200 dark:border-slate-600 bg-gray-100 dark:bg-slate-800/50"
                             data-i18n="projects.p4">✅ Mini projet Data</span>
                     </div>
                 </div>
 
                 <div
                     class="bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-1 rounded-3xl inline-block">
-                    <div class="bg-slate-900 rounded-[22px] p-10 md:p-16 relative overflow-hidden">
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-[22px] p-10 md:p-16 relative overflow-hidden border border-gray-200 dark:border-transparent">
                         <div
                             class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
                         </div>
 
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display text-white" data-i18n="cta.title">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display text-gray-900 dark:text-white"
+                            data-i18n="cta.title">
                             Prêt à accélérer ton apprentissage ?</h2>
-                        <p class="text-lg text-slate-400 mb-8 max-w-xl mx-auto" data-i18n="cta.desc">
+                        <p class="text-lg text-gray-600 dark:text-slate-400 mb-8 max-w-xl mx-auto" data-i18n="cta.desc">
                             Rejoins le programme de mentorat pour suivre ce planning étape par étape, avec un
                             accompagnement personnalisé.
                         </p>
 
                         <a href="https://yann-dipita.com/#activity"
-                            class="inline-flex items-center gap-2 bg-primary hover:bg-indigo-500 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/25 text-lg">
+                            class="inline-flex items-center gap-2 bg-primary hover:bg-gray-800 dark:hover:bg-gray-200 text-background-light dark:text-background-dark font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/25 text-lg">
                             <span data-i18n="cta.button">S'inscrire au Mentorat</span>
                             <span class="material-symbols-outlined">rocket_launch</span>
                         </a>
