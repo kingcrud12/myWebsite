@@ -30,7 +30,7 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload'
 // - img-src: self + data: (for SVGs/encoded)
 // - connect-src: self + Formspree (for form submission)
 // - form-action: self + Formspree
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://player.twitch.tv; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.twitch.tv; connect-src 'self' https://formspree.io https://*.twitch.tv; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv https://*.twitch.tv;");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://player.twitch.tv; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.twitch.tv; connect-src 'self' https://formspree.io https://*.twitch.tv; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv https://*.twitch.tv; report-uri /csp-report;");
 // ------------------------
 
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -49,6 +49,24 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== '') {
 }
 
 
+
+// --- LOGGING ---
+// Log the specific domain being accessed (Crucial for Twitch 'parent' parameter debugging)
+error_log("Router: Request to " . ($_SERVER['HTTP_HOST'] ?? 'unknown') . $_SERVER['REQUEST_URI']);
+
+// --- CSP VIOLATION REPORTING ---
+// Handle CSP reports sent by the browser
+if ($requestPath === 'csp-report') {
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    if ($data) {
+        error_log("CSP VIOLATION: " . print_r($data, true));
+    } else {
+        error_log("CSP VIOLATION: Raw data: " . substr($json, 0, 1000));
+    }
+    http_response_code(204); // No Content
+    exit;
+}
 
 // Servir robots.txt
 if ($requestPath === 'robots.txt') {
