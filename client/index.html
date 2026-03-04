@@ -7,8 +7,9 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com data:; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv; img-src 'self' data: https:; connect-src 'self' https://formspree.io;" />
     <meta name="google-site-verification" content="XY6pclnXX3MzOlSv71C70rKEzqj82_XOp9xFw3LqAIA" />
-    <title>Yann Dipita | Développeur Web &amp; Mobile</title>
+    <title data-i18n="seo.title">Yann Dipita - Développeur Web &amp; Mobile | Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="canonical" href="https://yann-dipita.com/" />
     <meta name="description"
         content="Développeur Web & Mobile passionné (React, Next.js, React Native, Node.js). Je conçois des interfaces modernes et des architectures robustes pour vos projets." />
     <meta name="keywords"
@@ -18,7 +19,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yann-dipita.com/" />
-    <meta property="og:title" content="Yann Dipita | Développeur Web & Mobile" />
+    <meta property="og:title" content="Yann Dipita - Développeur Web &amp; Mobile | Portfolio" />
     <meta property="og:description"
         content="Développeur Web & Mobile passionné. Je conçois des interfaces modernes et des architectures robustes." />
     <meta property="og:image" content="https://yann-dipita.com/profile.jpg" />
@@ -26,7 +27,7 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://yann-dipita.com/" />
-    <meta property="twitter:title" content="Yann Dipita | Développeur Web & Mobile" />
+    <meta property="twitter:title" content="Yann Dipita - Développeur Web &amp; Mobile | Portfolio" />
     <meta property="twitter:description"
         content="Développeur Web & Mobile passionné. Je conçois des interfaces modernes et des architectures robustes." />
     <meta property="twitter:image" content="https://yann-dipita.com/profile.jpg" />
@@ -937,6 +938,9 @@
         // Language System
         const translations = {
             fr: {
+                seo: {
+                    title: "Yann Dipita - Développeur Web & Mobile | Portfolio"
+                },
                 nav: {
                     home: "Accueil",
                     about: "À Propos",
@@ -1023,6 +1027,9 @@
                 }
             },
             en: {
+                seo: {
+                    title: "Yann Dipita - Web & Mobile Developer | Portfolio"
+                },
                 nav: {
                     home: "Home",
                     about: "About",
@@ -1147,7 +1154,11 @@
                     if (translations[this.lang]) {
                         const value = key.split('.').reduce((obj, k) => obj && obj[k], translations[this.lang]);
                         if (value) {
-                            el.textContent = value;
+                            if (el.tagName === 'TITLE') {
+                                document.title = value; // update document.title properly
+                            } else {
+                                el.textContent = value;
+                            }
                         }
                     }
                 });
