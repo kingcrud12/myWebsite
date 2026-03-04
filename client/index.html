@@ -8,8 +8,12 @@
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com data:; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv; img-src 'self' data: https:; connect-src 'self' https://formspree.io;" />
     <meta name="google-site-verification" content="XY6pclnXX3MzOlSv71C70rKEzqj82_XOp9xFw3LqAIA" />
     <title>Yann Dipita | Développeur Web &amp; Mobile</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="description"
-        content="Développeur Web & Mobile passionné (React, Next.js, React Native, Node.js). Je conçois des interfaces modernes et des architectures robustes." />
+        content="Développeur Web & Mobile passionné (React, Next.js, React Native, Node.js). Je conçois des interfaces modernes et des architectures robustes pour vos projets." />
+    <meta name="keywords"
+        content="Développeur Web, Développeur Mobile, React, Next.js, React Native, Node.js, Yann Dipita, Freelance, Création site web, Application mobile" />
+
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -110,6 +114,17 @@
 
         .project-card:hover .project-image {
             transform: scale(1.02);
+        }
+
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         html {
@@ -355,8 +370,8 @@
                             data-i18n="projects.filter_library">Librairie</button>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-                    <div class="project-item group relative md:col-span-2 lg:col-span-2 overflow-hidden rounded-[2rem] glass project-card border-black/20 dark:border-white/20"
+                <div class="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory hide-scroll" id="projects-grid">
+                    <div class="project-item group flex-none w-[85vw] md:w-[60vw] lg:w-[50vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card border-black/20 dark:border-white/20"
                         data-category="saas">
                         <div class="absolute top-6 left-6 z-10">
                             <span
@@ -397,7 +412,7 @@
                         </div>
                     </div>
                     <a href="https://promethee-selenium.com/" target="_blank"
-                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="library">
                         <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Prométhée Selenium"
@@ -426,12 +441,12 @@
                         </div>
                     </a>
                     <a href="https://apps.apple.com/fr/app/easy-task/id6756175109" target="_blank"
-                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="mobile">
                         <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Easy Task"
                                 class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="easytask.png" />
+                                src="Easy_task.png" />
                             <div class="absolute top-4 left-4">
                                 <span
                                     class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Mobile
@@ -454,7 +469,7 @@
                         </div>
                     </a>
                     <a href="https://course-platform-d669f.web.app/index.html" target="_blank"
-                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="web">
                         <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Course Platform"
@@ -481,7 +496,7 @@
                         </div>
                     </a>
                     <a href="https://pypi.org/project/selenium-ui-test-tool/" target="_blank"
-                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="library">
                         <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Selenium UI Test Tool"
@@ -510,7 +525,7 @@
                         </div>
                     </a>
                     <a href="https://hashtag-impact.vercel.app/" target="_blank"
-                        class="project-item group glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
+                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
                         data-category="web">
                         <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
                             <img alt="Hashtag Impact"
@@ -1202,7 +1217,52 @@
                     project.classList.add('hidden'); // Helper for tailwind
                 }
             });
+
+            const carousel = document.getElementById('projects-grid');
+            if (carousel) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                if (typeof startProjectScroll === 'function') startProjectScroll();
+            }
         }
+
+        // Project Auto-Scroll
+        let projectScrollTimer;
+
+        function startProjectScroll() {
+            const carousel = document.getElementById('projects-grid');
+            if (!carousel) return;
+
+            clearInterval(projectScrollTimer);
+            projectScrollTimer = setInterval(() => {
+                const firstItem = carousel.querySelector('.project-item:not(.hidden)');
+                if (!firstItem) return;
+
+                const itemWidth = firstItem.offsetWidth + 32; // width + gap (gap-8 = 32px)
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+                if (carousel.scrollLeft >= maxScroll - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                }
+            }, 3000);
+        }
+
+        function stopProjectScroll() {
+            clearInterval(projectScrollTimer);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('projects-grid');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', stopProjectScroll);
+                carousel.addEventListener('mouseleave', startProjectScroll);
+                carousel.addEventListener('touchstart', stopProjectScroll, { passive: true });
+                carousel.addEventListener('touchend', startProjectScroll);
+                startProjectScroll();
+            }
+        });
+
 
         // Form Security & Submission
         const Security = {
