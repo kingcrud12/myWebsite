@@ -199,6 +199,8 @@
                     <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
                         href="#about" data-i18n="nav.about">À Propos</a>
                     <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
+                        href="#skills" data-i18n="nav.skills">Compétences</a>
+                    <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
                         href="#projects" data-i18n="nav.projects">Projets</a>
                     <a class="text-sm font-medium hover:text-black dark:hover:text-white transition-colors"
                         href="#activity" data-i18n="nav.activity">Activité</a>
@@ -346,6 +348,104 @@
                 </div>
             </div>
         </section>
+        
+                <section class="py-24 px-6 relative overflow-hidden bg-neutral-50 dark:bg-neutral-900/50" id="skills">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 space-y-4 md:text-left">
+                    <h2 class="text-4xl font-display font-extrabold">
+                        <span data-i18n="skills.title_start">Mes</span> <span class="text-neutral-900 dark:text-white" data-i18n="skills.title_end">Compétences</span>
+                    </h2>
+                    <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl" data-i18n="skills.subtitle">
+                        Expertise technique et méthodologique pour la réussite de sites web et d'applications mobiles.
+                    </p>
+                </div>
+
+                <div class="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory hide-scroll" id="skills-grid">
+                    <!-- Skill 1 -->
+                    <a href="analysis.html" class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block">
+                        <div class="h-48 relative overflow-hidden bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                            <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDEwaDQwdjJIMFpNMCAzMGg0MHYySDB6IiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-[length:40px_40px] animate-[slide_20s_linear_infinite]"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:scale-125 transition-transform duration-500 z-10">psychology</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-black/20 z-10">
+                            <h3 class="text-xl font-bold mb-4 font-display" data-i18n="skills.analysis_title">1. Analyse des besoins clients</h3>
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.analysis_1">Mise en place d'entretiens de cadrage pour définir les objectifs stratégiques.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.analysis_2">Rédaction de cahier des charges techniques et fonctionnel détaillés.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.analysis_3">Recommandation de la stack technologique la plus adaptée (React, Vue, Shopify, Flutter, etc.) selon le budget et les performances attendues.</span></li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Skill 2 -->
+                    <a href="design.html" class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block">
+                        <div class="h-48 relative overflow-hidden bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center">
+                            <div class="absolute w-64 h-64 border-[12px] border-white/10 rounded-full mix-blend-overlay group-hover:scale-110 transition-transform duration-700"></div>
+                            <div class="absolute w-40 h-40 border-[8px] border-white/10 rounded-full mix-blend-overlay group-hover:-scale-x-110 transition-transform duration-700 delay-75"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:rotate-12 transition-transform duration-500 z-10">design_services</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-black/20 z-10">
+                            <h3 class="text-xl font-bold mb-4 font-display" data-i18n="skills.design_title">2. Conception (Design & Architecture)</h3>
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.design_1">Mise en place de : Wireframes et prototypes interactifs (UI/UX Design) via des outils comme Figma ou Adobe XD.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.design_2">Architecture : Modélisation de la base de données et conception de l’architecture logicielle (API REST, micro-services).</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.design_3">Planification : Définition de la roadmap projet avec des jalons de livraison clairs.</span></li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Skill 3 -->
+                    <a href="development.html" class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block">
+                        <div class="h-48 relative overflow-hidden bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center">
+                            <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==')] bg-[length:20px_20px]"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:-translate-y-2 transition-transform duration-500 z-10">code</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-black/20 z-10">
+                            <h3 class="text-xl font-bold mb-4 font-display" data-i18n="skills.dev_title">3. Développement</h3>
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.dev_1">Front-end : Intégration d'interfaces responsives, fluides et optimisées pour le SEO.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.dev_2">Back-end : Développement des fonctionnalités métier, gestion de l'authentification sécurisée et intégration de services tiers (paiements Stripe, APIs logistiques, CRM).</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.dev_3">E-commerce : Configuration et personnalisation poussée de plateformes (Shopify Liquid, WooCommerce) ou solutions "Headless".</span></li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Skill 4 -->
+                    <a href="deployment.html" class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block">
+                        <div class="h-48 relative overflow-hidden bg-gradient-to-r from-orange-400 to-amber-500 flex items-center justify-center">
+                            <div class="absolute w-full h-full border-t border-b border-white/20 -skew-y-12 group-hover:skew-y-0 transition-transform duration-700 bg-white/5"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:-translate-y-3 group-hover:scale-110 transition-transform duration-500 z-10">rocket_launch</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-black/20 z-10">
+                            <h3 class="text-xl font-bold mb-4 font-display" data-i18n="skills.deploy_title">4. Déploiement & Maintenance</h3>
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.deploy_1">Mise en production : Configuration des serveurs, gestion des noms de domaine et installation de certificats SSL.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.deploy_2">CI/CD : Automatisation du déploiement via des pipelines (GitHub Actions, GitLab CI).</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.deploy_3">Suivi : Tests de recette (QA), correction de bugs et formation des clients à la gestion de leur nouvel outil.</span></li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Skill 5 -->
+                    <a href="automation.html" class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block">
+                        <div class="h-48 relative overflow-hidden bg-gradient-to-bl from-violet-600 to-purple-800 flex items-center justify-center">
+                            <div class="absolute w-32 h-32 border border-white/20 rotate-45 group-hover:rotate-90 transition-transform duration-700"></div>
+                            <div class="absolute w-24 h-24 border-2 border-white/10 rotate-12 group-hover:-rotate-45 transition-transform duration-700"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:rotate-180 transition-transform duration-1000 z-10">smart_toy</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-black/20 z-10">
+                            <h3 class="text-xl font-bold mb-4 font-display" data-i18n="skills.auto_title">5. Automatisation & Scripting</h3>
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.auto_1">Création de scripts Python & Node.js pour automatiser les tâches répétitives.</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.auto_2">Développement de flux d'automatisation no-code/low-code (RPA, Make, Zapier).</span></li>
+                                <li class="flex gap-3 items-start"><span class="text-black dark:text-white font-bold mt-1">•</span><span data-i18n="skills.auto_3">Web scraping, bots intelligents, tests automatisés (UI et API).</span></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section class="py-24 px-6" id="projects">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -371,190 +471,135 @@
                             data-i18n="projects.filter_library">Librairie</button>
                     </div>
                 </div>
-                <div class="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory hide-scroll" id="projects-grid">
-                    <div class="project-item group flex-none w-[85vw] md:w-[60vw] lg:w-[50vw] snap-center relative overflow-hidden rounded-[2rem] glass project-card border-black/20 dark:border-white/20"
-                        data-category="saas">
-                        <div class="absolute top-6 left-6 z-10">
-                            <span
-                                class="px-3 py-1 bg-black dark:bg-white text-white dark:text-black text-[10px] font-bold uppercase tracking-widest rounded-full"
-                                data-i18n="projects.featured">Projet
-                                du moment</span>
-                        </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full" id="projects-grid">
+                    <div class="project-item group relative overflow-hidden rounded-[2rem] glass project-card border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col lg:col-span-2" data-category="saas">
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-                            <div class="p-8 flex flex-col justify-between h-full space-y-8">
+                            <div class="p-10 flex flex-col justify-between h-full space-y-8 z-10 relative">
                                 <div>
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <span
-                                            class="text-xs font-bold text-black dark:text-white uppercase tracking-wider">Web
-                                            Platform</span>
+                                    <div class="mb-4">
+                                        <span class="inline-block px-3 py-1 bg-black dark:bg-white text-white dark:text-black text-[10px] font-bold uppercase tracking-widest rounded-full" data-i18n="projects.featured">Projet du moment</span>
                                     </div>
-                                    <h3 class="text-3xl font-display font-bold mb-4">PMT - Project Management Tool</h3>
-                                    <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed"
-                                        data-i18n="projects.pmt_desc">
-                                        Une plateforme SaaS complète pour la gestion de projets agile, permettant aux
-                                        équipes de collaborer en temps réel avec des outils de visualisation avancés.
+                                    <h3 class="text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">PMT - Project Management</h3>
+                                    <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed" data-i18n="projects.pmt_desc">
+                                        Une plateforme SaaS complète pour la gestion de projets agile, permettant aux équipes de collaborer en temps réel avec des outils de visualisation avancés.
                                     </p>
                                 </div>
                                 <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Next.js</span>
-                                    <span
-                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">PostgreSQL</span>
-                                    <span
-                                        class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Pusher</span>
+                                    <span class="text-xs bg-black/5 dark:bg-white/10 backdrop-blur-md font-medium px-3 py-1.5 rounded-full">Next.js</span>
+                                    <span class="text-xs bg-black/5 dark:bg-white/10 backdrop-blur-md font-medium px-3 py-1.5 rounded-full">PostgreSQL</span>
+                                    <span class="text-xs bg-black/5 dark:bg-white/10 backdrop-blur-md font-medium px-3 py-1.5 rounded-full">Pusher</span>
                                 </div>
                             </div>
-                            <div class="bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden min-h-[300px]">
-                                <img alt="PMT Dashboard"
-                                    class="absolute inset-0 w-full h-full object-cover project-image transition-transform duration-700"
-                                    src="pmt.png" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent"></div>
+                            <div class="relative overflow-hidden min-h-[250px] bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
+                                <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')] bg-[length:20px_20px]"></div>
+                                <span class="material-symbols-outlined text-[100px] text-white/50 group-hover:text-white/80 transition-colors duration-500 transform -rotate-12 group-hover:rotate-0">dashboard_customize</span>
                             </div>
                         </div>
                     </div>
-                    <a href="https://promethee-selenium.com/" target="_blank"
-                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
-                        data-category="library">
-                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                            <img alt="Prométhée Selenium"
-                                class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="promethee.png" />
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
-                                    data-i18n="projects.filter_library">Librairie
-                                </span>
+
+                    <a href="https://promethee-selenium.com/" target="_blank" class="project-item group relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-category="library">
+                        <div class="h-56 relative overflow-hidden bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
+                            <div class="absolute top-6 left-6 z-10">
+                                <span class="px-3 py-1 bg-black/20 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest rounded-full" data-i18n="projects.filter_library">Librairie</span>
                             </div>
+                            <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')] bg-[length:20px_20px]"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/70 group-hover:scale-125 transition-transform duration-500">bug_report</span>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div class="p-8 flex-1 flex flex-col justify-between z-10 relative bg-white dark:bg-black/20">
                             <div>
-                                <h3 class="text-xl font-display font-bold mb-2">Prométhée Selenium</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
-                                    data-i18n="projects.promethee_desc">Bibliothèque robuste basée sur le pattern Page
-                                    Object Model pour les tests UI automatisés avec Selenium.</p>
+                                <h3 class="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Prométhée Selenium</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6" data-i18n="projects.promethee_desc">Bibliothèque robuste basée sur le pattern Page Object Model pour les tests UI automatisés.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Python</span>
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Selenium</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">Python</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">Selenium</span>
                             </div>
                         </div>
                     </a>
-                    <a href="https://apps.apple.com/fr/app/easy-task/id6756175109" target="_blank"
-                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
-                        data-category="mobile">
-                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                            <img alt="Easy Task"
-                                class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="Easy_task.png" />
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Mobile
-                                </span>
+
+                    <a href="https://apps.apple.com/fr/app/easy-task/id6756175109" target="_blank" class="project-item group relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-category="mobile">
+                        <div class="h-56 relative overflow-hidden bg-gradient-to-tr from-orange-400 to-rose-400 flex items-center justify-center">
+                            <div class="absolute top-6 left-6 z-10">
+                                <span class="px-3 py-1 bg-black/20 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest rounded-full">Mobile</span>
                             </div>
+                            <div class="absolute w-32 h-32 border-4 border-white/20 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:-translate-y-2 transition-transform duration-300">task_alt</span>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div class="p-8 flex-1 flex flex-col justify-between z-10 relative bg-white dark:bg-black/20">
                             <div>
-                                <h3 class="text-xl font-display font-bold mb-2">Easy Task</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
-                                    data-i18n="projects.easytask_desc">Une application iOS intuitive
-                                    pour gérer vos tâches quotidiennes et vos échéances importantes.</p>
+                                <h3 class="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Easy Task</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6" data-i18n="projects.easytask_desc">Une application iOS intuitive pour gérer vos tâches quotidiennes et vos échéances importantes.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">SwiftUI</span>
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">CoreData</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">SwiftUI</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">CoreData</span>
                             </div>
                         </div>
                     </a>
-                    <a href="https://course-platform-d669f.web.app/index.html" target="_blank"
-                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
-                        data-category="web">
-                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                            <img alt="Course Platform"
-                                class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="course-platform.png" />
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
-                                </span>
+
+                    <a href="https://course-platform-d669f.web.app/index.html" target="_blank" class="project-item group relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-category="web">
+                        <div class="h-56 relative overflow-hidden bg-gradient-to-bl from-blue-500 to-indigo-600 flex items-center justify-center">
+                            <div class="absolute top-6 left-6 z-10">
+                                <span class="px-3 py-1 bg-black/20 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest rounded-full">Web</span>
                             </div>
+                            <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_25%,rgba(255,255,255,0.1)_50%,transparent_50%,transparent_75%,rgba(255,255,255,0.1)_75%,rgba(255,255,255,0.1)_100%)] bg-[length:20px_20px]"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:rotate-12 transition-transform duration-300">school</span>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div class="p-8 flex-1 flex flex-col justify-between z-10 relative bg-white dark:bg-black/20">
                             <div>
-                                <h3 class="text-xl font-display font-bold mb-2">Course Platform</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
-                                    data-i18n="projects.course_desc">Plateforme de formation en ligne interactive.</p>
+                                <h3 class="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Course Platform</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6" data-i18n="projects.course_desc">Plateforme de formation en ligne interactive.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">HTML/CSS</span>
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">JavaScript</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">HTML/CSS</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">JavaScript</span>
                             </div>
                         </div>
                     </a>
-                    <a href="https://pypi.org/project/selenium-ui-test-tool/" target="_blank"
-                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
-                        data-category="library">
-                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                            <img alt="Selenium UI Test Tool"
-                                class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="selenium-tool.png" />
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full"
-                                    data-i18n="projects.filter_library">Librairie
-                                </span>
+
+                    <a href="https://pypi.org/project/selenium-ui-test-tool/" target="_blank" class="project-item group relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-category="library">
+                        <div class="h-56 relative overflow-hidden bg-gradient-to-r from-teal-400 to-emerald-600 flex items-center justify-center">
+                            <div class="absolute top-6 left-6 z-10">
+                                <span class="px-3 py-1 bg-black/20 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest rounded-full" data-i18n="projects.filter_library">Librairie</span>
                             </div>
+                            <div class="absolute w-40 h-40 bg-white/10 rounded-full mix-blend-overlay group-hover:scale-110 transition-transform duration-500 blur-xl"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:scale-110 transition-transform duration-300">code_blocks</span>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div class="p-8 flex-1 flex flex-col justify-between z-10 relative bg-white dark:bg-black/20">
                             <div>
-                                <h3 class="text-xl font-display font-bold mb-2">Selenium UI Test Tool</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
-                                    data-i18n="projects.selenium_desc">Bibliothèque Python pour simplifier
-                                    l'automatisation des tests UI.</p>
+                                <h3 class="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Selenium UI Test Tool</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6" data-i18n="projects.selenium_desc">Bibliothèque Python pour simplifier l'automatisation des tests UI.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Python</span>
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Selenium</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">Python</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">Selenium</span>
                             </div>
                         </div>
                     </a>
-                    <a href="https://hashtag-impact.vercel.app/" target="_blank"
-                        class="project-item group flex-none w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center glass rounded-[2rem] overflow-hidden flex flex-col project-card block border-primary/30"
-                        data-category="web">
-                        <div class="aspect-video bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                            <img alt="Hashtag Impact"
-                                class="w-full h-full object-cover project-image transition-transform duration-700"
-                                src="hashtag-impact.png" />
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1 bg-neutral-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Web
-                                </span>
+
+                    <a href="https://hashtag-impact.vercel.app/" target="_blank" class="project-item group relative overflow-hidden rounded-[2rem] glass project-card flex flex-col border-black/10 dark:border-white/10 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-category="web">
+                        <div class="h-56 relative overflow-hidden bg-gradient-to-br from-gray-700 to-black flex items-center justify-center">
+                            <div class="absolute top-6 left-6 z-10">
+                                <span class="px-3 py-1 bg-white/10 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest rounded-full">Web</span>
                             </div>
+                            <div class="absolute w-24 h-24 rotate-45 border-2 border-white/20 group-hover:rotate-90 transition-transform duration-700"></div>
+                            <div class="absolute w-32 h-32 rotate-12 border border-white/10 group-hover:rotate-45 transition-transform duration-700 delay-100"></div>
+                            <span class="material-symbols-outlined text-7xl text-white/90 group-hover:scale-110 transition-all duration-300 z-10 relative">home_work</span>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div class="p-8 flex-1 flex flex-col justify-between z-10 relative bg-white dark:bg-black/20">
                             <div>
-                                <h3 class="text-xl font-display font-bold mb-2">Hashtag Impact</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6"
-                                    data-i18n="projects.hashtag_impact_desc">Plateforme de valorisation des biens
-                                    immobiliers vacants.</p>
+                                <h3 class="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">Hashtag Impact</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6" data-i18n="projects.hashtag_impact_desc">Plateforme de valorisation des biens immobiliers vacants.</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">Next.js</span>
-                                <span
-                                    class="text-[10px] bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">TailwindCSS</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">Next.js</span>
+                                <span class="text-xs bg-black/5 dark:bg-white/5 font-medium px-3 py-1 rounded-full border border-black/10 dark:border-white/10">TailwindCSS</span>
                             </div>
                         </div>
                     </a>
                 </div>
-            </div>
+</div>
             </div>
         </section>
         <section class="py-24 px-6 bg-neutral-50 dark:bg-neutral-900/50" id="blog-preview">
@@ -616,7 +661,6 @@
                             <div class="glass p-6 rounded-2xl border border-transparent hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group"
                                 onclick="Mentorship.selectType('1h', this)">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-3xl">🚀</span>
                                     <div
                                         class="w-6 h-6 rounded-full border-2 border-neutral-300 dark:border-neutral-600 group-hover:border-black dark:group-hover:border-white flex items-center justify-center radio-circle">
                                         <div class="w-3 h-3 rounded-full bg-black dark:bg-white hidden"></div>
@@ -637,7 +681,6 @@
                             <div class="glass p-6 rounded-2xl border border-transparent hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group"
                                 onclick="Mentorship.selectType('2h', this)">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-3xl">⚡️</span>
                                     <div
                                         class="w-6 h-6 rounded-full border-2 border-neutral-300 dark:border-neutral-600 group-hover:border-black dark:group-hover:border-white flex items-center justify-center radio-circle">
                                         <div class="w-3 h-3 rounded-full bg-black dark:bg-white hidden"></div>
@@ -679,7 +722,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Right Booking -->
                     <div class="glass p-8 rounded-[2.5rem] shadow-2xl relative overflow-visible">
@@ -938,11 +981,39 @@
         // Language System
         const translations = {
             fr: {
+                skills: {
+                    title_start: "Mes",
+                    title_end: "Compétences",
+                    subtitle: "Expertise technique et méthodologique pour la réussite de sites web et d'applications mobiles.",
+                    analysis_title: "1. Analyse des besoins clients",
+                    analysis_1: "Mise en place d'entretiens de cadrage pour définir les objectifs stratégiques.",
+                    analysis_2: "Rédaction de cahier des charges techniques et fonctionnel détaillés.",
+                    analysis_3: "Recommandation de la stack technologique la plus adaptée (React, Vue, Shopify, Flutter, etc.) selon le budget et les performances attendues.",
+                    design_title: "2. Conception (Design & Architecture)",
+                    design_1: "Mise en place de : Wireframes et prototypes interactifs (UI/UX Design) via des outils comme Figma ou Adobe XD.",
+                    design_2: "Architecture : Modélisation de la base de données et conception de l’architecture logicielle (API REST, micro-services).",
+                    design_3: "Planification : Définition de la roadmap projet avec des jalons de livraison clairs.",
+                    dev_title: "3. Développement",
+                    dev_1: "Front-end : Intégration d'interfaces responsives, fluides et optimisées pour le SEO.",
+                    dev_2: "Back-end : Développement des fonctionnalités métier, gestion de l'authentification sécurisée et intégration de services tiers (paiements Stripe, APIs logistiques, CRM).",
+                    dev_3: "E-commerce : Configuration et personnalisation poussée de plateformes (Shopify Liquid, WooCommerce) ou solutions \"Headless\".",
+                    deploy_title: "4. Déploiement & Maintenance",
+                    deploy_1: "Mise en production : Configuration des serveurs, gestion des noms de domaine et installation de certificats SSL.",
+                    deploy_2: "CI/CD : Automatisation du déploiement via des pipelines (GitHub Actions, GitLab CI).",
+                                        deploy_3: "Suivi : Tests de recette (QA), correction de bugs et formation des clients à la gestion de leur nouvel outil.",
+                    deploy_4: "Automatisation : QA (automatisation API, UI), autres automatisations.",
+                    auto_title: "5. Automatisation & Scripting",
+                    auto_1: "Création de scripts Python & Node.js pour automatiser les tâches répétitives.",
+                    auto_2: "Développement de flux d'automatisation no-code/low-code (RPA, Make, Zapier).",
+                    auto_3: "Web scraping, bots intelligents, tests automatisés (UI et API)."
+
+                },
                 seo: {
                     title: "Yann Dipita - Développeur Web & Mobile | Portfolio"
                 },
                 nav: {
                     home: "Accueil",
+                    skills: "Compétences",
                     about: "À Propos",
                     projects: "Projets",
                     activity: "Activité",
@@ -1027,11 +1098,39 @@
                 }
             },
             en: {
+                skills: {
+                    title_start: "My",
+                    title_end: "Skills",
+                    subtitle: "Technical and methodological expertise for the success of your websites and mobile apps.",
+                    analysis_title: "1. Client Needs Analysis",
+                    analysis_1: "Setting up scoping interviews to define strategic objectives.",
+                    analysis_2: "Writing detailed technical and functional specifications.",
+                    analysis_3: "Recommendation of the most suitable tech stack (React, Vue, Shopify, Flutter, etc.) according to budget and expected performance.",
+                    design_title: "2. Conception (Design & Architecture)",
+                    design_1: "Implementation of: Wireframes and interactive prototypes (UI/UX Design) using tools like Figma or Adobe XD.",
+                    design_2: "Architecture: Database modeling and software architecture design (REST APIs, microservices).",
+                    design_3: "Planning: Definition of the project roadmap with clear delivery milestones.",
+                    dev_title: "3. Development",
+                    dev_1: "Front-end: Integration of responsive, fluid, and SEO-optimized interfaces.",
+                    dev_2: "Back-end: Development of business logic, secure authentication, and third-party integrations (Stripe payments, logistics APIs, CRM).",
+                    dev_3: "E-commerce: Advanced configuration and customization of platforms (Shopify Liquid, WooCommerce) or \"Headless\" solutions.",
+                    deploy_title: "4. Deployment & Maintenance",
+                    deploy_1: "Production release: Server configuration, domain name management, and SSL certificate installation.",
+                    deploy_2: "CI/CD: Deployment automation via pipelines (GitHub Actions, GitLab CI).",
+                                        deploy_3: "Monitoring: Acceptance testing (QA), bug fixing, and training clients to manage their new tool.",
+                    deploy_4: "Automation: QA (API and UI automation), and other automations.",
+                    auto_title: "5. Automation & Scripting",
+                    auto_1: "Creation of Python & Node.js scripts to automate repetitive tasks.",
+                    auto_2: "Development of no-code/low-code automation logic (RPA, Make, Zapier).",
+                    auto_3: "Web scraping, intelligent bots, automated testing (UI and API)."
+
+                },
                 seo: {
                     title: "Yann Dipita - Web & Mobile Developer | Portfolio"
                 },
                 nav: {
                     home: "Home",
+                    skills: "Skills",
                     about: "About",
                     projects: "Projects",
                     activity: "Activity",

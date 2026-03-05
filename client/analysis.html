@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Analyse des besoins | Yann Dipita</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#000000", secondary: "#333333" },
+                    fontFamily: { display: ["'Plus Jakarta Sans'", "sans-serif"], sans: ["'Inter'", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(0, 0, 0, 0.1); }
+        .dark .glass { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans antialiased min-h-screen flex flex-col">
+    <!-- Nav -->
+    <nav class="w-full py-6 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html#skills" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined">arrow_back</span> Retour
+            </a>
+            <span class="font-display font-bold text-xl">YD.</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Header -->
+            <div class="space-y-6 text-center">
+                <div class="w-20 h-20 bg-blue-500/10 text-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl">psychology</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">1. Analyse des besoins</h1>
+                <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                    Une étape cruciale pour garantir la réussite du projet. C'est ici que l'on transforme vos idées en un plan d'action technique solide et réalisable.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8 mt-16 text-lg text-neutral-700 dark:text-neutral-300">
+                <div class="glass p-8 md:p-12 rounded-[2.5rem] space-y-8 shadow-2xl">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">forum</span>
+                            Entretiens de cadrage
+                        </h2>
+                        <p>Le projet commence toujours par des ateliers d'échange. L'objectif est de comprendre en profondeur <strong>qui sont vos utilisateurs</strong>, <strong>quels sont vos objectifs business</strong>, et <strong>quelles sont vos contraintes</strong> (budget, délais). Nous définissons ensemble le périmètre exact du MVP (Produit Minimum Viable) pour éviter de s'éparpiller.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">description</span>
+                            Rédaction du cahier des charges
+                        </h2>
+                        <p>À la suite de nos ateliers, je rédige un document de spécifications techniques et fonctionnelles détaillé. Ce document agit comme la "Bible" du projet. Il décrit avec précision :</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-blue-500">
+                            <li>Les fonctionnalités user-stories (ex: "En tant qu'utilisateur, je veux pouvoir m'inscrire via Google").</li>
+                            <li>Les parcours utilisateurs.</li>
+                            <li>Les exigences de performance et de sécurité.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">memory</span>
+                            Recommandation technologique
+                        </h2>
+                        <p>Je ne propose qu'une seule solution si c'est la meilleure pour vous. Selon que le besoin soit :</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-blue-500">
+                            <li><strong>E-commerce :</strong> Shopify, WooCommerce ou Headless.</li>
+                            <li><strong>Application Web Complexe :</strong> React, Next.js, Node.js.</li>
+                            <li><strong>Application Mobile :</strong> SwiftUI, React Native ou Flutter pour du multiplateforme rapide.</li>
+                        </ul>
+                        <p class="mt-4">La stack technique choisie sera celle qui offre le meilleur compromis entre vitesse de développement, maintenabilité long terme et coûts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center pt-12">
+                <a href="design.html" class="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                    Voir l'étape 2 : Conception <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
