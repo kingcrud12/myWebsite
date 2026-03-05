@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Développement | Yann Dipita</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#000000", secondary: "#333333" },
+                    fontFamily: { display: ["'Plus Jakarta Sans'", "sans-serif"], sans: ["'Inter'", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans antialiased min-h-screen flex flex-col">
+    <!-- Nav -->
+    <nav class="w-full py-6 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html#skills" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined">arrow_back</span> Retour
+            </a>
+            <span class="font-display font-bold text-xl">YD.</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Header -->
+            <div class="space-y-6 text-center">
+                <div
+                    class="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl">code</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">3. Développement</h1>
+                <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                    Le code prend vie. Un développement modulaire, performant et documenté pour une application rapide
+                    et sécurisée.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8 mt-16 text-lg text-neutral-700 dark:text-neutral-300">
+                <div class="glass p-8 md:p-12 rounded-[2.5rem] space-y-8 shadow-2xl">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-emerald-500 material-symbols-outlined">web</span>
+                            Intégration Front-end
+                        </h2>
+                        <p>Je transforme les maquettes Figma en interfaces web ou mobiles fluides, responsives
+                            ("Mobile-First") et optimisées pour le référencement (SEO).</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-emerald-500">
+                            <li>Technologies : React, Vue.js, Tailwind CSS pour du web. Flutter & React Native pour du
+                                mobile.</li>
+                            <li>Animations fluides et expérience "Premium" (Glassmorphism, animations au scroll).</li>
+                            <li>Accessibilité (a11y) prise en compte.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-emerald-500 material-symbols-outlined">dns</span>
+                            Développement Back-end & E-commerce
+                        </h2>
+                        <p>Le moteur sous le capot. Je développe la logique métier et gère la base de données avec des
+                            technologies robustes (Node.js, Python, PostgreSQL).</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-emerald-500">
+                            <li><strong>Sécurité :</strong> Gestion des tokens JWT, encryption TLS, protection contre
+                                les failles (XSS, CSRF, Injection SQL).</li>
+                            <li><strong>APIs Tiers :</strong> Intégration de paiements (Stripe, PayPal), de CRMs,
+                                d'outils logistiques.</li>
+                            <li><strong>E-commerce :</strong> Création de boutiques complètes (Shopify, thèmes Liquid ou
+                                développement Headless sur mesure).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center pt-12">
+                <a href="deployment.html"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                    Voir l'étape 4 : Déploiement <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

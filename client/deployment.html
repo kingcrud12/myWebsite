@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Déploiement & Maintenance | Yann Dipita</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#000000", secondary: "#333333" },
+                    fontFamily: { display: ["'Plus Jakarta Sans'", "sans-serif"], sans: ["'Inter'", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans antialiased min-h-screen flex flex-col">
+    <!-- Nav -->
+    <nav class="w-full py-6 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html#skills" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined">arrow_back</span> Retour
+            </a>
+            <span class="font-display font-bold text-xl">YD.</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Header -->
+            <div class="space-y-6 text-center">
+                <div
+                    class="w-20 h-20 bg-orange-500/10 text-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl">rocket_launch</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">4. Déploiement & Maintenance
+                </h1>
+                <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                    Le lancement de votre produit ne marque pas la fin du projet, mais le début de sa vie publique.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8 mt-16 text-lg text-neutral-700 dark:text-neutral-300">
+                <div class="glass p-8 md:p-12 rounded-[2.5rem] space-y-8 shadow-2xl">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-orange-500 material-symbols-outlined">cloud_upload</span>
+                            Mise en production
+                        </h2>
+                        <p>Je m'occupe de la configuration de l'hébergement cloud (AWS, Vercel, Heroku, Digital Ocean)
+                            pour garantir performance globale et sécurité.</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-orange-500">
+                            <li>Gestion des noms de domaine et redirection DNS.</li>
+                            <li>Génération et vérification des certificats SSL (HTTPS).</li>
+                            <li>Configuration Docker pour isoler et standardiser l'environnement.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-orange-500 material-symbols-outlined">sync</span>
+                            CI/CD (Intégration et Déploiement Continus)
+                        </h2>
+                        <p>Chaque nouvelle fonctionnalité se doit d'être livrée sans casser l'existant. Grâce aux
+                            pipelines d'automatisation (GitHub Actions, GitLab CI), chaque modification de code est
+                            testée avant d'arriver en production, réduisant drastiquement les régressions.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-orange-500 material-symbols-outlined">support_agent</span>
+                            Suivi, Formation & Qualité
+                        </h2>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-orange-500">
+                            <li>Phase de recette (QA) approfondie avec vous avant le lancement officiel.</li>
+                            <li>Correction rapide des bugs éventuels détectés.</li>
+                            <li>Formation à l'utilisation du Back-office ou du CMS pour que vous soyez 100% autonomes !
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center pt-12">
+                <a href="automation.html"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                    Voir la compétence clé : Automatisation <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Automatisation & Scripting | Yann Dipita</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#000000", secondary: "#333333" },
+                    fontFamily: { display: ["'Plus Jakarta Sans'", "sans-serif"], sans: ["'Inter'", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans antialiased min-h-screen flex flex-col">
+    <!-- Nav -->
+    <nav class="w-full py-6 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html#skills" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined">arrow_back</span> Retour
+            </a>
+            <span class="font-display font-bold text-xl">YD.</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Header -->
+            <div class="space-y-6 text-center">
+                <div
+                    class="w-20 h-20 bg-purple-500/10 text-purple-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl">smart_toy</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight">5. Automatisation &
+                    Scripting</h1>
+                <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                    Je crée des solutions pour éliminer les tâches chronophages afin de vous faire gagner un temps
+                    précieux (et de l'argent).
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8 mt-16 text-lg text-neutral-700 dark:text-neutral-300">
+                <div class="glass p-8 md:p-12 rounded-[2.5rem] space-y-8 shadow-2xl">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-purple-500 material-symbols-outlined">terminal</span>
+                            Scripts Sur-Mesure (Python & Node.js)
+                        </h2>
+                        <p>Je développe des scripts personnalisés pour l'extraction de données ou le traitement de gros
+                            volumes d'informations :</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-purple-500">
+                            <li><strong>Web Scraping :</strong> Collecte d'informations ciblées sur des sites internet.
+                            </li>
+                            <li><strong>Manipulation de données :</strong> Nettoyage, fusion ou conversion de fichiers
+                                complexes.</li>
+                            <li><strong>Bots :</strong> Création de bots pour automatiser des interactions.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-purple-500 material-symbols-outlined">cable</span>
+                            Flux No-Code / Low-Code
+                        </h2>
+                        <p>Sans avoir réinventer la roue, on peut interconnecter les différents logiciels de votre
+                            entreprise pour qu'ils "se parlent".</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-purple-500">
+                            <li>Outils de type <strong>Zapier, Make (Integromat), ou n8n</strong>.</li>
+                            <li>Exemple : Un lead s'inscrit sur votre site Webflow -> un email Typeform part -> les
+                                données arrivent sur votre CRM Hubspot -> vous recevez une notification Slack. Tout cela
+                                automatiquement.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-purple-500 material-symbols-outlined">rule_folder</span>
+                            Tests Automatisés (QA & API)
+                        </h2>
+                        <p>Pour des produits critiques, je mets en place des suites de tests automatisées (Selenium,
+                            Cypress, Pytest, Playwright) garantissant que les fonctionnalités de base ne soient jamais
+                            compromises (non-régression).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center pt-12">
+                <a href="index.html#contact"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                    Me confier une tâche d'automatisation <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
