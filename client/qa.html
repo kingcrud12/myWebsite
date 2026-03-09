@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Quality Assurance (QA) | Yann Dipita</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#000000", secondary: "#333333" },
+                    fontFamily: { display: ["'Plus Jakarta Sans'", "sans-serif"], sans: ["'Inter'", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans antialiased min-h-screen flex flex-col">
+    <!-- Nav -->
+    <nav class="w-full py-6 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index-qa.html#skills" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <span class="material-symbols-outlined">arrow_back</span> Retour
+            </a>
+            <span class="font-display font-bold text-xl">YD.</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Header -->
+            <div class="space-y-6 text-center">
+                <div
+                    class="w-20 h-20 bg-blue-500/10 text-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-4xl">psychology</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-extrabold tracking-tight"
+                    data-i18n="skills.qa_sub_title">1. Quality Assurance (QA)
+                </h1>
+                <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed"
+                    data-i18n="qa_sub.desc">
+                    Garantir la qualité logicielle dès la conception.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8 mt-16 text-lg text-neutral-700 dark:text-neutral-300">
+                <div class="glass p-8 md:p-12 rounded-[2.5rem] space-y-8 shadow-2xl">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">edit_document</span>
+                            <span data-i18n="qa_sub.doc_title">Cahiers de Tests et Analyse</span>
+                        </h2>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-blue-500">
+                            <li><strong data-i18n="qa_sub.doc_1_strong">Rédaction et maintien:</strong> <span
+                                    data-i18n="qa_sub.doc_1">Création de cahiers de tests exhaustifs pour couvrir tous
+                                    les cas d'usage.</span></li>
+                            <li><strong data-i18n="qa_sub.doc_2_strong">Étude des fonctionnalités:</strong> <span
+                                    data-i18n="qa_sub.doc_2">Analyse approfondie des nouvelles fonctionnalités pour
+                                    anticiper les failles potentielles.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">rule_folder</span>
+                            <span data-i18n="qa_sub.camp_title">Campagnes de Tests</span>
+                        </h2>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-blue-500">
+                            <li><strong data-i18n="qa_sub.camp_1_strong">Tests inter-sprint:</strong> <span
+                                    data-i18n="qa_sub.camp_1">Mise en place de campagnes structurées tout au long du
+                                    cycle de développement agile.</span></li>
+                            <li><strong data-i18n="qa_sub.camp_2_strong">Préparation de démos:</strong> <span
+                                    data-i18n="qa_sub.camp_2">Validation des parcours utilisateurs pour garantir des
+                                    démonstrations fluides.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <span class="text-blue-500 material-symbols-outlined">architecture</span>
+                            <span data-i18n="qa_sub.frame_title">Frameworks Sur-Mesure</span>
+                        </h2>
+                        <p data-i18n="qa_sub.frame_desc">Plutôt que d'utiliser des solutions génériques, je conçois des
+                            frameworks adaptés aux besoins
+                            spécifiques de chaque projet :</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-blue-500">
+                            <li><strong>ATLAS API:</strong> <span data-i18n="qa_sub.frame_1">Framework sur mesure pour
+                                    l'automatisation des tests API.</span></li>
+                            <li><strong>Promethee-Selenium & Selenium UI Test Tool:</strong> <span
+                                    data-i18n="qa_sub.frame_2">Mes propres bibliothèques
+                                    pour simplifier et fiabiliser drastiquement les tests E2E.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center pt-12">
+                <a href="index-qa.html#contact"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                    <span data-i18n="qa_sub.cta">Me confier votre QA</span> <span
+                        class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="i18n.js"></script>
+</body>
+
+</html>
