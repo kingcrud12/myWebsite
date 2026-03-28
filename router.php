@@ -90,7 +90,7 @@ if ($requestPath === 'sitemap.xml') {
 
 // Si c'est la racine ou index.html, servir index.html
 if ($requestPath === '' || $requestPath === 'index' || $requestPath === '/') {
-    $file = __DIR__ . '/client/index';
+    $file = __DIR__ . '/client/index.html';
     if (file_exists($file)) {
         header('Content-Type: text/html; charset=utf-8');
         readfile($file);
