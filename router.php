@@ -89,8 +89,8 @@ if ($requestPath === 'sitemap.xml') {
 }
 
 // Si c'est la racine ou index.html, servir index.html
-if ($requestPath === '' || $requestPath === 'index-qa.html' || $requestPath === '/') {
-    $file = __DIR__ . '/client/index-qa.html';
+if ($requestPath === '' || $requestPath === 'index' || $requestPath === '/') {
+    $file = __DIR__ . '/client/index';
     if (file_exists($file)) {
         header('Content-Type: text/html; charset=utf-8');
         readfile($file);
@@ -119,7 +119,7 @@ if (file_exists($filePath) && strpos(realpath($filePath), realpath(__DIR__ . '/c
 }
 
 // Si le fichier n'existe pas, servir index.html (pour le routing côté client)
-$indexFile = __DIR__ . '/client/index-qa.html';
+$indexFile = __DIR__ . '/client/index.html';
 if (file_exists($indexFile)) {
     header('Content-Type: text/html; charset=utf-8');
     readfile($indexFile);
