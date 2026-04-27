@@ -30,14 +30,14 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload'
 // - img-src: self + data: (for SVGs/encoded)
 // - connect-src: self + Formspree (for form submission)
 // - form-action: self + Formspree
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://player.twitch.tv; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.twitch.tv; connect-src 'self' https://formspree.io https://*.twitch.tv; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv https://*.twitch.tv; report-uri /csp-report;");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://player.twitch.tv https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.twitch.tv; connect-src 'self' https://formspree.io https://*.twitch.tv blob: data:; form-action 'self' https://formspree.io; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv https://*.twitch.tv; report-uri /csp-report;");
 // ------------------------
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
 
-// Enlever le slash initial
-$requestPath = ltrim($requestPath, '/');
+// Enlever le slash initial et décoder les caractères spéciaux (espaces, etc.)
+$requestPath = urldecode(ltrim($requestPath, '/'));
 
 // Log pour débogage sur Render (seulement pour les vraies requêtes, pas les connexions préventives)
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== '') {
@@ -111,6 +111,10 @@ if (file_exists($filePath) && strpos(realpath($filePath), realpath(__DIR__ . '/c
         $mimeType = 'text/css';
     } elseif (pathinfo($filePath, PATHINFO_EXTENSION) === 'js') {
         $mimeType = 'application/javascript';
+    } elseif (pathinfo($filePath, PATHINFO_EXTENSION) === 'fbx') {
+        $mimeType = 'application/octet-stream';
+    } elseif (pathinfo($filePath, PATHINFO_EXTENSION) === 'glb') {
+        $mimeType = 'model/gltf-binary';
     }
 
     header('Content-Type: ' . $mimeType);
