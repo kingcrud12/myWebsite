@@ -1,15 +1,6 @@
-// Navigation
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-const themeToggle = document.getElementById('themeToggle');
-
 // Theme Management
 const initTheme = () => {
     const savedTheme = localStorage.getItem('theme');
-    // Default to Dark if no saved theme, or if saved theme is dark
-    // Only go to light if explicitly saved as 'light'
     if (savedTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
     } else {
@@ -17,82 +8,64 @@ const initTheme = () => {
     }
 };
 
-// Toggle Theme
+const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
     });
 }
 
-// Initialize theme on load
 initTheme();
 
-// Smooth scroll and active nav link
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const targetId = link.getAttribute('href');
+// Mobile Navigation
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
 
-        // Only prevent default if it's an anchor link on the same page
-        if (targetId.startsWith('#')) {
-            e.preventDefault();
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const spans = hamburger.querySelectorAll('span');
+        if (navMenu.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
         }
+    });
 
-        // Close mobile menu
-        navMenu.classList.remove('active');
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+}
+
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        if (navMenu) navMenu.classList.remove('active');
     });
 });
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Mobile menu toggle
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-
-    // Animate hamburger
-    const spans = hamburger.querySelectorAll('span');
-    if (navMenu.classList.contains('active')) {
-        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-    } else {
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    }
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-        const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    }
-});
-
-// Scroll animations
+// Reveal Animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -101,444 +74,16 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all sections and project cards
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
-    projectCards.forEach(card => {
-        observer.observe(card);
+    const revealElements = document.querySelectorAll('section, .group');
+    revealElements.forEach(el => {
+        el.classList.add('reveal-on-scroll');
+        observer.observe(el);
     });
 });
-
-// Contact Form
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-let btnSubmit, btnText, btnLoader;
-
-if (contactForm) {
-    btnSubmit = contactForm.querySelector('.btn-submit');
-    btnText = btnSubmit.querySelector('.btn-text');
-    btnLoader = btnSubmit.querySelector('.btn-loader');
-}
-
-
-// Protection contre les envois multiples
-let isSubmitting = false;
-
-// Regex Patterns for Security
-const securityPatterns = {
-    // Name: Letters, spaces, hyphens, apostrophes. 2-50 chars.
-    name: /^[a-zA-ZÀ-ÿ\s'-]{2,50}$/,
-
-    // Email: Standard email validation
-    email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-
-    // Text: Reject HTML tags, script tags, and common injection patterns
-    // We look for malicious patterns and return FALSE if found (to reject)
-    unsafe: /<[^>]*>|javascript:|data:|vbscript:|on\w+=/i
-};
-
-function validateInput(data) {
-    // 1. Validate Name
-    if (!securityPatterns.name.test(data.name)) {
-        return {
-            valid: false,
-            message: "Le nom contient des caractères non autorisés (lettres, espaces et tirets uniquement)."
-        };
-    }
-
-    // 2. Validate Email
-    if (!securityPatterns.email.test(data.email)) {
-        return {
-            valid: false,
-            message: "L'adresse email n'est pas valide."
-        };
-    }
-
-    // 3. Check for XSS/Injection in Subject and Message
-    if (securityPatterns.unsafe.test(data.subject) || securityPatterns.unsafe.test(data.message)) {
-        return {
-            valid: false,
-            message: "Votre message contient des caractères ou du code non autorisés."
-        };
-    }
-
-    return { valid: true };
-}
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Empêcher les envois multiples
-        if (isSubmitting) {
-            console.log('Form submission already in progress, ignoring duplicate submit');
-            return;
-        }
-
-        isSubmitting = true;
-
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            subject: document.getElementById('subject').value.trim(),
-            message: document.getElementById('message').value.trim()
-        };
-
-        // Security Validation
-        const validation = validateInput(formData);
-        if (!validation.valid) {
-            showError(validation.message);
-            isSubmitting = false;
-            return;
-        }
-
-        // Show loading state
-        btnText.style.display = 'none';
-        btnLoader.style.display = 'inline';
-        btnSubmit.disabled = true;
-
-        // Hide previous messages
-        formMessage.style.display = 'none';
-        formMessage.className = 'form-message';
-
-        try {
-            // Préparer les données en JSON
-            const jsonData = {
-                name: formData.name,
-                email: formData.email,
-                subject: formData.subject,
-                message: formData.message
-            };
-
-            // Utiliser l'endpoint Formspree
-            const response = await fetch('https://formspree.io/f/manrbred', {
-                method: 'POST',
-                body: JSON.stringify(jsonData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            });
-
-
-
-            // Vérifier que la réponse est valide
-            if (!response.ok) {
-                let errorText = '';
-                let errorJson = null;
-
-                try {
-                    errorText = await response.text();
-                    // Essayer de parser comme JSON
-                    try {
-                        errorJson = JSON.parse(errorText);
-                    } catch (e) {
-                        // Ce n'est pas du JSON, garder le texte brut
-                    }
-                } catch (e) {
-                    errorText = 'Impossible de lire la réponse du serveur';
-                }
-
-                console.error('Server error:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    errorText: errorText,
-                    errorJson: errorJson
-                });
-
-                const errorMessage = errorJson?.message || errorText || `Erreur serveur: ${response.status}`;
-                throw new Error(errorMessage);
-            }
-
-            // Vérifier que la réponse est du JSON
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                const text = await response.text();
-                console.error('Non-JSON response:', {
-                    contentType: contentType,
-                    text: text,
-                    status: response.status
-                });
-                throw new Error('Réponse invalide du serveur');
-            }
-
-            const result = await response.json();
-            console.log('Form submission success:', result);
-
-            if (result.ok) {
-                showSuccess('Message envoyé avec succès! Je vous répondrai bientôt.');
-                contactForm.reset();
-            } else {
-                showError(result.error || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
-            }
-
-        } catch (error) {
-            console.error('Form submission error:', error);
-
-            let errorMessage = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
-
-            if (error.name === 'AbortError') {
-                errorMessage = 'La requête a pris trop de temps. Veuillez réessayer ou m\'envoyer un email directement à dipitay@gmail.com';
-                console.error('Request timeout:', error);
-            } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                errorMessage = 'Impossible de contacter le serveur. Veuillez vérifier votre connexion ou m\'envoyer un email directement à dipitay@gmail.com';
-                console.error('Network error:', error);
-            } else if (error.message) {
-                // Utiliser le message d'erreur du serveur s'il est disponible
-                errorMessage = error.message;
-                // Si le message contient des détails techniques, les logger mais ne pas les afficher
-                if (error.error) {
-                    console.error('Server error details:', error.error);
-                }
-            }
-
-            showError(errorMessage);
-        } finally {
-            // Reset button state
-            isSubmitting = false;
-            btnText.style.display = 'inline';
-            btnLoader.style.display = 'none';
-            btnSubmit.disabled = false;
-        }
-    });
-
-    function showSuccess(message = 'Message envoyé avec succès!') {
-        formMessage.textContent = message;
-        formMessage.className = 'form-message success';
-        formMessage.style.display = 'block';
-
-        // Scroll to message
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function showError(message) {
-        formMessage.textContent = message;
-        formMessage.className = 'form-message error';
-        formMessage.style.display = 'block';
-
-        // Scroll to message
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    // Alternative: Simple form submission using Formspree or similar service
-    // You can also use this approach by replacing the form action:
-    /*
-    contactForm.addEventListener('submit', (e) => {
-        // Form will submit to Formspree endpoint
-        // Make sure to add: action="https://formspree.io/f/YOUR_FORM_ID" method="POST" to form tag
-    });
-    */
-
-    // Add smooth reveal animations on scroll
-    const revealElements = document.querySelectorAll('.project-card, .about-content, .contact-content');
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    revealElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        revealObserver.observe(element);
-    });
-
-
-    // Typewriter Effect
-    const heroBg = document.querySelector('.hero-bg');
-    const heroDescription = document.querySelector('.hero-description');
-    const originalText = "Bienvenue dans mon monde numérique. Ici on parle de développement web, mobile et automatisation.";
-
-    // Clear text initially
-    heroDescription.textContent = originalText;
-
-    function typeWriter(text, element, speed = 50) {
-        element.textContent = '';
-        element.classList.add('typing-cursor');
-
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                // Typing finished
-                // Keep cursor for a while then remove if needed, or keep blinking
-            }
-        }
-        type();
-    }
-
-    // Synchronize with CSS animation
-    if (heroBg && heroDescription) {
-        // Initial state
-        heroDescription.style.opacity = '1';
-
-        // Listen for animation iteration to sync
-        heroBg.addEventListener('animationiteration', () => {
-            runTypingCycle();
-        });
-
-        // Also start the cycle initially (sync with the first run of CSS animation)
-        // The CSS animation starts immediately. We need to match the timing.
-        // Cycle is 20s.
-        // 0-35% (0-7s): Visible
-        // 35-45% (7-9s): Fade Out
-        // 45% (9s): Start Typing
-
-        runTypingCycle();
-    }
-
-    function runTypingCycle() {
-        // Cycle is 40s
-        // Phase 1 (0-20s): Code Card visible 0-9s
-        // Phase 2 (20-40s): Rabbit Scene + Code Card visible 20-29s
-
-        // --- PHASE 1 START (0s) ---
-        heroDescription.style.transition = 'none';
-        heroDescription.style.opacity = '1';
-        heroDescription.textContent = originalText;
-        heroDescription.classList.remove('typing-cursor');
-
-        // Typing Start at 1s
-        setTimeout(() => {
-            heroDescription.textContent = '';
-            typeWriter(originalText, heroDescription, 50);
-        }, 1000);
-
-        // Fade Out at 8s
-        setTimeout(() => {
-            heroDescription.style.transition = 'opacity 1s ease';
-            heroDescription.style.opacity = '0';
-        }, 8000);
-
-        // --- PHASE 2 START (20s) ---
-        // Reset and show text again for Phase 2
-        setTimeout(() => {
-            heroDescription.style.transition = 'none';
-            heroDescription.style.opacity = '1';
-            heroDescription.textContent = ''; // Clear for typing
-            typeWriter(originalText, heroDescription, 50);
-        }, 20000); // 20s = 50% of 40s cycle
-
-        // Fade Out at 28s
-        setTimeout(() => {
-            heroDescription.style.transition = 'opacity 1s ease';
-            heroDescription.style.opacity = '0';
-        }, 28000);
-    }
-
-    // Project Carousel Logic
-    document.addEventListener('DOMContentLoaded', () => {
-        const track = document.querySelector('.carousel-track');
-        // Guard clause in case carousel elements don't exist
-        if (!track) return;
-
-        const slides = Array.from(track.children);
-        const dotsNav = document.querySelector('.carousel-dots');
-        const dots = Array.from(dotsNav.children);
-
-        let currentIndex = 0;
-        let autoPlayInterval;
-
-        // Update slide position
-        const updateSlidePosition = () => {
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        };
-
-        // Update dots
-        const updateDots = (index) => {
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
-        };
-
-        // Move to next slide
-        const moveToNextSlide = () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlidePosition();
-            updateDots(currentIndex);
-        };
-
-        // Auto Play
-        const startAutoPlay = () => {
-            stopAutoPlay(); // Clear existing interval
-            autoPlayInterval = setInterval(moveToNextSlide, 5000); // Change slide every 5 seconds
-        };
-
-        const stopAutoPlay = () => {
-            clearInterval(autoPlayInterval);
-        };
-
-        // Event Listeners
-        dotsNav.addEventListener('click', (e) => {
-            const targetDot = e.target.closest('.dot');
-            if (!targetDot) return;
-
-            const targetIndex = parseInt(targetDot.dataset.index);
-            currentIndex = targetIndex;
-            updateSlidePosition();
-            updateDots(currentIndex);
-            startAutoPlay();
-        });
-
-        // Pause on hover
-        track.addEventListener('mouseenter', stopAutoPlay);
-        track.addEventListener('mouseleave', startAutoPlay);
-
-        // Initial Start
-        startAutoPlay();
-    });
-
-    // Activity Page View Cycling
-    window.addEventListener('load', () => {
-        const gridView = document.getElementById('activity-grid-view');
-        const animView = document.getElementById('activity-animation-view');
-
-        if (gridView && animView) {
-            console.log('Activity Page: Animation Cycle Initialized');
-            let isGridView = true;
-
-            // Cycle every 5 seconds
-            setInterval(() => {
-                console.log('Activity Page: Switching View');
-                if (isGridView) {
-                    // Switch to Animation
-                    gridView.classList.remove('active-view');
-                    setTimeout(() => {
-                        animView.classList.add('active-view');
-                    }, 500); // Wait for fade out
-                } else {
-                    // Switch to Grid
-                    animView.classList.remove('active-view');
-                    setTimeout(() => {
-                        gridView.classList.add('active-view');
-                    }, 500);
-                }
-                isGridView = !isGridView;
-            }, 5000);
-        }
-    })
-};
