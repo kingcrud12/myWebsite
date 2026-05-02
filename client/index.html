@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com data:; frame-src 'self' https://player.twitch.tv https://www.twitch.tv https://m.twitch.tv; img-src 'self' data: https: blob:; connect-src 'self' https://formspree.io blob: data:;" />
     <meta name="google-site-verification" content="XY6pclnXX3MzOlSv71C70rKEzqj82_XOp9xFw3LqAIA" />
-    <title>Yann Dipita — Développeur Web, Mobile & Automation</title>
+    <title data-i18n="seo.title">Yann Dipita — Développeur Web, Mobile & Automatisation</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="canonical" href="https://yann-dipita.com/" />
     <meta name="description"
-        content="Développeur Web, Mobile & Automation passionné. Je conçois des applications robustes, des expériences mobiles fluides et des solutions d'automatisation intelligentes." />
+        content="Développeur Web, Mobile & Automatisation passionné. Je conçois des applications robustes, des expériences mobiles fluides et des solutions d'automatisation intelligentes." data-i18n="seo.description" />
     <meta name="keywords"
         content="Développeur Web, Développeur Mobile, Automation, QA, React, Next.js, React Native, Node.js, Python, Selenium, Yann Dipita, Freelance" />
 
@@ -206,8 +206,8 @@
             Yann Dipita
         </a>
         <div class="flex gap-8 items-center">
-            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#projects">Projets</a>
-            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#about">À propos</a>
+            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#projects" data-i18n="nav.projects">Projets</a>
+            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#about" data-i18n="nav.about">À propos</a>
             <button class="px-3 py-1 border border-white rounded-full text-[10px] font-bold uppercase hover:bg-white hover:text-black transition-all" id="langToggle">EN</button>
         </div>
     </nav>
@@ -217,21 +217,21 @@
         <section class="min-h-screen flex flex-col justify-center px-12 md:px-24">
             <div class="max-w-4xl space-y-12">
                 <div class="space-y-4">
-                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-500 mb-4">Bonjour, Je suis</p>
+                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-500 mb-4" data-i18n="hero.greeting">Bonjour, Je suis</p>
                     <h1 class="text-6xl md:text-9xl font-bold tracking-tighter leading-none uppercase">
                         Yann Dipita
                     </h1>
-                    <p class="text-xl md:text-2xl text-neutral-400 font-medium max-w-2xl leading-tight">
-                        Développeur Web, Mobile & Automation
+                    <p class="text-xl md:text-2xl text-neutral-400 font-medium max-w-2xl leading-tight" data-i18n="hero.role">
+                        Développeur Web, Mobile & Automatisation
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row gap-6 pt-4">
                     <a class="text-lg font-bold flex items-center gap-2 group" href="#projects">
-                        <span>→ Voir mes projets</span>
+                        <span data-i18n="hero.see_projects">→ Voir mes projets</span>
                         <div class="h-[2px] w-0 bg-white group-hover:w-8 transition-all duration-300"></div>
                     </a>
                     <a class="text-lg font-bold flex items-center gap-2 group text-neutral-400 hover:text-white transition-colors" href="#about">
-                        <span>→ More about me</span>
+                        <span data-i18n="hero.more_about">→ More about me</span>
                         <div class="h-[2px] w-0 bg-neutral-400 group-hover:w-8 group-hover:bg-white transition-all duration-300"></div>
                     </a>
                 </div>
@@ -242,20 +242,20 @@
 
     <!-- Section Galerie de Projets (Mode Liste) -->
     <section id="projects" class="py-24 px-12 md:px-24 bg-black text-white">
-        <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-500 mb-16">Projets Sélectionnés</h2>
+        <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-500 mb-16" data-i18n="projects.title">Projets Sélectionnés</h2>
         <div class="divide-y divide-white/10 border-t border-b border-white/10">
             <!-- Malea -->
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">Application Mobile — Social</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.malea.category">Application Mobile — Social</span>
                         <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Malea</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6">
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.malea.desc">
                             Conception et déploiement d'un réseau social mobile dédié au partage de lieux. Architecture incluant une messagerie sécurisée, l'intégration de Google Places API et un système d'authentification multi-plateforme (Google, Apple).
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://play.google.com/store/apps/details?id=com.marne_tech.malea_app&pli=1" target="_blank" class="hover:text-primary transition-colors">Play Store ↗</a>
-                            <a href="https://apps.apple.com/us/app/malea/id6761765215" target="_blank" class="hover:text-primary transition-colors">App Store ↗</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.marne_tech.malea_app&pli=1" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.malea.playstore">Play Store ↗</a>
+                            <a href="https://apps.apple.com/us/app/malea/id6761765215" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.malea.appstore">App Store ↗</a>
                         </div>
                     </div>
                 </div>
@@ -264,13 +264,13 @@
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">App iOS — Productivité</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.easy.category">App iOS — Productivité</span>
                         <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Easy</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6">
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.easy.desc">
                             Assistant intelligent de productivité sur iOS. Une expérience utilisateur fluide conçue pour simplifier l'organisation quotidienne et la gestion des priorités.
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://apps.apple.com/us/app/easy-task/id6756175109" target="_blank" class="hover:text-primary transition-colors">App Store ↗</a>
+                            <a href="https://apps.apple.com/us/app/easy-task/id6756175109" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.easy.appstore">App Store ↗</a>
                         </div>
                     </div>
                 </div>
@@ -279,13 +279,13 @@
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">Plateforme Web — E-commerce</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.reconcil.category">Plateforme Web — E-commerce</span>
                         <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Reconcil Afro Beauty</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6">
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.reconcil.desc">
                             Écosystème e-commerce complet. Développement d'une architecture API performante, d'un client web réactif et d'un back-office de gestion centralisé.
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://reconcil-afro-beauty.com/" target="_blank" class="hover:text-primary transition-colors">Voir le site ↗</a>
+                            <a href="https://reconcil-afro-beauty.com/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.reconcil.visit">Voir le site ↗</a>
                         </div>
                     </div>
                 </div>
@@ -294,13 +294,13 @@
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">Application Web — En Vedette</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.root.category">Application Web — En Vedette</span>
                         <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Root-Academy</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6">
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.root.desc">
                             Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://root-academy-three.vercel.app/" target="_blank" class="hover:text-primary transition-colors">Voir le site ↗</a>
+                            <a href="https://root-academy-three.vercel.app/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.root.visit">Voir le site ↗</a>
                         </div>
                     </div>
                 </div>
@@ -309,14 +309,14 @@
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">Bibliothèques — Automatisation</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.automation.category">Bibliothèques — Automatisation</span>
                         <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Outils d'automatisation</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6">
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.automation.desc">
                             Conception de frameworks de tests E2E et d'outils d'automatisation haute performance sous Python/Selenium pour optimiser les cycles de qualité logicielle.
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://promethee-selenium.com/" target="_blank" class="hover:text-primary transition-colors">Promethee Selenium ↗</a>
-                            <a href="https://kingcrud12.github.io/selenium_ui_test_tool/" target="_blank" class="hover:text-primary transition-colors">UI Test Tool ↗</a>
+                            <a href="https://promethee-selenium.com/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.automation.promethee">Promethee Selenium ↗</a>
+                            <a href="https://kingcrud12.github.io/selenium_ui_test_tool/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.automation.uitool">UI Test Tool ↗</a>
                         </div>
                     </div>
                 </div>
@@ -327,22 +327,22 @@
     <!-- Section À Propos (Minimaliste) -->
     <section id="about" class="py-24 px-12 md:px-24 border-t border-white/10">
         <div class="max-w-2xl space-y-8">
-            <h2 class="text-4xl font-bold uppercase tracking-tighter">À Propos</h2>
-            <p class="text-xl text-neutral-400 font-medium leading-tight">
-                Je suis un Développeur Web, Mobile et Automation basé en France. 
+            <h2 class="text-4xl font-bold uppercase tracking-tighter" data-i18n="about.title">À Propos</h2>
+            <p class="text-xl text-neutral-400 font-medium leading-tight" data-i18n="about.desc">
+                Je suis un Développeur Web, Mobile et Automatisation basé en France. 
                 Je me spécialise dans la création d'APIs robustes, d'applications mobiles évolutives 
                 et de frameworks d'automatisation avancés pour simplifier les flux de travail complexes.
             </p>
             <div class="flex gap-12">
                 <div>
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2">Social</h4>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2" data-i18n="about.social">Social</h4>
                     <ul class="space-y-1">
                         <li><a href="#" class="text-sm font-bold hover:text-neutral-400 transition-colors">LinkedIn</a></li>
                         <li><a href="#" class="text-sm font-bold hover:text-neutral-400 transition-colors">GitHub</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2">Contact</h4>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2" data-i18n="about.contact">Contact</h4>
                     <a href="mailto:contact@yann-dipita.com" class="text-sm font-bold hover:text-neutral-400 transition-colors">contact@yann-dipita.com</a>
                 </div>
             </div>
@@ -352,10 +352,11 @@
     <!-- Pied de page -->
     <footer class="py-12 px-12 md:px-24 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-neutral-500 border-t border-white/10">
         <p>© 2026 Yann Dipita</p>
-        <p>Conçu et développé avec passion</p>
+        <p data-i18n="footer.passion">Conçu et développé avec passion</p>
     </footer>
 
     <script src="background3d.js"></script>
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 
