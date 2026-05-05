@@ -16,6 +16,11 @@ const translations = {
         },
         projects: {
             title: "Projets Sélectionnés",
+            root: {
+                category: "Application Web — En Vedette",
+                desc: "Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.",
+                visit: "Voir le site ↗"
+            },
             malea: {
                 category: "Application Mobile — Social",
                 desc: "Conception et déploiement d'un réseau social mobile dédié au partage de lieux. Architecture incluant une messagerie sécurisée, l'intégration de Google Places API et un système d'authentification multi-plateforme (Google, Apple).",
@@ -30,11 +35,6 @@ const translations = {
             reconcil: {
                 category: "Plateforme Web — E-commerce",
                 desc: "Écosystème e-commerce complet. Développement d'une architecture API performante, d'un client web réactif et d'un back-office de gestion centralisé.",
-                visit: "Voir le site ↗"
-            },
-            root: {
-                category: "Application Web — En Vedette",
-                desc: "Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.",
                 visit: "Voir le site ↗"
             },
             automation: {
@@ -71,6 +71,11 @@ const translations = {
         },
         projects: {
             title: "Selected Projects",
+            root: {
+                category: "Web App — Featured",
+                desc: "Modern online learning platform (ongoing project). Development of a dedicated API and a dynamic user interface for an interactive educational experience.",
+                visit: "Visit site ↗"
+            },
             malea: {
                 category: "Mobile App — Social",
                 desc: "Design and deployment of a mobile social network dedicated to place sharing. Architecture includes secure messaging, Google Places API integration, and multi-platform authentication (Google, Apple).",
@@ -85,11 +90,6 @@ const translations = {
             reconcil: {
                 category: "Web Platform — E-commerce",
                 desc: "Complete e-commerce ecosystem. Development of a high-performance API architecture, a responsive web client, and a centralized management back-office.",
-                visit: "Visit site ↗"
-            },
-            root: {
-                category: "Web App — Featured",
-                desc: "Modern online learning platform (ongoing project). Development of a dedicated API and a dynamic user interface for an interactive educational experience.",
                 visit: "Visit site ↗"
             },
             automation: {

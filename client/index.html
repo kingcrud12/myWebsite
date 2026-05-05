@@ -201,14 +201,14 @@
         <!-- Monochrome background -->
     </div>
 
-    <nav class="fixed w-full z-50 py-8 px-12 flex justify-between items-center mix-blend-difference text-white">
-        <a class="text-xl font-bold tracking-tighter uppercase" href="/">
+    <nav class="fixed w-full z-50 py-4 md:py-8 px-6 md:px-12 flex justify-between items-center mix-blend-difference text-white">
+        <a class="text-lg md:text-xl font-bold tracking-tighter uppercase" href="/">
             Yann Dipita
         </a>
-        <div class="flex gap-8 items-center">
-            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#projects" data-i18n="nav.projects">Projets</a>
-            <a class="text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity" href="#about" data-i18n="nav.about">À propos</a>
-            <button class="px-3 py-1 border border-white rounded-full text-[10px] font-bold uppercase hover:bg-white hover:text-black transition-all" id="langToggle">EN</button>
+        <div class="flex gap-4 md:gap-8 items-center">
+            <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity shrink-0 whitespace-nowrap" href="#projects" data-i18n="nav.projects">Projets</a>
+            <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest hover:opacity-50 transition-opacity shrink-0 whitespace-nowrap" href="#about" data-i18n="nav.about">À propos</a>
+            <button class="px-2 md:px-3 py-1 border border-white rounded-full text-[9px] md:text-[10px] font-bold uppercase hover:bg-white hover:text-black transition-all shrink-0 whitespace-nowrap" id="langToggle">EN</button>
         </div>
     </nav>
 
@@ -244,6 +244,21 @@
     <section id="projects" class="py-24 px-12 md:px-24 bg-black text-white">
         <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-500 mb-16" data-i18n="projects.title">Projets Sélectionnés</h2>
         <div class="divide-y divide-white/10 border-t border-b border-white/10">
+            <!-- Root Academy -->
+            <div class="py-12 group transition-colors hover:bg-white/[0.02]">
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                    <div class="max-w-2xl">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.root.category">Application Web — En Vedette</span>
+                        <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Root-Academy</h3>
+                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.root.desc">
+                            Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.
+                        </p>
+                        <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
+                            <a href="https://root-academy.fr/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.root.visit">Voir le site ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Malea -->
             <div class="py-12 group transition-colors hover:bg-white/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
@@ -286,21 +301,6 @@
                         </p>
                         <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
                             <a href="https://reconcil-afro-beauty.com/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.reconcil.visit">Voir le site ↗</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Root Academy -->
-            <div class="py-12 group transition-colors hover:bg-white/[0.02]">
-                <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                    <div class="max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block" data-i18n="projects.root.category">Application Web — En Vedette</span>
-                        <h3 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Root-Academy</h3>
-                        <p class="text-neutral-400 text-lg leading-tight mb-6" data-i18n="projects.root.desc">
-                            Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.
-                        </p>
-                        <div class="flex gap-6 text-[10px] font-bold uppercase tracking-widest">
-                            <a href="https://root-academy-three.vercel.app/" target="_blank" class="hover:text-primary transition-colors" data-i18n="projects.root.visit">Voir le site ↗</a>
                         </div>
                     </div>
                 </div>
