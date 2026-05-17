@@ -1,8 +1,8 @@
 const translations = {
     fr: {
         seo: {
-            title: "Yann Dipita — Développeur Web, Mobile & Automatisation",
-            description: "Développeur Web, Mobile & Automatisation passionné. Je conçois des applications robustes, des expériences mobiles fluides et des solutions d'automatisation intelligentes."
+            title: "Yann Dipita — Développeur Web & Mobile",
+            description: "Développeur Web et Mobile passionné. Je conçois des logiciels complets — SaaS, applications sur-mesure et sites web modernes."
         },
         nav: {
             projects: "Projets",
@@ -10,45 +10,122 @@ const translations = {
         },
         hero: {
             greeting: "Bonjour, Je suis",
-            role: "Développeur Web, Mobile & Automatisation",
+            role: "Développeur Web et Mobile",
+            tagline: "Je conçois des logiciels complets — SaaS, applications sur-mesure et sites web modernes",
             see_projects: "→ Voir mes projets",
             more_about: "→ En savoir plus"
         },
         projects: {
             title: "Projets Sélectionnés",
+            promo: {
+                category: "SaaS — Promo & Fidélité",
+                desc: "Plateforme complète de gestion de codes promotionnels, cartes cadeaux et programmes de fidélité. Intégration transparente avec Stripe et Shopify pour booster les ventes e-commerce.",
+                visit: "Visiter la plateforme ↗"
+            },
             root: {
-                category: "Application Web — En Vedette",
-                desc: "Plateforme d'apprentissage en ligne moderne (projet en cours). Développement d'une API dédiée et d'une interface utilisateur dynamique pour une expérience éducative interactive.",
-                visit: "Voir le site ↗"
+                category: "Plateforme E-learning",
+                desc: "Application moderne d'apprentissage en ligne. Conçue avec une interface utilisateur fluide, un catalogue interactif et un système de suivi des progrès pour les étudiants.",
+                visit: "Visiter le site ↗"
             },
             malea: {
-                category: "Application Mobile — Social",
-                desc: "Conception et déploiement d'un réseau social mobile dédié au partage de lieux. Architecture incluant une messagerie sécurisée, l'intégration de Google Places API et un système d'authentification multi-plateforme (Google, Apple).",
-                playstore: "Play Store ↗",
+                category: "Application Mobile — Réseau Social",
+                desc: "Réseau social innovant de partage de lieux et recommandations. Développé avec React Native, intégrant Google Places API, géolocalisation et messagerie temps réel.",
                 appstore: "App Store ↗"
             },
             easy: {
                 category: "App iOS — Productivité",
-                desc: "Assistant intelligent de productivité sur iOS. Une expérience utilisateur fluide conçue pour simplifier l'organisation quotidienne et la gestion des priorités.",
+                desc: "Gestionnaire de tâches intelligent et minimaliste sur iOS. Pensé pour maximiser la concentration, simplifier l'organisation quotidienne et automatiser la planification.",
                 appstore: "App Store ↗"
             },
             reconcil: {
-                category: "Plateforme Web — E-commerce",
-                desc: "Écosystème e-commerce complet. Développement d'une architecture API performante, d'un client web réactif et d'un back-office de gestion centralisé.",
-                visit: "Voir le site ↗"
+                category: "E-commerce — Cosmétique",
+                desc: "Boutique en ligne moderne spécialisée dans les soins capillaires et cosmétiques afro. Intégration complète de paniers dynamiques, Mondial Relay, Stripe, et back-office sur-mesure.",
+                visit: "Visiter la boutique ↗"
             },
-            automation: {
-                category: "Bibliothèques — Automatisation",
-                desc: "Conception de frameworks de tests E2E et d'outils d'automatisation haute performance sous Python/Selenium pour optimiser les cycles de qualité logicielle.",
-                promethee: "Promethee Selenium ↗",
-                uitool: "UI Test Tool ↗"
+            promethee: {
+                category: "Outil QA & Automatisation",
+                desc: "Plateforme cloud de test d'interfaces automatisé. Orchestration parallèle multi-navigateur sous Docker avec pytest, rapports détaillés et alertes en temps réel.",
+                visit: "Visiter le site ↗"
+            },
+            selenium_tool: {
+                category: "Outil Développeur — Open Source",
+                desc: "Générateur et exécuteur de tests Selenium sans code. Interface visuelle intuitive pour accélérer les cycles d'intégration continue avec export en un clic.",
+                visit: "Voir le projet ↗"
+            }
+        },
+        about_profile: {
+            category: "A Propos",
+            title_prefix: "Découvrez",
+            title_name: "Yann Dipita",
+            desc: "Ingénieur full-stack passionné et rigoureux. Je conçois des logiciels complets et performants — du design à la mise en production — pour offrir la puissance d'une solution sur-mesure, sans compromis.",
+            features: {
+                efficacite: {
+                    title: "EFFICACITÉ SOLO",
+                    desc: "Zéro overhead de coordination. Une seule personne pilote tout le produit — de la base de données au déploiement."
+                },
+                esprit: {
+                    title: "ESPRIT INGÉNIEUR",
+                    desc: "Je raisonne en systèmes, pas seulement en interfaces. Des choix techniques robustes et durables."
+                },
+                maitrise: {
+                    title: "MAÎTRISE FULL-STACK",
+                    desc: "Frontend, backend, infrastructure, design — un seul cerveau, zéro perte en transmission."
+                },
+                livre: {
+                    title: "LIVRÉ DANS LES TEMPS",
+                    desc: "Stack moderne, workflow agile et efficace. Vous obtenez des résultats concrets en semaines, pas en mois."
+                }
+            }
+        },
+        services: {
+            title: "Services",
+            subtitle: "Ce que je construis",
+            expertise: "Expertise",
+            web: {
+                title: "Application Web",
+                desc: "Portails, tableaux de bord, outils internes — des logiciels sur-mesure qui épousent votre processus. Pas des templates.",
+                price: "Sur devis",
+                more: "En savoir plus"
+            },
+            saas: {
+                title: "Produit SaaS",
+                desc: "De l'idée au produit en ligne — authentification, paiements, panneau d'administration, déploiement. Prêt au lancement.",
+                price: "Sur devis",
+                more: "En savoir plus"
+            },
+            site: {
+                title: "Site Professionnel",
+                desc: "Rapide, moderne, optimisé pour le SEO. Conçu avec la performance et la conversion en tête.",
+                price: "À partir de 500€",
+                more: "En savoir plus"
+            },
+            mobile: {
+                title: "Application Mobile",
+                desc: "Applications natives et hybrides (iOS & Android). Expériences fluides, géolocalisation, notifications push, et performances optimales.",
+                price: "Sur devis",
+                more: "En savoir plus"
             }
         },
         about: {
             title: "À Propos",
-            desc: "Je suis un Développeur Web, Mobile et Automatisation basé en France. Je me spécialise dans la création d'APIs robustes, d'applications mobiles et web évolutives et de frameworks d'automatisation avancés pour simplifier les flux de travail complexes.",
+            subtitle: "Yann Dipita",
+            desc: "Je suis un Développeur Web et Mobile basé en France. Je me spécialise dans la création de logiciels complets : architectures d'APIs robustes (SaaS), applications mobiles natives réactives et sites web modernes à haute performance.",
             social: "Social",
-            contact: "Contact"
+            contact: "Contact",
+            form: {
+                title: "Réserver un appel",
+                subtitle: "Discutons de votre projet et trouvons la solution idéale.",
+                name: "Nom Complet",
+                email: "Adresse Email",
+                project_type: "Type de Projet",
+                message: "Brief du Projet",
+                submit: "Réserver mon appel",
+                placeholder_name: "Ex: Jean Dupont",
+                placeholder_email: "Ex: jean@entreprise.com",
+                placeholder_message: "Décrivez votre idée, vos objectifs et vos contraintes...",
+                success: "Demande reçue ! Je vous recontacte très rapidement.",
+                error: "Une erreur est survenue. Veuillez réessayer."
+            }
         },
         footer: {
             passion: "Conçu et développé avec passion"
@@ -56,8 +133,8 @@ const translations = {
     },
     en: {
         seo: {
-            title: "Yann Dipita — Web, Mobile & Automation Developer",
-            description: "Passionate Web, Mobile & Automation Developer. I design robust applications, fluid mobile experiences and intelligent automation solutions."
+            title: "Yann Dipita — Web & Mobile Developer",
+            description: "Passionate Web and Mobile Developer. I design complete software — SaaS, custom applications, and modern websites."
         },
         nav: {
             projects: "Projects",
@@ -65,45 +142,122 @@ const translations = {
         },
         hero: {
             greeting: "Hello, I am",
-            role: "Web, Mobile & Automation Developer",
+            role: "Web and Mobile Developer",
+            tagline: "I design complete software — SaaS, custom-built applications, and modern websites",
             see_projects: "→ See my projects",
             more_about: "→ More about me"
         },
         projects: {
             title: "Selected Projects",
+            promo: {
+                category: "SaaS — Promo & Loyalty",
+                desc: "Comprehensive platform for managing promo codes, gift cards, and loyalty programs. Seamless integration with Stripe and Shopify to boost e-commerce sales.",
+                visit: "Visit platform ↗"
+            },
             root: {
-                category: "Web App — Featured",
-                desc: "Modern online learning platform (ongoing project). Development of a dedicated API and a dynamic user interface for an interactive educational experience.",
+                category: "E-learning Platform",
+                desc: "Modern online learning platform. Designed with a fluid user interface, an interactive catalog, and a student progress tracking system.",
                 visit: "Visit site ↗"
             },
             malea: {
-                category: "Mobile App — Social",
-                desc: "Design and deployment of a mobile social network dedicated to place sharing. Architecture includes secure messaging, Google Places API integration, and multi-platform authentication (Google, Apple).",
-                playstore: "Play Store ↗",
+                category: "Mobile App — Social Network",
+                desc: "Innovative social network for sharing places and recommendations. Built with React Native, integrating Google Places API, geolocation, and real-time chat.",
                 appstore: "App Store ↗"
             },
             easy: {
                 category: "iOS App — Productivity",
-                desc: "Intelligent productivity assistant on iOS. A fluid user experience designed to simplify daily organization and priority management.",
+                desc: "Smart and minimalist task manager on iOS. Designed to maximize focus, simplify daily organization, and automate scheduling.",
                 appstore: "App Store ↗"
             },
             reconcil: {
-                category: "Web Platform — E-commerce",
-                desc: "Complete e-commerce ecosystem. Development of a high-performance API architecture, a responsive web client, and a centralized management back-office.",
+                category: "E-commerce — Cosmetics",
+                desc: "Modern online store specializing in afro hair care and cosmetics. Full integration of dynamic cart, Mondial Relay shipping, Stripe payments, and a custom back-office.",
+                visit: "Visit store ↗"
+            },
+            promethee: {
+                category: "QA & Automation Suite",
+                desc: "Cloud platform for automated interface testing. Multi-browser parallel orchestration under Docker using pytest, detailed reports, and real-time alerts.",
                 visit: "Visit site ↗"
             },
-            automation: {
-                category: "Libraries — Automation",
-                desc: "Design of E2E testing frameworks and high-performance automation tools using Python/Selenium to optimize software quality cycles.",
-                promethee: "Promethee Selenium ↗",
-                uitool: "UI Test Tool ↗"
+            selenium_tool: {
+                category: "Developer Tool — Open Source",
+                desc: "No-code Selenium test builder and runner. Intuitive visual UI to accelerate CI/CD test cycles with one-click export.",
+                visit: "View project ↗"
+            }
+        },
+        about_profile: {
+            category: "About",
+            title_prefix: "Discover",
+            title_name: "Yann Dipita",
+            desc: "Passionate and rigorous full-stack engineer. I design complete, high-performance software — from design to production deployment — to deliver custom-built solutions without compromise.",
+            features: {
+                efficacite: {
+                    title: "SOLO EFFICIENCY",
+                    desc: "Zero coordination overhead. A single person drives the entire product — from the database to production deployment."
+                },
+                esprit: {
+                    title: "ENGINEERING MINDSET",
+                    desc: "I reason in systems, not just interfaces. Technical choices that are robust, extensible and durable."
+                },
+                maitrise: {
+                    title: "FULL-STACK EXPERTISE",
+                    desc: "Frontend, backend, infrastructure, design — a single brain, zero information loss along the way."
+                },
+                livre: {
+                    title: "ON-TIME DELIVERY",
+                    desc: "Modern stack, agile and highly efficient workflow. You get concrete results in weeks, not months."
+                }
+            }
+        },
+        services: {
+            title: "Services",
+            subtitle: "What I Build",
+            expertise: "Expertise",
+            web: {
+                title: "Web Application",
+                desc: "Portals, dashboards, internal tools — custom software built to fit your business processes. No templates.",
+                price: "Custom quote",
+                more: "Learn more"
+            },
+            saas: {
+                title: "SaaS Product",
+                desc: "From idea to live product — authentication, payments, admin panels, cloud deployment. Launch-ready.",
+                price: "Custom quote",
+                more: "Learn more"
+            },
+            site: {
+                title: "Professional Website",
+                desc: "Fast, modern, optimized for SEO. Crafted with performance and conversion in mind.",
+                price: "From 500€",
+                more: "Learn more"
+            },
+            mobile: {
+                title: "Mobile Application",
+                desc: "Native and hybrid apps (iOS & Android). Fluid user experience, geolocation, push notifications, and high performance.",
+                price: "Custom quote",
+                more: "Learn more"
             }
         },
         about: {
             title: "About",
-            desc: "I am a Web, Mobile, Web and Automation Developer based in France. I specialize in building robust APIs, scalable mobile applications and advanced automation frameworks to simplify complex workflows.",
+            subtitle: "Yann Dipita",
+            desc: "I am a Web and Mobile Developer based in France. I specialize in building complete software: robust API architectures (SaaS), responsive native mobile apps, and high-performance modern websites.",
             social: "Social",
-            contact: "Contact"
+            contact: "Contact",
+            form: {
+                title: "Book a call",
+                subtitle: "Let's discuss your project and find the ideal solution.",
+                name: "Full Name",
+                email: "Email Address",
+                project_type: "Project Type",
+                message: "Project Brief",
+                submit: "Book my call",
+                placeholder_name: "E.g. John Doe",
+                placeholder_email: "E.g. john@company.com",
+                placeholder_message: "Describe your idea, goals and constraints...",
+                success: "Request received! I will get back to you very shortly.",
+                error: "An error occurred. Please try again."
+            }
         },
         footer: {
             passion: "Designed and developed with passion"
@@ -163,6 +317,8 @@ window.I18n = {
                         el.value = value;
                     } else if (el.tagName === 'META' && el.getAttribute('name') === 'description') {
                         el.setAttribute('content', value);
+                    } else if (el.hasAttribute('placeholder')) {
+                        el.setAttribute('placeholder', value);
                     } else {
                         el.innerHTML = value;
                     }

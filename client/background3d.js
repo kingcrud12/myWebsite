@@ -57,18 +57,18 @@ class Background3D {
         ];
 
         const material = new THREE.MeshPhongMaterial({
-            color: 0xffffff,
+            color: 0x333333,
             wireframe: false,
             shininess: 100,
             transparent: true,
-            opacity: 0.15
+            opacity: 0.05
         });
 
         const wireframeMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
+            color: 0x333333,
             wireframe: true,
             transparent: true,
-            opacity: 0.05
+            opacity: 0.02
         });
 
         for (let i = 0; i < 15; i++) {
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bg.style.height = '100%';
         bg.style.zIndex = '-1';
         bg.style.pointerEvents = 'none';
-        bg.style.background = '#000000'; // Pure black background
+        bg.style.background = 'transparent'; // Transparent background
         document.body.prepend(bg);
     }
     new Background3D('bg-canvas-container');
