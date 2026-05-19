@@ -55,8 +55,8 @@ const translations = {
         },
         about_profile: {
             category: "A Propos",
-            title_prefix: "Découvrez",
-            title_name: "Yann Dipita",
+            title_prefix: "FAITES ",
+            title_name: "Ma rencontre",
             desc: "Ingénieur full-stack passionné et rigoureux. Je conçois des logiciels complets et performants — du design à la mise en production — pour offrir la puissance d'une solution sur-mesure, sans compromis.",
             features: {
                 efficacite: {
@@ -187,8 +187,8 @@ const translations = {
         },
         about_profile: {
             category: "About",
-            title_prefix: "Discover",
-            title_name: "Yann Dipita",
+            title_prefix: "MEET  ",
+            title_name: "The Man Behind The Code",
             desc: "Passionate and rigorous full-stack engineer. I design complete, high-performance software — from design to production deployment — to deliver custom-built solutions without compromise.",
             features: {
                 efficacite: {
