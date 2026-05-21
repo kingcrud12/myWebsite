@@ -141,23 +141,52 @@
         <div class="max-w-7xl mx-auto px-6">
             <div
                 class="glass rounded-3xl px-6 py-4 flex justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+
+                <!-- LOGO -->
                 <a class="text-lg md:text-xl font-display font-black tracking-tighter uppercase text-neutral-950 hover:opacity-75 transition-opacity"
                     href="/">
                     Yann Dipita<span class="text-neutral-400">.</span>
                 </a>
-                <div class="flex gap-6 md:gap-8 items-center">
-                    <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
+
+                <!-- MENU DESKTOP (Masqué sur mobile avec 'hidden', visible sur desktop avec 'md:flex') -->
+                <div class="hidden md:flex gap-8 items-center">
+                    <a class="text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
                         href="./mon-cv.pdf" download="mon-cv.pdf" data-i18n="nav.cv">Mon Cv</a>
-                    <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
+                    <a class="text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
                         href="#services">Services</a>
-                    <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
+                    <a class="text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
                         href="#projects" data-i18n="nav.projects">Projets</a>
-                    <a class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
+                    <a class="text-xs font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors shrink-0 whitespace-nowrap"
                         href="#about" data-i18n="nav.about">À propos</a>
                     <button
-                        class="px-2.5 py-1 border border-neutral-200 hover:border-neutral-900 rounded-full text-[9px] md:text-[10px] font-bold uppercase hover:bg-neutral-950 hover:text-white transition-all shrink-0 whitespace-nowrap text-neutral-800"
-                        id="langToggle">EN</button>
+                        class="px-2.5 py-1 border border-neutral-200 hover:border-neutral-900 rounded-full text-[10px] font-bold uppercase hover:bg-neutral-950 hover:text-white transition-all shrink-0 whitespace-nowrap text-neutral-800"
+                        id="themeToggle">EN</button>
                 </div>
+
+                <!-- BOUTON BURGER (Adapté pour ton script : id="hamburger") -->
+                <button id="hamburger"
+                    class="flex flex-col gap-1.5 md:hidden text-neutral-800 focus:outline-none p-1 z-50"
+                    aria-label="Toggle Menu">
+                    <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300 origin-center"></span>
+                    <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300 origin-center"></span>
+                    <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300 origin-center"></span>
+                </button>
+            </div>
+
+            <!-- MENU MOBILE (Adapté pour ton script : id="navMenu" + gestion CSS) -->
+            <div id="navMenu"
+                class="fixed inset-x-6 top-28 glass rounded-3xl p-6 shadow-xl flex flex-col gap-6 items-center border border-neutral-100/20 md:hidden pointer-events-none opacity-0 invisible [&.active]:pointer-events-auto [&.active]:opacity-100 [&.active]:invisible-none [&.active]:visible transition-all duration-300">
+                <a class="text-sm font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors"
+                    href="./mon-cv.pdf" download="mon-cv.pdf" data-i18n="nav.cv">Mon Cv</a>
+                <a class="text-sm font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors"
+                    href="#services">Services</a>
+                <a class="text-sm font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors"
+                    href="#projects" data-i18n="nav.projects">Projets</a>
+                <a class="text-sm font-bold uppercase tracking-widest text-neutral-600 hover:text-neutral-950 transition-colors"
+                    href="#about" data-i18n="nav.about">À propos</a>
+                <hr class="w-full border-neutral-200/50">
+                <button
+                    class="w-full py-2 border border-neutral-200 hover:border-neutral-900 rounded-full text-xs font-bold uppercase hover:bg-neutral-950 hover:text-white transition-all text-neutral-800">EN</button>
             </div>
         </div>
     </nav>
@@ -1213,7 +1242,7 @@
 
     <script src="background3d.js"></script>
     <script src="i18n.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
