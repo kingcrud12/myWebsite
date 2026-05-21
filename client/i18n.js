@@ -6,7 +6,8 @@ const translations = {
         },
         nav: {
             projects: "Projets",
-            about: "À propos"
+            about: "À propos",
+            cv: "Mon Cv"
         },
         hero: {
             greeting: "Bonjour, Je suis",
@@ -138,7 +139,8 @@ const translations = {
         },
         nav: {
             projects: "Projects",
-            about: "About"
+            about: "About",
+            cv: "CV"
         },
         hero: {
             greeting: "Hello, I am",
