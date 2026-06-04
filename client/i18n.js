@@ -18,6 +18,11 @@ const translations = {
         },
         projects: {
             title: "Projets Sélectionnés",
+            tickeazy: {
+                category: "SaaS — Billetterie & Transport",
+                desc: "Plateforme de réservation et de vente de billets électroniques (événements et transports) dans les grandes villes africaines. Validation par QR code et gestion d'abonnements.",
+                visit: "Visiter la plateforme ↗"
+            },
             promo: {
                 category: "SaaS — Promo & Fidélité",
                 desc: "Plateforme complète de gestion de codes promotionnels, cartes cadeaux et programmes de fidélité. Intégration transparente avec Stripe et Shopify pour booster les ventes e-commerce.",
@@ -151,6 +156,11 @@ const translations = {
         },
         projects: {
             title: "Selected Projects",
+            tickeazy: {
+                category: "SaaS — Ticketing & Transport",
+                desc: "Electronic ticket booking and sales platform (events and transport) in major African cities. QR code validation and subscription management.",
+                visit: "Visit platform ↗"
+            },
             promo: {
                 category: "SaaS — Promo & Loyalty",
                 desc: "Comprehensive platform for managing promo codes, gift cards, and loyalty programs. Seamless integration with Stripe and Shopify to boost e-commerce sales.",
